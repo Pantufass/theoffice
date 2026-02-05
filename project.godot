@@ -15,7 +15,7 @@ compatibility/default_parent_skeleton_in_mesh_instance_3d=true
 [application]
 
 config/name="theoffice"
-run/main_scene="res://Scenes/scene.tscn"
+run/main_scene="uid://dkqgmryje87j8"
 config/features=PackedStringArray("4.6", "C#", "GL Compatibility")
 config/icon="res://icon.svg"
 

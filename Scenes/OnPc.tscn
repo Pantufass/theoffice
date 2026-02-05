@@ -12,17 +12,20 @@ font_color = Color(0, 0, 0, 1)
 
 [node name="OnPc" type="Node2D" unique_id=1948212878]
 
-[node name="CanvasLayer" type="CanvasLayer" parent="." unique_id=203585400]
+[node name="CanvasLayer" type="CanvasLayer" parent="." unique_id=203585400 node_paths=PackedStringArray("Read", "Write")]
 script = ExtResource("1_t2wvu")
+Read = NodePath("Typing/ReadLabel")
+Write = NodePath("Typing/WriteLabel")
 
-[node name="ColorRect" type="ColorRect" parent="CanvasLayer" unique_id=1803577253]
+[node name="Typing" type="ColorRect" parent="CanvasLayer" unique_id=1803577253]
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 
-[node name="ReadLabel" type="Label" parent="CanvasLayer" unique_id=708394167]
+[node name="ReadLabel" type="Label" parent="CanvasLayer/Typing" unique_id=708394167]
+layout_mode = 1
 anchors_preset = 4
 anchor_top = 0.5
 anchor_bottom = 0.5
@@ -34,7 +37,8 @@ grow_vertical = 2
 text = "Things to copy"
 label_settings = SubResource("LabelSettings_keslg")
 
-[node name="WriteLabel" type="Label" parent="CanvasLayer" unique_id=2121179120]
+[node name="WriteLabel" type="Label" parent="CanvasLayer/Typing" unique_id=2121179120]
+layout_mode = 1
 anchors_preset = 6
 anchor_left = 1.0
 anchor_top = 0.5
@@ -42,7 +46,30 @@ anchor_right = 1.0
 anchor_bottom = 0.5
 offset_left = -40.0
 offset_top = -11.5
-offset_bottom = 11.5
+offset_bottom = 33.5
 grow_horizontal = 0
 grow_vertical = 2
 label_settings = SubResource("LabelSettings_t2wvu")
+
+[node name="CharSelect" type="ColorRect" parent="CanvasLayer" unique_id=1000102472]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0.11764706, 0.02745098, 0.3137255, 1)
+
+[node name="ColorRect" type="ColorRect" parent="CanvasLayer/CharSelect" unique_id=1191835186]
+layout_mode = 1
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -247.00003
+offset_top = -584.0
+offset_right = -207.00003
+offset_bottom = -544.0
+grow_horizontal = 2
+grow_vertical = 0
+scale = Vector2(12.184299, 13.411978)

@@ -9,6 +9,7 @@ public partial class OnPc : CanvasLayer
     {
         if(Read == null) Read = GetNode<Label>("Read");
         if(Write == null) Write = GetNode<Label>("Write");
+        Read.Text = "Thongs to copy";
     }
 
     public override void _Process(double delta)
@@ -16,8 +17,12 @@ public partial class OnPc : CanvasLayer
         
     }
 
-    public override void _Input(InputEvent @event)
+    public override void _Input(InputEvent e)
     {
-        
+        if (e is InputEventKey keyEvent && keyEvent.Pressed && keyEvent.Unicode != 0)
+    {
+        char c = (char)keyEvent.Unicode;
+        GD.Print(c);
+    }
     }
 }
