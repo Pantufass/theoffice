@@ -1,0 +1,48 @@
+[gd_scene format=3 uid="uid://dkqgmryje87j8"]
+
+[ext_resource type="Script" uid="uid://cshg44jm410n3" path="res://Scenes/OnPc.cs" id="1_t2wvu"]
+
+[sub_resource type="LabelSettings" id="LabelSettings_keslg"]
+font_size = 32
+font_color = Color(0, 0, 0, 1)
+
+[sub_resource type="LabelSettings" id="LabelSettings_t2wvu"]
+font_size = 32
+font_color = Color(0, 0, 0, 1)
+
+[node name="OnPc" type="Node2D" unique_id=1948212878]
+
+[node name="CanvasLayer" type="CanvasLayer" parent="." unique_id=203585400]
+script = ExtResource("1_t2wvu")
+
+[node name="ColorRect" type="ColorRect" parent="CanvasLayer" unique_id=1803577253]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="ReadLabel" type="Label" parent="CanvasLayer" unique_id=708394167]
+anchors_preset = 4
+anchor_top = 0.5
+anchor_bottom = 0.5
+offset_left = 70.0
+offset_top = -21.0
+offset_right = 293.0
+offset_bottom = 24.0
+grow_vertical = 2
+text = "Things to copy"
+label_settings = SubResource("LabelSettings_keslg")
+
+[node name="WriteLabel" type="Label" parent="CanvasLayer" unique_id=2121179120]
+anchors_preset = 6
+anchor_left = 1.0
+anchor_top = 0.5
+anchor_right = 1.0
+anchor_bottom = 0.5
+offset_left = -40.0
+offset_top = -11.5
+offset_bottom = 11.5
+grow_horizontal = 0
+grow_vertical = 2
+label_settings = SubResource("LabelSettings_t2wvu")
