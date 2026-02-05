@@ -1,6 +1,6 @@
 [gd_scene format=3 uid="uid://dkqgmryje87j8"]
 
-[ext_resource type="Script" uid="uid://cshg44jm410n3" path="res://Scenes/OnPc.cs" id="1_t2wvu"]
+[ext_resource type="Script" uid="uid://cshg44jm410n3" path="res://Scripts/OnPc.cs" id="1_t2wvu"]
 
 [sub_resource type="LabelSettings" id="LabelSettings_keslg"]
 font_size = 32
@@ -10,21 +10,24 @@ font_color = Color(0, 0, 0, 1)
 font_size = 32
 font_color = Color(0, 0, 0, 1)
 
-[node name="OnPc" type="Node2D" unique_id=1948212878]
+[sub_resource type="LabelSettings" id="LabelSettings_uf01e"]
+font_color = Color(0, 0, 0, 1)
 
-[node name="CanvasLayer" type="CanvasLayer" parent="." unique_id=203585400 node_paths=PackedStringArray("Read", "Write")]
+[node name="OnPC" type="CanvasLayer" unique_id=203585400 node_paths=PackedStringArray("Typing", "CharSelect", "Read", "Write")]
 script = ExtResource("1_t2wvu")
+Typing = NodePath("Typing")
+CharSelect = NodePath("CharSelect")
 Read = NodePath("Typing/ReadLabel")
 Write = NodePath("Typing/WriteLabel")
 
-[node name="Typing" type="ColorRect" parent="CanvasLayer" unique_id=1803577253]
+[node name="Typing" type="ColorRect" parent="." unique_id=1803577253]
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 
-[node name="ReadLabel" type="Label" parent="CanvasLayer/Typing" unique_id=708394167]
+[node name="ReadLabel" type="Label" parent="Typing" unique_id=708394167]
 layout_mode = 1
 anchors_preset = 4
 anchor_top = 0.5
@@ -37,7 +40,7 @@ grow_vertical = 2
 text = "Things to copy"
 label_settings = SubResource("LabelSettings_keslg")
 
-[node name="WriteLabel" type="Label" parent="CanvasLayer/Typing" unique_id=2121179120]
+[node name="WriteLabel" type="Label" parent="Typing" unique_id=2121179120]
 layout_mode = 1
 anchors_preset = 6
 anchor_left = 1.0
@@ -51,7 +54,7 @@ grow_horizontal = 0
 grow_vertical = 2
 label_settings = SubResource("LabelSettings_t2wvu")
 
-[node name="CharSelect" type="ColorRect" parent="CanvasLayer" unique_id=1000102472]
+[node name="CharSelect" type="ColorRect" parent="." unique_id=1000102472]
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
@@ -59,17 +62,40 @@ grow_horizontal = 2
 grow_vertical = 2
 color = Color(0.11764706, 0.02745098, 0.3137255, 1)
 
-[node name="ColorRect" type="ColorRect" parent="CanvasLayer/CharSelect" unique_id=1191835186]
+[node name="Popup" type="ColorRect" parent="CharSelect" unique_id=1191835186]
 layout_mode = 1
-anchors_preset = 7
+anchors_preset = 8
 anchor_left = 0.5
-anchor_top = 1.0
+anchor_top = 0.5
 anchor_right = 0.5
-anchor_bottom = 1.0
-offset_left = -247.00003
-offset_top = -584.0
-offset_right = -207.00003
-offset_bottom = -544.0
+anchor_bottom = 0.5
+offset_left = -226.0
+offset_top = -279.0
+offset_right = -186.0
+offset_bottom = -239.0
 grow_horizontal = 2
-grow_vertical = 0
-scale = Vector2(12.184299, 13.411978)
+grow_vertical = 2
+scale = Vector2(12, 14)
+
+[node name="VSplitContainer" type="VSplitContainer" parent="CharSelect" unique_id=2083281605]
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -101.0
+offset_top = 62.0
+offset_right = 111.0
+offset_bottom = 102.0
+grow_horizontal = 2
+
+[node name="Label" type="Label" parent="CharSelect/VSplitContainer" unique_id=1460774869]
+layout_mode = 2
+text = "Worker Profile Creator"
+label_settings = SubResource("LabelSettings_uf01e")
+justification_flags = 161
+uppercase = true
+metadata/_edit_use_anchors_ = true
+
+[node name="RichTextLabel" type="RichTextLabel" parent="CharSelect/VSplitContainer" unique_id=1523422420]
+layout_mode = 2
+text = "DABADOO"
