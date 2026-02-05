@@ -1,6 +1,8 @@
 [gd_scene format=3 uid="uid://dkqgmryje87j8"]
 
 [ext_resource type="Script" uid="uid://cshg44jm410n3" path="res://Scripts/OnPc.cs" id="1_t2wvu"]
+[ext_resource type="Script" uid="uid://ej72h3mh1nep" path="res://Scenes/CharSelect.cs" id="2_2gxi5"]
+[ext_resource type="LabelSettings" uid="uid://darhnls4fheg8" path="res://UI/new_label_settings.tres" id="2_uf01e"]
 
 [sub_resource type="LabelSettings" id="LabelSettings_keslg"]
 font_size = 32
@@ -60,7 +62,9 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+scale = Vector2(1, 0.99640566)
 color = Color(0.11764706, 0.02745098, 0.3137255, 1)
+script = ExtResource("2_2gxi5")
 
 [node name="Popup" type="ColorRect" parent="CharSelect" unique_id=1191835186]
 layout_mode = 1
@@ -69,13 +73,13 @@ anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
-offset_left = -226.0
+offset_left = -246.99997
 offset_top = -279.0
-offset_right = -186.0
+offset_right = -206.99997
 offset_bottom = -239.0
 grow_horizontal = 2
 grow_vertical = 2
-scale = Vector2(12, 14)
+scale = Vector2(12.599999, 14)
 
 [node name="VSplitContainer" type="VSplitContainer" parent="CharSelect" unique_id=2083281605]
 layout_mode = 1
@@ -87,15 +91,256 @@ offset_top = 62.0
 offset_right = 111.0
 offset_bottom = 102.0
 grow_horizontal = 2
+split_offsets = PackedInt32Array(72, 164, 256, 348, 439)
+split_offset = 72
 
-[node name="Label" type="Label" parent="CharSelect/VSplitContainer" unique_id=1460774869]
+[node name="Titlepart" type="VSplitContainer" parent="CharSelect/VSplitContainer" unique_id=2114160337]
 layout_mode = 2
-text = "Worker Profile Creator"
+split_offsets = PackedInt32Array(0, 0)
+
+[node name="Title" type="Label" parent="CharSelect/VSplitContainer/Titlepart" unique_id=1460774869]
+layout_mode = 2
+text = "VERY IMPORTANT CONTRACT PAPER"
 label_settings = SubResource("LabelSettings_uf01e")
+horizontal_alignment = 1
 justification_flags = 161
 uppercase = true
 metadata/_edit_use_anchors_ = true
 
-[node name="RichTextLabel" type="RichTextLabel" parent="CharSelect/VSplitContainer" unique_id=1523422420]
+[node name="Select" type="Label" parent="CharSelect/VSplitContainer/Titlepart" unique_id=1860258186]
 layout_mode = 2
-text = "DABADOO"
+text = "SELECT"
+label_settings = ExtResource("2_uf01e")
+horizontal_alignment = 1
+
+[node name="ColorRect" type="ColorRect" parent="CharSelect/VSplitContainer/Titlepart" unique_id=1003235456]
+custom_minimum_size = Vector2(400, 2)
+layout_mode = 2
+color = Color(0, 0, 0, 1)
+
+[node name="Race" type="VSplitContainer" parent="CharSelect/VSplitContainer" unique_id=1144432524]
+layout_mode = 2
+split_offsets = PackedInt32Array(23, 66)
+split_offset = 23
+
+[node name="Text" type="Label" parent="CharSelect/VSplitContainer/Race" unique_id=1298040793]
+layout_mode = 2
+text = "RACE"
+label_settings = ExtResource("2_uf01e")
+horizontal_alignment = 1
+
+[node name="HSplitContainer" type="HSplitContainer" parent="CharSelect/VSplitContainer/Race" unique_id=1412386360]
+layout_mode = 2
+split_offsets = PackedInt32Array(120, 162, 174, 216)
+split_offset = 120
+
+[node name="Label2" type="Label" parent="CharSelect/VSplitContainer/Race/HSplitContainer" unique_id=1573525862]
+custom_minimum_size = Vector2(120, 0)
+layout_mode = 2
+
+[node name="<Button" type="Button" parent="CharSelect/VSplitContainer/Race/HSplitContainer" unique_id=1473676904]
+custom_minimum_size = Vector2(30, 30)
+layout_mode = 2
+text = "<"
+
+[node name="ColorRect" type="ColorRect" parent="CharSelect/VSplitContainer/Race/HSplitContainer" unique_id=376371643]
+custom_minimum_size = Vector2(150, 0)
+layout_mode = 2
+color = Color(0.82605994, 0.82606006, 0.8260599, 1)
+
+[node name="RaceValue" type="Label" parent="CharSelect/VSplitContainer/Race/HSplitContainer/ColorRect" unique_id=2094443807]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(150, 0)
+layout_mode = 0
+offset_left = 12.0
+offset_top = 4.0
+offset_right = 162.0
+offset_bottom = 27.0
+label_settings = ExtResource("2_uf01e")
+horizontal_alignment = 1
+
+[node name=">Button" type="Button" parent="CharSelect/VSplitContainer/Race/HSplitContainer" unique_id=1399303944]
+custom_minimum_size = Vector2(30, 30)
+layout_mode = 2
+text = ">"
+
+[node name="Label" type="Label" parent="CharSelect/VSplitContainer/Race/HSplitContainer" unique_id=569080186]
+custom_minimum_size = Vector2(120, 0)
+layout_mode = 2
+
+[node name="ColorRect" type="ColorRect" parent="CharSelect/VSplitContainer/Race" unique_id=1276467814]
+custom_minimum_size = Vector2(400, 2)
+layout_mode = 2
+
+[node name="Gender" type="VSplitContainer" parent="CharSelect/VSplitContainer" unique_id=1903295462]
+layout_mode = 2
+split_offsets = PackedInt32Array(23, 66)
+split_offset = 23
+
+[node name="Text" type="Label" parent="CharSelect/VSplitContainer/Gender" unique_id=161298609]
+layout_mode = 2
+text = "GENDER"
+label_settings = ExtResource("2_uf01e")
+horizontal_alignment = 1
+
+[node name="HSplitContainer" type="HSplitContainer" parent="CharSelect/VSplitContainer/Gender" unique_id=1218563651]
+layout_mode = 2
+split_offsets = PackedInt32Array(120, 162, 174, 216)
+split_offset = 120
+
+[node name="Label2" type="Label" parent="CharSelect/VSplitContainer/Gender/HSplitContainer" unique_id=1784047786]
+custom_minimum_size = Vector2(120, 0)
+layout_mode = 2
+
+[node name="<Button" type="Button" parent="CharSelect/VSplitContainer/Gender/HSplitContainer" unique_id=792098057]
+custom_minimum_size = Vector2(30, 30)
+layout_mode = 2
+text = "<"
+
+[node name="ColorRect" type="ColorRect" parent="CharSelect/VSplitContainer/Gender/HSplitContainer" unique_id=1720266365]
+custom_minimum_size = Vector2(150, 0)
+layout_mode = 2
+color = Color(0.82605994, 0.82606006, 0.8260599, 1)
+
+[node name="GenderValue" type="Label" parent="CharSelect/VSplitContainer/Gender/HSplitContainer/ColorRect" unique_id=1231123822]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(150, 0)
+layout_mode = 0
+offset_left = 12.0
+offset_top = 4.0
+offset_right = 162.0
+offset_bottom = 27.0
+label_settings = ExtResource("2_uf01e")
+horizontal_alignment = 1
+
+[node name=">Button" type="Button" parent="CharSelect/VSplitContainer/Gender/HSplitContainer" unique_id=1828056715]
+custom_minimum_size = Vector2(30, 30)
+layout_mode = 2
+text = ">"
+
+[node name="Label" type="Label" parent="CharSelect/VSplitContainer/Gender/HSplitContainer" unique_id=1029258043]
+custom_minimum_size = Vector2(120, 0)
+layout_mode = 2
+
+[node name="ColorRect" type="ColorRect" parent="CharSelect/VSplitContainer/Gender" unique_id=1674498450]
+custom_minimum_size = Vector2(400, 2)
+layout_mode = 2
+
+[node name="Native" type="VSplitContainer" parent="CharSelect/VSplitContainer" unique_id=2032126944]
+layout_mode = 2
+split_offsets = PackedInt32Array(23, 66)
+split_offset = 23
+
+[node name="Text" type="Label" parent="CharSelect/VSplitContainer/Native" unique_id=576028065]
+layout_mode = 2
+text = "NATIVE LANGUAGE"
+label_settings = ExtResource("2_uf01e")
+horizontal_alignment = 1
+
+[node name="HSplitContainer" type="HSplitContainer" parent="CharSelect/VSplitContainer/Native" unique_id=1583292531]
+layout_mode = 2
+split_offsets = PackedInt32Array(120, 162, 174, 216)
+split_offset = 120
+
+[node name="Label2" type="Label" parent="CharSelect/VSplitContainer/Native/HSplitContainer" unique_id=293487340]
+custom_minimum_size = Vector2(120, 0)
+layout_mode = 2
+
+[node name="<Button" type="Button" parent="CharSelect/VSplitContainer/Native/HSplitContainer" unique_id=799618533]
+custom_minimum_size = Vector2(30, 30)
+layout_mode = 2
+text = "<"
+
+[node name="ColorRect" type="ColorRect" parent="CharSelect/VSplitContainer/Native/HSplitContainer" unique_id=1950577997]
+custom_minimum_size = Vector2(150, 0)
+layout_mode = 2
+color = Color(0.82605994, 0.82606006, 0.8260599, 1)
+
+[node name="NativeValue" type="Label" parent="CharSelect/VSplitContainer/Native/HSplitContainer/ColorRect" unique_id=121499685]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(150, 0)
+layout_mode = 0
+offset_left = 12.0
+offset_top = 4.0
+offset_right = 162.0
+offset_bottom = 27.0
+label_settings = ExtResource("2_uf01e")
+horizontal_alignment = 1
+
+[node name=">Button" type="Button" parent="CharSelect/VSplitContainer/Native/HSplitContainer" unique_id=1180005697]
+custom_minimum_size = Vector2(30, 30)
+layout_mode = 2
+text = ">"
+
+[node name="Label" type="Label" parent="CharSelect/VSplitContainer/Native/HSplitContainer" unique_id=2076615797]
+custom_minimum_size = Vector2(120, 0)
+layout_mode = 2
+
+[node name="ColorRect" type="ColorRect" parent="CharSelect/VSplitContainer/Native" unique_id=1825586138]
+custom_minimum_size = Vector2(400, 2)
+layout_mode = 2
+
+[node name="Citizen" type="VSplitContainer" parent="CharSelect/VSplitContainer" unique_id=47590328]
+layout_mode = 2
+split_offsets = PackedInt32Array(23, 66)
+split_offset = 23
+
+[node name="Text" type="Label" parent="CharSelect/VSplitContainer/Citizen" unique_id=1618813940]
+layout_mode = 2
+text = "CITIZEN NUMBER"
+label_settings = ExtResource("2_uf01e")
+horizontal_alignment = 1
+
+[node name="HSplitContainer" type="HSplitContainer" parent="CharSelect/VSplitContainer/Citizen" unique_id=962731980]
+layout_mode = 2
+split_offsets = PackedInt32Array(120, 162, 324, 366)
+split_offset = 120
+
+[node name="Label2" type="Label" parent="CharSelect/VSplitContainer/Citizen/HSplitContainer" unique_id=1234756010]
+custom_minimum_size = Vector2(120, 0)
+layout_mode = 2
+
+[node name="<Button" type="Button" parent="CharSelect/VSplitContainer/Citizen/HSplitContainer" unique_id=991062345]
+custom_minimum_size = Vector2(30, 30)
+layout_mode = 2
+flat = true
+
+[node name="ColorRect" type="ColorRect" parent="CharSelect/VSplitContainer/Citizen/HSplitContainer" unique_id=1067176210]
+custom_minimum_size = Vector2(150, 0)
+layout_mode = 2
+color = Color(0.82605994, 0.82606006, 0.8260599, 1)
+
+[node name="CitizenValue" type="LineEdit" parent="CharSelect/VSplitContainer/Citizen/HSplitContainer/ColorRect" unique_id=1692893300]
+unique_name_in_owner = true
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+virtual_keyboard_enabled = false
+
+[node name=">Button" type="Button" parent="CharSelect/VSplitContainer/Citizen/HSplitContainer" unique_id=481383838]
+custom_minimum_size = Vector2(30, 30)
+layout_mode = 2
+flat = true
+
+[node name="Label" type="Label" parent="CharSelect/VSplitContainer/Citizen/HSplitContainer" unique_id=1903893631]
+custom_minimum_size = Vector2(120, 0)
+layout_mode = 2
+
+[node name="ColorRect" type="ColorRect" parent="CharSelect/VSplitContainer/Citizen" unique_id=226615907]
+custom_minimum_size = Vector2(400, 2)
+layout_mode = 2
+
+[node name="Button" type="Button" parent="CharSelect/VSplitContainer" unique_id=951728410]
+layout_mode = 2
+text = "START
+"
+
+[connection signal="pressed" from="CharSelect/VSplitContainer/Race/HSplitContainer/<Button" to="CharSelect" method="OnRacePreviousButtonPressed"]
+[connection signal="pressed" from="CharSelect/VSplitContainer/Race/HSplitContainer/>Button" to="CharSelect" method="OnRaceNextButtonPressed"]
+[connection signal="pressed" from="CharSelect/VSplitContainer/Gender/HSplitContainer/<Button" to="CharSelect" method="OnGenderPreviousButtonPressed"]
+[connection signal="pressed" from="CharSelect/VSplitContainer/Gender/HSplitContainer/>Button" to="CharSelect" method="OnGenderNextButtonPressed"]
+[connection signal="pressed" from="CharSelect/VSplitContainer/Native/HSplitContainer/<Button" to="CharSelect" method="OnNativePreviousButtonPressed"]
+[connection signal="pressed" from="CharSelect/VSplitContainer/Native/HSplitContainer/>Button" to="CharSelect" method="OnNativeNextButtonPressed"]
