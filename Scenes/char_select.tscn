@@ -1,0 +1,295 @@
+[gd_scene format=3 uid="uid://dpi48qij7xmij"]
+
+[ext_resource type="Script" uid="uid://ej72h3mh1nep" path="res://Scenes/CharSelect.cs" id="1_e34xs"]
+[ext_resource type="LabelSettings" uid="uid://darhnls4fheg8" path="res://UI/new_label_settings.tres" id="2_4q53g"]
+
+[sub_resource type="LabelSettings" id="LabelSettings_uf01e"]
+font_color = Color(0, 0, 0, 1)
+
+[node name="CharSelect" type="ColorRect" unique_id=2031427807]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+scale = Vector2(1, 0.99640566)
+color = Color(0.11764706, 0.02745098, 0.3137255, 1)
+script = ExtResource("1_e34xs")
+
+[node name="Popup" type="ColorRect" parent="." unique_id=1815040109]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -245.0
+offset_top = -278.83768
+offset_right = -205.0
+offset_bottom = -238.83768
+grow_horizontal = 2
+grow_vertical = 2
+scale = Vector2(12.599999, 14)
+
+[node name="VSplitContainer" type="VSplitContainer" parent="." unique_id=1427525990]
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -241.0
+offset_top = 62.223656
+offset_right = 257.0
+offset_bottom = 544.22363
+grow_horizontal = 2
+split_offsets = PackedInt32Array(72, 164, 256, 348, 439)
+split_offset = 72
+
+[node name="Titlepart" type="VSplitContainer" parent="VSplitContainer" unique_id=1526209612]
+layout_mode = 2
+split_offsets = PackedInt32Array(0, 0)
+
+[node name="Title" type="Label" parent="VSplitContainer/Titlepart" unique_id=1393125898]
+layout_mode = 2
+text = "VERY IMPORTANT CONTRACT PAPER"
+label_settings = SubResource("LabelSettings_uf01e")
+horizontal_alignment = 1
+justification_flags = 161
+uppercase = true
+metadata/_edit_use_anchors_ = true
+
+[node name="Select" type="Label" parent="VSplitContainer/Titlepart" unique_id=1504171829]
+layout_mode = 2
+text = "SELECT"
+label_settings = ExtResource("2_4q53g")
+horizontal_alignment = 1
+
+[node name="ColorRect" type="ColorRect" parent="VSplitContainer/Titlepart" unique_id=1169685182]
+custom_minimum_size = Vector2(400, 2)
+layout_mode = 2
+color = Color(0, 0, 0, 1)
+
+[node name="Race" type="VSplitContainer" parent="VSplitContainer" unique_id=1763479234]
+layout_mode = 2
+split_offsets = PackedInt32Array(23, 66)
+split_offset = 23
+
+[node name="Text" type="Label" parent="VSplitContainer/Race" unique_id=246735427]
+layout_mode = 2
+text = "RACE"
+label_settings = ExtResource("2_4q53g")
+horizontal_alignment = 1
+
+[node name="HSplitContainer" type="HSplitContainer" parent="VSplitContainer/Race" unique_id=1692934915]
+layout_mode = 2
+split_offsets = PackedInt32Array(120, 162, 174, 216)
+split_offset = 120
+
+[node name="Label2" type="Label" parent="VSplitContainer/Race/HSplitContainer" unique_id=1886599449]
+custom_minimum_size = Vector2(120, 0)
+layout_mode = 2
+
+[node name="<Button" type="Button" parent="VSplitContainer/Race/HSplitContainer" unique_id=1016857166]
+custom_minimum_size = Vector2(30, 30)
+layout_mode = 2
+text = "<"
+
+[node name="ColorRect" type="ColorRect" parent="VSplitContainer/Race/HSplitContainer" unique_id=1642626072]
+custom_minimum_size = Vector2(150, 0)
+layout_mode = 2
+color = Color(0.82605994, 0.82606006, 0.8260599, 1)
+
+[node name="RaceValue" type="Label" parent="VSplitContainer/Race/HSplitContainer/ColorRect" unique_id=191138853]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(150, 0)
+layout_mode = 0
+offset_right = 150.0
+offset_bottom = 23.0
+label_settings = ExtResource("2_4q53g")
+horizontal_alignment = 1
+
+[node name=">Button" type="Button" parent="VSplitContainer/Race/HSplitContainer" unique_id=234207447]
+custom_minimum_size = Vector2(30, 30)
+layout_mode = 2
+text = ">"
+
+[node name="Label" type="Label" parent="VSplitContainer/Race/HSplitContainer" unique_id=687512323]
+custom_minimum_size = Vector2(120, 0)
+layout_mode = 2
+
+[node name="ColorRect" type="ColorRect" parent="VSplitContainer/Race" unique_id=2010331272]
+custom_minimum_size = Vector2(400, 2)
+layout_mode = 2
+
+[node name="Gender" type="VSplitContainer" parent="VSplitContainer" unique_id=3824005]
+layout_mode = 2
+split_offsets = PackedInt32Array(23, 66)
+split_offset = 23
+
+[node name="Text" type="Label" parent="VSplitContainer/Gender" unique_id=61850843]
+layout_mode = 2
+text = "GENDER"
+label_settings = ExtResource("2_4q53g")
+horizontal_alignment = 1
+
+[node name="HSplitContainer" type="HSplitContainer" parent="VSplitContainer/Gender" unique_id=255742368]
+layout_mode = 2
+split_offsets = PackedInt32Array(120, 162, 174, 216)
+split_offset = 120
+
+[node name="Label2" type="Label" parent="VSplitContainer/Gender/HSplitContainer" unique_id=1641357064]
+custom_minimum_size = Vector2(120, 0)
+layout_mode = 2
+
+[node name="<Button" type="Button" parent="VSplitContainer/Gender/HSplitContainer" unique_id=1964198601]
+custom_minimum_size = Vector2(30, 30)
+layout_mode = 2
+text = "<"
+
+[node name="ColorRect" type="ColorRect" parent="VSplitContainer/Gender/HSplitContainer" unique_id=653680105]
+custom_minimum_size = Vector2(150, 0)
+layout_mode = 2
+color = Color(0.82605994, 0.82606006, 0.8260599, 1)
+
+[node name="GenderValue" type="Label" parent="VSplitContainer/Gender/HSplitContainer/ColorRect" unique_id=461094144]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(150, 0)
+layout_mode = 0
+offset_right = 150.0
+offset_bottom = 23.0
+label_settings = ExtResource("2_4q53g")
+horizontal_alignment = 1
+
+[node name=">Button" type="Button" parent="VSplitContainer/Gender/HSplitContainer" unique_id=1358385252]
+custom_minimum_size = Vector2(30, 30)
+layout_mode = 2
+text = ">"
+
+[node name="Label" type="Label" parent="VSplitContainer/Gender/HSplitContainer" unique_id=1937901288]
+custom_minimum_size = Vector2(120, 0)
+layout_mode = 2
+
+[node name="ColorRect" type="ColorRect" parent="VSplitContainer/Gender" unique_id=579679141]
+custom_minimum_size = Vector2(400, 2)
+layout_mode = 2
+
+[node name="Native" type="VSplitContainer" parent="VSplitContainer" unique_id=1757144014]
+layout_mode = 2
+split_offsets = PackedInt32Array(23, 66)
+split_offset = 23
+
+[node name="Text" type="Label" parent="VSplitContainer/Native" unique_id=1858320008]
+layout_mode = 2
+text = "NATIVE LANGUAGE"
+label_settings = ExtResource("2_4q53g")
+horizontal_alignment = 1
+
+[node name="HSplitContainer" type="HSplitContainer" parent="VSplitContainer/Native" unique_id=1218480644]
+layout_mode = 2
+split_offsets = PackedInt32Array(120, 162, 174, 216)
+split_offset = 120
+
+[node name="Label2" type="Label" parent="VSplitContainer/Native/HSplitContainer" unique_id=1851773029]
+custom_minimum_size = Vector2(120, 0)
+layout_mode = 2
+
+[node name="<Button" type="Button" parent="VSplitContainer/Native/HSplitContainer" unique_id=140641156]
+custom_minimum_size = Vector2(30, 30)
+layout_mode = 2
+text = "<"
+
+[node name="ColorRect" type="ColorRect" parent="VSplitContainer/Native/HSplitContainer" unique_id=852768854]
+custom_minimum_size = Vector2(150, 0)
+layout_mode = 2
+color = Color(0.82605994, 0.82606006, 0.8260599, 1)
+
+[node name="NativeValue" type="Label" parent="VSplitContainer/Native/HSplitContainer/ColorRect" unique_id=380663065]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(150, 0)
+layout_mode = 0
+offset_right = 150.0
+offset_bottom = 23.0
+label_settings = ExtResource("2_4q53g")
+horizontal_alignment = 1
+
+[node name=">Button" type="Button" parent="VSplitContainer/Native/HSplitContainer" unique_id=267650829]
+custom_minimum_size = Vector2(30, 30)
+layout_mode = 2
+text = ">"
+
+[node name="Label" type="Label" parent="VSplitContainer/Native/HSplitContainer" unique_id=1272261318]
+custom_minimum_size = Vector2(120, 0)
+layout_mode = 2
+
+[node name="ColorRect" type="ColorRect" parent="VSplitContainer/Native" unique_id=1498232840]
+custom_minimum_size = Vector2(400, 2)
+layout_mode = 2
+
+[node name="Citizen" type="VSplitContainer" parent="VSplitContainer" unique_id=1046644634]
+layout_mode = 2
+split_offsets = PackedInt32Array(23, 66)
+split_offset = 23
+
+[node name="Text" type="Label" parent="VSplitContainer/Citizen" unique_id=905506107]
+layout_mode = 2
+text = "CITIZEN NUMBER"
+label_settings = ExtResource("2_4q53g")
+horizontal_alignment = 1
+
+[node name="HSplitContainer" type="HSplitContainer" parent="VSplitContainer/Citizen" unique_id=1005140883]
+layout_mode = 2
+split_offsets = PackedInt32Array(120, 162, 324, 366)
+split_offset = 120
+
+[node name="Label2" type="Label" parent="VSplitContainer/Citizen/HSplitContainer" unique_id=1702432266]
+custom_minimum_size = Vector2(120, 0)
+layout_mode = 2
+
+[node name="<Button" type="Button" parent="VSplitContainer/Citizen/HSplitContainer" unique_id=213149936]
+custom_minimum_size = Vector2(30, 30)
+layout_mode = 2
+flat = true
+
+[node name="ColorRect" type="ColorRect" parent="VSplitContainer/Citizen/HSplitContainer" unique_id=1692682663]
+custom_minimum_size = Vector2(150, 0)
+layout_mode = 2
+color = Color(0.82605994, 0.82606006, 0.8260599, 1)
+
+[node name="CitizenValue" type="LineEdit" parent="VSplitContainer/Citizen/HSplitContainer/ColorRect" unique_id=1825792297]
+unique_name_in_owner = true
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+virtual_keyboard_enabled = false
+
+[node name=">Button" type="Button" parent="VSplitContainer/Citizen/HSplitContainer" unique_id=615817567]
+custom_minimum_size = Vector2(30, 30)
+layout_mode = 2
+flat = true
+
+[node name="Label" type="Label" parent="VSplitContainer/Citizen/HSplitContainer" unique_id=281548157]
+custom_minimum_size = Vector2(120, 0)
+layout_mode = 2
+
+[node name="ColorRect" type="ColorRect" parent="VSplitContainer/Citizen" unique_id=1777666008]
+custom_minimum_size = Vector2(400, 2)
+layout_mode = 2
+
+[node name="CenterContainer" type="CenterContainer" parent="VSplitContainer" unique_id=1745247246]
+layout_mode = 2
+
+[node name="Button" type="Button" parent="VSplitContainer/CenterContainer" unique_id=551769631]
+custom_minimum_size = Vector2(120, 0)
+layout_mode = 2
+text = "START
+"
+
+[connection signal="pressed" from="VSplitContainer/Race/HSplitContainer/<Button" to="." method="OnRacePreviousButtonPressed"]
+[connection signal="pressed" from="VSplitContainer/Race/HSplitContainer/>Button" to="." method="OnRaceNextButtonPressed"]
+[connection signal="pressed" from="VSplitContainer/Gender/HSplitContainer/<Button" to="." method="OnGenderPreviousButtonPressed"]
+[connection signal="pressed" from="VSplitContainer/Gender/HSplitContainer/>Button" to="." method="OnGenderNextButtonPressed"]
+[connection signal="pressed" from="VSplitContainer/Native/HSplitContainer/<Button" to="." method="OnNativePreviousButtonPressed"]
+[connection signal="pressed" from="VSplitContainer/Native/HSplitContainer/>Button" to="." method="OnNativeNextButtonPressed"]
+[connection signal="pressed" from="VSplitContainer/CenterContainer/Button" to="." method="OnStart"]

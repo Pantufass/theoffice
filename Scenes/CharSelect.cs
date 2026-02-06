@@ -32,7 +32,7 @@ public partial class CharSelect : ColorRect
     [Export] public Label nativeLabel;
     [Export] public LineEdit citizenLine;
 
-    private static int MAX_SCORE = 11;
+    public static int MAX_SCORE = 14;
 
     public bool started = false;
 
@@ -109,7 +109,7 @@ public partial class CharSelect : ColorRect
         GetScore();
         this.Visible = false;
         started = true;
-
+        GetParent<OnPc>().OnStart();
     }
 
     private int CalcCitizenNumber()
@@ -134,14 +134,14 @@ public partial class CharSelect : ColorRect
     private int CalcGender()
     {
         if(Gender == GenderEnum.Female) return 2;
-        if(Gender == GenderEnum.NonBinary) return 1;
-        if(Gender == GenderEnum.Male) return 5;
+        if(Gender == GenderEnum.NonBinary) return 0;
+        if(Gender == GenderEnum.Male) return 4;
         return 0;
     }
     private int CalcNative()
     {
-        if(Native == NativeEnum.EnglishNative) return 3;
-        if(Native == NativeEnum.EnglishSpeaker) return 2;
+        if(Native == NativeEnum.EnglishNative) return 2;
+        if(Native == NativeEnum.EnglishSpeaker) return 1;
         if(Native == NativeEnum.NoSpeaker) return 0;
         return 0;
     }
