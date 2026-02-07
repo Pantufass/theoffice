@@ -39,14 +39,15 @@ grow_vertical = 2
 color = Color(0.11764706, 0.02745098, 0.3137255, 1)
 
 [node name="ReadLabel" type="RichTextLabel" parent="Typing" unique_id=1099888526]
+custom_minimum_size = Vector2(350, 0)
 layout_mode = 1
 anchors_preset = 4
 anchor_top = 0.5
 anchor_bottom = 0.5
-offset_left = 432.0
-offset_top = -49.0
-offset_right = 655.0
-offset_bottom = -4.0
+offset_left = 407.0
+offset_top = -52.0
+offset_right = 757.0
+offset_bottom = -7.0
 grow_vertical = 2
 theme_override_font_sizes/normal_font_size = 32
 bbcode_enabled = true
@@ -106,7 +107,7 @@ text = "RESTART"
 [node name="CharSelect" parent="." unique_id=2031427807 instance=ExtResource("3_2gxi5")]
 
 [node name="FullTimer" type="Timer" parent="." unique_id=1921347659]
-wait_time = 30.0
+wait_time = 40.0
 
 [node name="TicTimer" type="Timer" parent="." unique_id=439049063]
 

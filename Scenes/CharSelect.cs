@@ -32,7 +32,7 @@ public partial class CharSelect : ColorRect
     [Export] public Label nativeLabel;
     [Export] public LineEdit citizenLine;
 
-    public static int MAX_SCORE = 14;
+    public static int MAX_SCORE = 15;
 
     public bool started = false;
 
@@ -147,7 +147,7 @@ public partial class CharSelect : ColorRect
     }
     public void GetScore()
     {
-        Score = 0;  
+        Score = 1;  
         Score += CalcCitizen();
         Score += CalcRace();
         Score += CalcGender();

@@ -47,7 +47,6 @@ public partial class OnPc : CanvasLayer
 
         Typing.Visible =false;
         FinalScreen.Visible = false;
-        fullTimer.Start();
 
         GetWords();
         SetWord();
@@ -60,6 +59,7 @@ public partial class OnPc : CanvasLayer
         Mode = ScoreMult >= 8 ? ModeEnum.easy : ModeEnum.hard;
         Typing.Visible = true;
         PercentMult = (float)ScoreMult / CharSelect.MAX_SCORE;
+        fullTimer.Start();
         
         GD.Print(Mode);
     }
@@ -111,19 +111,20 @@ public partial class OnPc : CanvasLayer
     private void UpdateColoredWord()
     {
         string result = "";
-
-        for (int i = 0; i < currentWord.Length; i++)
+        string current = currentWord.ToUpper();
+        string currTyped = typed.ToUpper();
+        for (int i = 0; i < current.Length; i++)
         {
-            if (i < typed.Length)
+            if (i < currTyped.Length)
             {
-                if (typed[i] == currentWord[i])
-                    result += "[color=green]" + currentWord[i] + "[/color]";
+                if (currTyped[i] == current[i])
+                    result += "[color=green]" + current[i] + "[/color]";
                 else
-                    result += "[color=red]" + currentWord[i] + "[/color]";
+                    result += "[color=red]" + current[i] + "[/color]";
             }
             else
             {
-                result += "[color=white]" + currentWord[i] + "[/color]";
+                result += "[color=white]" + current[i] + "[/color]";
             }
         }
 
