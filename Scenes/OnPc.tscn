@@ -1,26 +1,13 @@
 [gd_scene format=3 uid="uid://dkqgmryje87j8"]
 
 [ext_resource type="Script" uid="uid://cshg44jm410n3" path="res://Scripts/OnPc.cs" id="1_t2wvu"]
+[ext_resource type="PackedScene" uid="uid://cv7y1e8vjfkel" path="res://Scenes/finalScreen.tscn" id="2_2gxi5"]
+[ext_resource type="PackedScene" uid="uid://6ro81qds71v3" path="res://Scenes/typing.tscn" id="2_85k7a"]
 [ext_resource type="PackedScene" uid="uid://dpi48qij7xmij" path="res://Scenes/char_select.tscn" id="3_2gxi5"]
 
-[sub_resource type="LabelSettings" id="LabelSettings_uf01e"]
-font_size = 32
-
-[sub_resource type="LabelSettings" id="LabelSettings_2gxi5"]
-font_size = 32
-
-[sub_resource type="LabelSettings" id="LabelSettings_85k7a"]
-font_size = 30
-
-[node name="OnPC" type="CanvasLayer" unique_id=203585400 node_paths=PackedStringArray("Typing", "CharSelect", "FinalScreen", "Read", "FinalScore", "Money", "TimerLabel")]
+[node name="OnPC" type="CanvasLayer" unique_id=203585400 node_paths=PackedStringArray("CharSelect")]
 script = ExtResource("1_t2wvu")
-Typing = NodePath("Typing")
 CharSelect = NodePath("CharSelect")
-FinalScreen = NodePath("Final")
-Read = NodePath("Typing/ReadLabel")
-FinalScore = NodePath("Final/Final Score")
-Money = NodePath("Typing/Money")
-TimerLabel = NodePath("Typing/TimerLabel")
 
 [node name="Background" type="ColorRect" parent="." unique_id=644131289]
 anchors_preset = 15
@@ -30,86 +17,14 @@ grow_horizontal = 2
 grow_vertical = 2
 color = Color(0.11764706, 0.02745098, 0.3137255, 1)
 
-[node name="Typing" type="ColorRect" parent="." unique_id=1803577253]
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
-color = Color(0.11764706, 0.02745098, 0.3137255, 1)
+[node name="Typing" parent="." unique_id=1682653831 instance=ExtResource("2_85k7a")]
 
-[node name="ReadLabel" type="RichTextLabel" parent="Typing" unique_id=1099888526]
-custom_minimum_size = Vector2(350, 0)
-layout_mode = 1
-anchors_preset = 4
-anchor_top = 0.5
-anchor_bottom = 0.5
-offset_left = 407.0
-offset_top = -52.0
-offset_right = 757.0
-offset_bottom = -7.0
-grow_vertical = 2
-theme_override_font_sizes/normal_font_size = 32
-bbcode_enabled = true
-text = "Things to copy"
-horizontal_alignment = 1
-
-[node name="Money" type="Label" parent="Typing" unique_id=1883751946]
-layout_mode = 0
-offset_left = 994.0
-offset_top = 502.0
-offset_right = 995.0
-offset_bottom = 547.0
-label_settings = SubResource("LabelSettings_uf01e")
-
-[node name="TimerLabel" type="Label" parent="Typing" unique_id=790713274]
-layout_mode = 0
-offset_left = 528.0
-offset_top = 45.0
-offset_right = 568.0
-offset_bottom = 68.0
-text = "2"
-label_settings = SubResource("LabelSettings_2gxi5")
-
-[node name="Final" type="Control" parent="." unique_id=1382391108]
-layout_mode = 3
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
-
-[node name="Final Score" type="Label" parent="Final" unique_id=744462821]
-custom_minimum_size = Vector2(800, 0)
-layout_mode = 1
-anchors_preset = 13
-anchor_left = 0.5
-anchor_right = 0.5
-anchor_bottom = 1.0
-offset_left = -404.0
-offset_top = 275.0
-offset_right = 396.0
-offset_bottom = -328.0
-grow_horizontal = 2
-grow_vertical = 2
-label_settings = SubResource("LabelSettings_85k7a")
-horizontal_alignment = 1
-
-[node name="Button" type="Button" parent="Final" unique_id=1555188288]
-layout_mode = 0
-offset_left = 482.0
-offset_top = 377.0
-offset_right = 624.0
-offset_bottom = 430.0
-theme_override_font_sizes/font_size = 32
-text = "RESTART"
+[node name="FinalScreen" parent="." unique_id=441014253 node_paths=PackedStringArray("HighScores") instance=ExtResource("2_2gxi5")]
+HighScores = []
 
 [node name="CharSelect" parent="." unique_id=2031427807 instance=ExtResource("3_2gxi5")]
 
 [node name="FullTimer" type="Timer" parent="." unique_id=1921347659]
 wait_time = 40.0
 
-[node name="TicTimer" type="Timer" parent="." unique_id=439049063]
-
-[connection signal="pressed" from="Final/Button" to="." method="Restart"]
 [connection signal="timeout" from="FullTimer" to="." method="Finish"]

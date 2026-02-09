@@ -13,10 +13,9 @@ public partial class OnPc : CanvasLayer
 
     [Export] public ColorRect Typing;
     [Export] public CharSelect CharSelect;
-    [Export] public Control FinalScreen;
     [Export] public RichTextLabel Read;
-    [Export] public Label FinalScore;
     [Export] public Label Money;
+    [Export] public FinalScreen FinalScreen;
     private ModeEnum Mode { get; set; }
 
     private Timer fullTimer;
@@ -39,14 +38,12 @@ public partial class OnPc : CanvasLayer
         if(Typing == null) Typing = GetNode<ColorRect>("Typing");
         if(CharSelect == null) CharSelect = GetNode<CharSelect>("CharSelect");
         if(Read == null) Read = Typing.GetNode<RichTextLabel>("ReadLabel");
-        if(fullTimer == null) fullTimer = GetNode<Timer>("FullTimer");
-        if(TimerLabel == null) TimerLabel = GetNode<Label>("TimerLabel");
+        if(TimerLabel == null) TimerLabel = Typing.GetNode<Label>("TimerLabel");
         if(Money == null) Money = Typing.GetNode<Label>("Money");
-        if(FinalScreen == null) FinalScreen = GetNode<Control>("FinalScreen");
-        if(FinalScore == null) FinalScore = FinalScreen.GetNode<Label>("FinalScore");
+        if(fullTimer == null) fullTimer = GetNode<Timer>("FullTimer");
+        if(FinalScreen == null) FinalScreen = GetNode<FinalScreen>("FinalScreen");
 
         Typing.Visible =false;
-        FinalScreen.Visible = false;
 
         GetWords();
         SetWord();
@@ -70,7 +67,11 @@ public partial class OnPc : CanvasLayer
 
     private void SetWord()
     {
-        if (Mode == ModeEnum.easy)
+        if (easyWordList.Count == 0 && hardWordList.Count == 0)
+        {
+            throw new Exception("No words loaded!");
+        }
+        if (PercentMult > GD.Randf())
         {
             currentWord = easyWordList[(int)Mathf.Ceil(GD.Randi() % easyWordList.Count)];
         }
@@ -171,27 +172,23 @@ public partial class OnPc : CanvasLayer
         string hardWords = System.IO.File.ReadAllText(hardpath);
         foreach (string word in easyWords.Split('\n'))
         {
-            easyWordList.Add(word.Trim());
+            var wordVar = word.Trim();
+            if (!string.IsNullOrEmpty(wordVar))
+                easyWordList.Add(wordVar);
         }
         foreach (string word in hardWords.Split('\n'))       
         {
-            hardWordList.Add(word.Trim());
+            var wordVar = word.Trim();
+            if (!string.IsNullOrEmpty(wordVar))
+                hardWordList.Add(wordVar);
         }
     }
 
     public void Finish()
     {
-        GD.Print("Final Score: " + Score);
-        GD.Print("Final Accuracy: " + fullAccuracy);
         Typing.Visible = false;
-        FinalScreen.Visible = true;
-        FinalScore.Text = "You earned "+ Score+"$ with an accuracy of "+fullAccuracy*100+"% and a total of "+totalTyped+" words";
+        FinalScreen.Finish("uaua", Score, fullAccuracy, totalTyped);
     }
 
-    public void Restart()
-    {
-        GetTree().ReloadCurrentScene();
-
-    }
     
 }

@@ -23,24 +23,27 @@ anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
-offset_left = -245.0
-offset_top = -278.83768
-offset_right = -205.0
-offset_bottom = -238.83768
+offset_left = -252.0
+offset_top = -276.05127
+offset_right = -212.0
+offset_bottom = -236.05127
 grow_horizontal = 2
 grow_vertical = 2
-scale = Vector2(12.599999, 14)
+scale = Vector2(12.799999, 14)
 
 [node name="VSplitContainer" type="VSplitContainer" parent="." unique_id=1427525990]
 layout_mode = 1
-anchors_preset = 5
+anchors_preset = 8
 anchor_left = 0.5
+anchor_top = 0.5
 anchor_right = 0.5
-offset_left = -241.0
-offset_top = 62.223656
-offset_right = 257.0
-offset_bottom = 544.22363
+anchor_bottom = 0.5
+offset_left = -249.0
+offset_top = -241.0
+offset_right = 249.0
+offset_bottom = 241.0
 grow_horizontal = 2
+grow_vertical = 2
 split_offsets = PackedInt32Array(72, 164, 256, 348, 439)
 split_offset = 72
 

@@ -1,0 +1,48 @@
+[gd_scene format=3 uid="uid://6ro81qds71v3"]
+
+[sub_resource type="LabelSettings" id="LabelSettings_uf01e"]
+font_size = 32
+
+[sub_resource type="LabelSettings" id="LabelSettings_2gxi5"]
+font_size = 32
+
+[node name="Typing" type="ColorRect" unique_id=1682653831]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0.11764706, 0.02745098, 0.3137255, 1)
+
+[node name="ReadLabel" type="RichTextLabel" parent="." unique_id=928035424]
+custom_minimum_size = Vector2(350, 0)
+layout_mode = 1
+anchors_preset = 4
+anchor_top = 0.5
+anchor_bottom = 0.5
+offset_left = 407.0
+offset_top = -52.0
+offset_right = 757.0
+offset_bottom = -7.0
+grow_vertical = 2
+theme_override_font_sizes/normal_font_size = 32
+bbcode_enabled = true
+text = "Things to copy"
+horizontal_alignment = 1
+
+[node name="Money" type="Label" parent="." unique_id=610044182]
+layout_mode = 0
+offset_left = 994.0
+offset_top = 502.0
+offset_right = 995.0
+offset_bottom = 547.0
+label_settings = SubResource("LabelSettings_uf01e")
+
+[node name="TimerLabel" type="Label" parent="." unique_id=2128523152]
+layout_mode = 0
+offset_left = 528.0
+offset_top = 45.0
+offset_right = 568.0
+offset_bottom = 68.0
+text = "2"
+label_settings = SubResource("LabelSettings_2gxi5")
