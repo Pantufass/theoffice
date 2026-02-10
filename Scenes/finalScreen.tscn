@@ -33,6 +33,7 @@ grow_horizontal = 2
 grow_vertical = 2
 label_settings = SubResource("LabelSettings_85k7a")
 horizontal_alignment = 1
+autowrap_mode = 1
 
 [node name="Button" type="Button" parent="." unique_id=2111743319]
 layout_mode = 1

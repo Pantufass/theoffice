@@ -26,7 +26,7 @@ public partial class CharSelect : ColorRect
     public RaceEnum Race { get; set; }
     public GenderEnum Gender { get; set; }
     public NativeEnum Native { get; set; }
-    public int CitizenNumber { get; set; }
+    public string CitizenNumber { get; set; }
     [Export] public Label raceLabel;
     [Export] public Label genderLabel;
     [Export] public Label nativeLabel;
@@ -102,10 +102,7 @@ public partial class CharSelect : ColorRect
 
     public void OnStart()
     {
-        if (int.TryParse(citizenLine.Text, out int citizenNumber))
-        {
-            CitizenNumber = citizenNumber;
-        }
+        CitizenNumber = citizenLine.Text;
         GetScore();
         this.Visible = false;
         started = true;
@@ -114,12 +111,17 @@ public partial class CharSelect : ColorRect
 
     private int CalcCitizenNumber()
     {
-        return CitizenNumber % 2 == 0 ? CalcCitizen() : 0;
+        int citNum = 1;
+        if (int.TryParse(citizenLine.Text, out int citizenNumber))
+        {
+            citNum = citizenNumber;
+        }
+        return citNum % 2 == 0 ? CalcCitizen() : 0;
     }
     private int CalcCitizen()
     {
-        if(CitizenNumber >= 100000 && CitizenNumber <= 1000000) return 3;
-        if(CitizenNumber >= 100000000 && CitizenNumber <= 1000000000) return 3;
+        if(CitizenNumber.Length == 6 || CitizenNumber.Length == 9) return 3;
+        //if(CitizenNumber.Length >= 9 && CitizenNumber.Length <= 10) return 3;
         return 0;
     }
     private int CalcRace()

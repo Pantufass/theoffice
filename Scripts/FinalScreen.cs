@@ -43,6 +43,9 @@ public partial class FinalScreen : Control
             SetLabelText(i,"NWords",data.topTen[i].Words.ToString());
             SetLabelText(i,"Accuracy",data.topTen[i].Accuracy.ToString());
         }
+
+        TotalScore.Text = $"Total money produced by company: {data.totalScore}$ \n"
+                        + $"Total words: {data.totalWords} and Average Accuracy: {data.accuracySum}";
     }
 
     private void SetLabelText(int index, string label, string text)
@@ -126,12 +129,12 @@ public partial class FinalScreen : Control
         var file = FileAccess.Open(path, FileAccess.ModeFlags.Write);
         file.StoreString(Json.Stringify(root));
     }
-    private void SaveScore(ScoreData score)
+    private void SaveScore(ScoreData score, int fullPotential)
     {
         var data = FetchData();
 
         // ---- Update totals ----
-        data.totalScore += score.Score;
+        data.totalScore += fullPotential;
         data.totalWords += score.Words;
         data.accuracySum += score.Accuracy;
         data.plays += 1;
@@ -155,7 +158,7 @@ public partial class FinalScreen : Control
         SaveToFile(data);
     }
 
-    public void Finish(string name, int score, float accuracy, int nWords)
+    public void Finish(string name, int score, float accuracy, int nWords, int fullPotential)
     {
         this.Visible = true;
         FinalScore.Text = "You earned "+ score
@@ -163,7 +166,7 @@ public partial class FinalScreen : Control
                         +"% and a total of "+nWords
                         +" words";
         
-        SaveScore(new ScoreData(name, score, nWords, accuracy));
+        SaveScore(new ScoreData(name, score, nWords, accuracy), fullPotential);
         ShowScores();
     }
 

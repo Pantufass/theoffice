@@ -20,6 +20,7 @@ public partial class OnPc : CanvasLayer
 
     private Timer fullTimer;
     public int Score = 0;
+    public int PotentialScore = 0;
     private int latest = 0;
     public float fullAccuracy = 0;
     public int totalTyped = 0;
@@ -28,7 +29,9 @@ public partial class OnPc : CanvasLayer
     private string typed = "";
     private int ScoreMult = 0;
     private float PercentMult = 1.0f;
-    private int mult = 15;
+    private string CitizenNum = "";
+    private int mult = 8;
+    private int minScore = 10;
     [Export] public Label TimerLabel;
 
     private List<string> easyWordList = new List<string>();
@@ -53,6 +56,7 @@ public partial class OnPc : CanvasLayer
     public void OnStart()
     {
         ScoreMult = CharSelect.Score;
+        CitizenNum = CharSelect.CitizenNumber;
         Mode = ScoreMult >= 8 ? ModeEnum.easy : ModeEnum.hard;
         Typing.Visible = true;
         PercentMult = (float)ScoreMult / CharSelect.MAX_SCORE;
@@ -136,10 +140,12 @@ public partial class OnPc : CanvasLayer
     {
         totalTyped++;
         fullAccuracy = CalcAccuracy(currentWord, typed);
-        var diffMod = Mode == ModeEnum.easy ? 1.2 : 0.9;
+        var diffMod = Mode == ModeEnum.easy ? 1.1 : 0.9;
         var greenChars = CorrectChars(currentWord,typed);
-        latest = (int)Mathf.Ceil(greenChars * PercentMult * CalcWordAccuracy(currentWord, typed) * mult * diffMod);
+        latest = minScore + (int)Mathf.Ceil(greenChars * PercentMult * CalcWordAccuracy(currentWord, typed) * mult * diffMod);
         Score += latest;
+        var fullLatest = minScore + (int)Mathf.Ceil(greenChars * CalcWordAccuracy(currentWord, typed) * mult * diffMod);
+        PotentialScore += fullLatest;
     }
 
     private float CalcAccuracy(string word, string typed)
@@ -187,7 +193,8 @@ public partial class OnPc : CanvasLayer
     public void Finish()
     {
         Typing.Visible = false;
-        FinalScreen.Finish("uaua", Score, fullAccuracy, totalTyped);
+        FinalScreen.Finish(CitizenNum, Score, fullAccuracy, totalTyped, PotentialScore);
+        GD.Print($"{Score} / {PotentialScore}");
     }
 
     
