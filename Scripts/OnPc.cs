@@ -57,7 +57,7 @@ public partial class OnPc : CanvasLayer
     {
         ScoreMult = CharSelect.Score;
         CitizenNum = CharSelect.CitizenNumber;
-        Mode = ScoreMult >= 8 ? ModeEnum.easy : ModeEnum.hard;
+        Mode = ScoreMult >= 13 ? ModeEnum.easy : ModeEnum.hard;
         Typing.Visible = true;
         PercentMult = (float)ScoreMult / CharSelect.MAX_SCORE;
         fullTimer.Start();
@@ -75,13 +75,15 @@ public partial class OnPc : CanvasLayer
         {
             throw new Exception("No words loaded!");
         }
-        if (PercentMult > GD.Randf())
+        if ((PercentMult-0.1f) > GD.Randf())
         {
             currentWord = easyWordList[(int)Mathf.Ceil(GD.Randi() % easyWordList.Count)];
+            GD.Print("easy word");
         }
         else
         {
             currentWord = hardWordList[(int)Mathf.Ceil(GD.Randi() % hardWordList.Count)];
+            GD.Print("hard word");
         }
         typed = "";
         UpdateColoredWord();

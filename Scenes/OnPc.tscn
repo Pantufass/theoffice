@@ -24,6 +24,6 @@ color = Color(0.11764706, 0.02745098, 0.3137255, 1)
 [node name="CharSelect" parent="." unique_id=2031427807 instance=ExtResource("3_2gxi5")]
 
 [node name="FullTimer" type="Timer" parent="." unique_id=1921347659]
-wait_time = 20.0
+wait_time = 30.0
 
 [connection signal="timeout" from="FullTimer" to="." method="Finish"]

@@ -33,7 +33,7 @@ public partial class FinalScreen : Control
 
     private void ShowScores()
     {
-        FetchData();
+        data = FetchData();
 
         data.topTen.Sort((a, b) => b.Score.CompareTo(a.Score));
         for (int i = 0; i < Math.Min(10, data.topTen.Count); i++)
@@ -80,7 +80,7 @@ public partial class FinalScreen : Control
         fetch.accuracySum = (float)totals["accuracySum"];
         fetch.plays = (int)totals["plays"];
 
-        // Top 10
+        // Top 10 WRONG HERE
         var arr = root["topTen"].AsGodotArray();
         foreach (var item in arr)
         {
@@ -136,7 +136,7 @@ public partial class FinalScreen : Control
         // ---- Update totals ----
         data.totalScore += fullPotential;
         data.totalWords += score.Words;
-        data.accuracySum += score.Accuracy;
+        data.accuracySum = ((data.accuracySum * data.plays) + score.Accuracy )/ (data.plays+1);
         data.plays += 1;
 
         // ---- Add to top ten ----
