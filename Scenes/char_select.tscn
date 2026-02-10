@@ -1,12 +1,12 @@
 [gd_scene format=3 uid="uid://dpi48qij7xmij"]
 
-[ext_resource type="Script" uid="uid://ej72h3mh1nep" path="res://Scenes/CharSelect.cs" id="1_e34xs"]
+[ext_resource type="Script" uid="uid://cm5yudecaikdx" path="res://Scripts/CharSelect.cs" id="1_e34xs"]
 [ext_resource type="LabelSettings" uid="uid://darhnls4fheg8" path="res://UI/new_label_settings.tres" id="2_4q53g"]
 
 [sub_resource type="LabelSettings" id="LabelSettings_uf01e"]
 font_color = Color(0, 0, 0, 1)
 
-[node name="CharSelect" type="ColorRect" unique_id=2031427807]
+[node name="CharSelect" type="ColorRect" unique_id=2031427807 node_paths=PackedStringArray("raceLabel", "genderLabel", "nativeLabel", "citizenLine")]
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
@@ -15,6 +15,10 @@ grow_vertical = 2
 scale = Vector2(1, 0.99640566)
 color = Color(0.11764706, 0.02745098, 0.3137255, 1)
 script = ExtResource("1_e34xs")
+raceLabel = NodePath("VSplitContainer/Race/HSplitContainer/ColorRect/RaceValue")
+genderLabel = NodePath("VSplitContainer/Gender/HSplitContainer/ColorRect/GenderValue")
+nativeLabel = NodePath("VSplitContainer/Native/HSplitContainer/ColorRect/NativeValue")
+citizenLine = NodePath("VSplitContainer/Citizen/HSplitContainer/ColorRect/CitizenValue")
 
 [node name="Popup" type="ColorRect" parent="." unique_id=1815040109]
 layout_mode = 1

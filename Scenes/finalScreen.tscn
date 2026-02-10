@@ -1,6 +1,6 @@
 [gd_scene format=3 uid="uid://cv7y1e8vjfkel"]
 
-[ext_resource type="Script" uid="uid://cs4yql126ipwi" path="res://Scenes/FinalScreen.cs" id="1_vewkw"]
+[ext_resource type="Script" uid="uid://cd6j2fk5s4jqw" path="res://Scripts/FinalScreen.cs" id="1_vewkw"]
 
 [sub_resource type="LabelSettings" id="LabelSettings_85k7a"]
 font_size = 30
@@ -16,7 +16,7 @@ script = ExtResource("1_vewkw")
 FinalScore = NodePath("FinalScore")
 TotalScore = NodePath("TotalScore")
 HighScoreCont = NodePath("HighScore")
-HighScores = [NodePath("HighScore/Number1"), NodePath("HighScore/Number2"), NodePath("HighScore/Number3"), NodePath("HighScore/Number4"), NodePath("HighScore/Number5"), NodePath("HighScore/Number6"), NodePath("HighScore/Number7"), NodePath("HighScore/Number8"), NodePath("HighScore/Number9"), NodePath("HighScore/Number10")]
+HighScores = []
 
 [node name="FinalScore" type="Label" parent="." unique_id=2025643976]
 custom_minimum_size = Vector2(800, 0)
@@ -70,6 +70,7 @@ split_offset = 200
 [node name="Name" type="Label" parent="HighScore/Number1" unique_id=1439602766]
 custom_minimum_size = Vector2(200, 0)
 layout_mode = 2
+text = "asda"
 
 [node name="Money" type="Label" parent="HighScore/Number1" unique_id=1028634776]
 custom_minimum_size = Vector2(100, 0)
@@ -91,6 +92,7 @@ split_offset = 200
 [node name="Name" type="Label" parent="HighScore/Number2" unique_id=648095379]
 custom_minimum_size = Vector2(200, 0)
 layout_mode = 2
+text = "asde"
 
 [node name="Money" type="Label" parent="HighScore/Number2" unique_id=30681445]
 custom_minimum_size = Vector2(100, 0)
@@ -112,6 +114,7 @@ split_offset = 200
 [node name="Name" type="Label" parent="HighScore/Number3" unique_id=1443552113]
 custom_minimum_size = Vector2(200, 0)
 layout_mode = 2
+text = "aass"
 
 [node name="Money" type="Label" parent="HighScore/Number3" unique_id=859494171]
 custom_minimum_size = Vector2(100, 0)
@@ -133,6 +136,7 @@ split_offset = 200
 [node name="Name" type="Label" parent="HighScore/Number4" unique_id=889111049]
 custom_minimum_size = Vector2(200, 0)
 layout_mode = 2
+text = "uaua"
 
 [node name="Money" type="Label" parent="HighScore/Number4" unique_id=264679533]
 custom_minimum_size = Vector2(100, 0)

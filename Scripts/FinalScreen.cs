@@ -25,8 +25,7 @@ public partial class FinalScreen : Control
             for(int i = 1; i < 11; i++)
             {
                 var name = "Number"+i;
-                HighScoreCont.GetNode<Container>(name);
-                GD.Print(name +" "+ HighScores[i] == null);
+                HighScores.Add(HighScoreCont.GetNode<Container>(name));
             }
         }
         data = FetchData();

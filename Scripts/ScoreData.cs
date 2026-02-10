@@ -1,7 +1,5 @@
 public class ScoreData
 {
-    private int nWords;
-
     public ScoreData(){}
     public ScoreData(string name, int score, int nWords, float accuracy)
     {
