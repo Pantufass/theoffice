@@ -48,7 +48,7 @@ offset_right = 249.0
 offset_bottom = 241.0
 grow_horizontal = 2
 grow_vertical = 2
-split_offsets = PackedInt32Array(72, 164, 256, 348, 439)
+split_offsets = PackedInt32Array(72, 163, 255, 347, 439)
 split_offset = 72
 
 [node name="Titlepart" type="VSplitContainer" parent="VSplitContainer" unique_id=1526209612]
@@ -74,6 +74,50 @@ horizontal_alignment = 1
 custom_minimum_size = Vector2(400, 2)
 layout_mode = 2
 color = Color(0, 0, 0, 1)
+
+[node name="Citizen" type="VSplitContainer" parent="VSplitContainer" unique_id=1046644634]
+layout_mode = 2
+split_offsets = PackedInt32Array(23, 66)
+split_offset = 23
+
+[node name="Text" type="Label" parent="VSplitContainer/Citizen" unique_id=905506107]
+layout_mode = 2
+text = "IDENTIFIER"
+label_settings = ExtResource("2_4q53g")
+horizontal_alignment = 1
+
+[node name="HSplitContainer" type="HSplitContainer" parent="VSplitContainer/Citizen" unique_id=1005140883]
+layout_mode = 2
+split_offsets = PackedInt32Array(120, 282)
+split_offset = 120
+
+[node name="Label2" type="Label" parent="VSplitContainer/Citizen/HSplitContainer" unique_id=1702432266]
+custom_minimum_size = Vector2(150, 0)
+layout_mode = 2
+
+[node name="ColorRect" type="ColorRect" parent="VSplitContainer/Citizen/HSplitContainer" unique_id=1692682663]
+custom_minimum_size = Vector2(150, 0)
+layout_mode = 2
+size_flags_horizontal = 3
+color = Color(0.82605994, 0.82606006, 0.8260599, 1)
+
+[node name="CitizenValue" type="LineEdit" parent="VSplitContainer/Citizen/HSplitContainer/ColorRect" unique_id=1825792297]
+unique_name_in_owner = true
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+virtual_keyboard_enabled = false
+
+[node name="Label" type="Label" parent="VSplitContainer/Citizen/HSplitContainer" unique_id=281548157]
+custom_minimum_size = Vector2(150, 0)
+layout_mode = 2
+
+[node name="ColorRect" type="ColorRect" parent="VSplitContainer/Citizen" unique_id=1777666008]
+custom_minimum_size = Vector2(400, 2)
+layout_mode = 2
 
 [node name="Race" type="VSplitContainer" parent="VSplitContainer" unique_id=1763479234]
 layout_mode = 2
@@ -103,6 +147,7 @@ text = "<"
 [node name="ColorRect" type="ColorRect" parent="VSplitContainer/Race/HSplitContainer" unique_id=1642626072]
 custom_minimum_size = Vector2(150, 0)
 layout_mode = 2
+size_flags_horizontal = 3
 color = Color(0.82605994, 0.82606006, 0.8260599, 1)
 
 [node name="RaceValue" type="Label" parent="VSplitContainer/Race/HSplitContainer/ColorRect" unique_id=191138853]
@@ -155,6 +200,7 @@ text = "<"
 [node name="ColorRect" type="ColorRect" parent="VSplitContainer/Gender/HSplitContainer" unique_id=653680105]
 custom_minimum_size = Vector2(150, 0)
 layout_mode = 2
+size_flags_horizontal = 3
 color = Color(0.82605994, 0.82606006, 0.8260599, 1)
 
 [node name="GenderValue" type="Label" parent="VSplitContainer/Gender/HSplitContainer/ColorRect" unique_id=461094144]
@@ -207,6 +253,7 @@ text = "<"
 [node name="ColorRect" type="ColorRect" parent="VSplitContainer/Native/HSplitContainer" unique_id=852768854]
 custom_minimum_size = Vector2(150, 0)
 layout_mode = 2
+size_flags_horizontal = 3
 color = Color(0.82605994, 0.82606006, 0.8260599, 1)
 
 [node name="NativeValue" type="Label" parent="VSplitContainer/Native/HSplitContainer/ColorRect" unique_id=380663065]
@@ -228,59 +275,6 @@ custom_minimum_size = Vector2(120, 0)
 layout_mode = 2
 
 [node name="ColorRect" type="ColorRect" parent="VSplitContainer/Native" unique_id=1498232840]
-custom_minimum_size = Vector2(400, 2)
-layout_mode = 2
-
-[node name="Citizen" type="VSplitContainer" parent="VSplitContainer" unique_id=1046644634]
-layout_mode = 2
-split_offsets = PackedInt32Array(23, 66)
-split_offset = 23
-
-[node name="Text" type="Label" parent="VSplitContainer/Citizen" unique_id=905506107]
-layout_mode = 2
-text = "CITIZEN NUMBER"
-label_settings = ExtResource("2_4q53g")
-horizontal_alignment = 1
-
-[node name="HSplitContainer" type="HSplitContainer" parent="VSplitContainer/Citizen" unique_id=1005140883]
-layout_mode = 2
-split_offsets = PackedInt32Array(120, 162, 324, 366)
-split_offset = 120
-
-[node name="Label2" type="Label" parent="VSplitContainer/Citizen/HSplitContainer" unique_id=1702432266]
-custom_minimum_size = Vector2(120, 0)
-layout_mode = 2
-
-[node name="<Button" type="Button" parent="VSplitContainer/Citizen/HSplitContainer" unique_id=213149936]
-custom_minimum_size = Vector2(30, 30)
-layout_mode = 2
-flat = true
-
-[node name="ColorRect" type="ColorRect" parent="VSplitContainer/Citizen/HSplitContainer" unique_id=1692682663]
-custom_minimum_size = Vector2(150, 0)
-layout_mode = 2
-color = Color(0.82605994, 0.82606006, 0.8260599, 1)
-
-[node name="CitizenValue" type="LineEdit" parent="VSplitContainer/Citizen/HSplitContainer/ColorRect" unique_id=1825792297]
-unique_name_in_owner = true
-layout_mode = 1
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
-virtual_keyboard_enabled = false
-
-[node name=">Button" type="Button" parent="VSplitContainer/Citizen/HSplitContainer" unique_id=615817567]
-custom_minimum_size = Vector2(30, 30)
-layout_mode = 2
-flat = true
-
-[node name="Label" type="Label" parent="VSplitContainer/Citizen/HSplitContainer" unique_id=281548157]
-custom_minimum_size = Vector2(120, 0)
-layout_mode = 2
-
-[node name="ColorRect" type="ColorRect" parent="VSplitContainer/Citizen" unique_id=1777666008]
 custom_minimum_size = Vector2(400, 2)
 layout_mode = 2
 

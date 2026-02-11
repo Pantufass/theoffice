@@ -56,6 +56,7 @@ layout_mode = 0
 offset_right = 556.0
 offset_bottom = 1080.0
 split_offsets = PackedInt32Array(23, 58, 464, 499, 534, 569, 604, 639, 674, 0)
+collapsed = true
 split_offset = 23
 
 [node name="Label" type="Label" parent="HighScore" unique_id=1172733969]
