@@ -32,6 +32,7 @@ public partial class OnPc : CanvasLayer
     private string CitizenNum = "";
     private int mult = 8;
     private int minScore = 10;
+    private Tween moneyTween;
     [Export] public Label TimerLabel;
 
     private List<string> easyWordList = new List<string>();
@@ -116,6 +117,42 @@ public partial class OnPc : CanvasLayer
     public void SetMoney()
     {
         Money.Text = "$" + latest.ToString();
+        AnimateMoney();
+    }
+
+    private void AnimateMoney()
+    {
+        if (moneyTween != null && moneyTween.IsValid())
+        {
+            moneyTween.Kill();
+            moneyTween = null;
+        }
+        Money.Visible = true;
+        
+        Vector2 originalPos = Money.Position;
+        Color originalColor = Money.Modulate;
+        
+        Money.Modulate = Colors.Green;
+        
+        var tween = CreateTween();
+        tween.SetParallel();
+        
+        tween.TweenProperty(Money, "position", 
+            originalPos + new Vector2(0, -20), 1f)
+             .SetEase(Tween.EaseType.Out)
+             .SetTrans(Tween.TransitionType.Quad);
+        
+        tween.TweenProperty(Money, "modulate", 
+            new Color(originalColor, 0f), 1f);
+        
+        tween.Finished += () => {
+            Money.Position = originalPos;
+            Money.Modulate = originalColor;
+            Money.Visible = false;
+        };
+        
+        Money.SetMeta("money_tween", tween);
+    
     }
 
     private void UpdateColoredWord()
