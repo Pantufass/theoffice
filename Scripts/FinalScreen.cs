@@ -9,7 +9,7 @@ public partial class FinalScreen : Control
     [Export] public Container HighScoreCont;
     [Export] public Godot.Collections.Array<Container> HighScores;
     private SaveData data;
-    private string path = "user://saved/records.json";
+    private string path = "res://saved/records.json";
 
     public override void _Ready()
     {

@@ -75,15 +75,18 @@ public partial class OnPc : CanvasLayer
         {
             throw new Exception("No words loaded!");
         }
-        if ((PercentMult-0.1f) > GD.Randf())
+        var finalPercent =(PercentMult-0.1f) * 0.5f + 0.5f * (Mode == ModeEnum.easy ? 1 
+                                                    : Mode == ModeEnum.medium ? 0.7
+                                                    : 0.3); 
+        if (finalPercent > GD.Randf())
         {
             currentWord = easyWordList[(int)Mathf.Ceil(GD.Randi() % easyWordList.Count)];
-            GD.Print("easy word");
+            //GD.Print("easy word");
         }
         else
         {
             currentWord = hardWordList[(int)Mathf.Ceil(GD.Randi() % hardWordList.Count)];
-            GD.Print("hard word");
+            //GD.Print("hard word");
         }
         typed = "";
         UpdateColoredWord();
