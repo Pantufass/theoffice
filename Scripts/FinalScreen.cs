@@ -33,8 +33,6 @@ public partial class FinalScreen : Control
 
     private void ShowScores()
     {
-        data = FetchData();
-
         data.topTen.Sort((a, b) => b.Score.CompareTo(a.Score));
         for (int i = 0; i < Math.Min(10, data.topTen.Count); i++)
         {
@@ -94,7 +92,6 @@ public partial class FinalScreen : Control
                 Accuracy = (float)d["accuracy"]
             });
         }
-        this.data = fetch;
         return fetch;
     }
 
@@ -127,12 +124,18 @@ public partial class FinalScreen : Control
         root["topTen"] = topArr;
 
         var file = FileAccess.Open(path, FileAccess.ModeFlags.Write);
-        file.StoreString(Json.Stringify(root));
+        string please = Json.Stringify(root);
+        file.StoreString(please);
     }
+
     private void SaveScore(ScoreData score, int fullPotential)
     {
-        var data = FetchData();
-
+        if(score == null)
+        {
+            SaveToFile(data);
+            return;
+        }
+        //data = FetchData();
         // ---- Update totals ----
         data.totalScore += fullPotential;
         data.totalWords += score.Words;
@@ -161,12 +164,21 @@ public partial class FinalScreen : Control
     public void Finish(string name, int score, float accuracy, int nWords, int fullPotential)
     {
         this.Visible = true;
-        FinalScore.Text = "You earned "+ score
-                        +"$ with an accuracy of "+accuracy*100
-                        +"% and a total of "+nWords
-                        +" words";
-        
-        SaveScore(new ScoreData(name, score, nWords, accuracy), fullPotential);
+        ScoreData finalScore = null;
+        if(accuracy < 0.1f)
+        {
+            FinalScore.Text = "You get 0$ for wasting the company's time.";
+        }
+        else
+        {
+            FinalScore.Text = "You earned "+ score
+                            +"$ with an accuracy of "+accuracy*100
+                            +"% and a total of "+nWords
+                            +" words";
+            finalScore = new ScoreData(name, score, nWords, accuracy);
+        }
+            
+        SaveScore(finalScore, fullPotential);
         ShowScores();
     }
 

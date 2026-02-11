@@ -195,6 +195,7 @@ public partial class OnPc : CanvasLayer
     public void Finish()
     {
         Typing.Visible = false;
+        fullTimer.Stop();
         FinalScreen.Finish(CitizenNum, Score, fullAccuracy, totalTyped, PotentialScore);
         GD.Print($"{Score} / {PotentialScore}");
     }
