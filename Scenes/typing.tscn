@@ -6,13 +6,13 @@ font_size = 32
 [sub_resource type="LabelSettings" id="LabelSettings_2gxi5"]
 font_size = 32
 
-[node name="Typing" type="ColorRect" unique_id=1682653831]
+[node name="Typing" type="Control" unique_id=1742347282]
+layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
-color = Color(0.11764706, 0.02745098, 0.3137255, 1)
 
 [node name="ReadLabel" type="RichTextLabel" parent="." unique_id=928035424]
 custom_minimum_size = Vector2(350, 0)

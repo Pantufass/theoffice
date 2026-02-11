@@ -5,9 +5,11 @@
 [ext_resource type="PackedScene" uid="uid://6ro81qds71v3" path="res://Scenes/typing.tscn" id="2_85k7a"]
 [ext_resource type="PackedScene" uid="uid://dpi48qij7xmij" path="res://Scenes/char_select.tscn" id="3_2gxi5"]
 
-[node name="OnPC" type="CanvasLayer" unique_id=203585400 node_paths=PackedStringArray("CharSelect")]
+[node name="OnPC" type="CanvasLayer" unique_id=203585400 node_paths=PackedStringArray("Typing", "CharSelect", "FinalScreen")]
 script = ExtResource("1_t2wvu")
+Typing = NodePath("Typing")
 CharSelect = NodePath("CharSelect")
+FinalScreen = NodePath("FinalScreen")
 
 [node name="Background" type="ColorRect" parent="." unique_id=644131289]
 anchors_preset = 15

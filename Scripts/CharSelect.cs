@@ -1,7 +1,7 @@
 using Godot;
 using System;
 
-public partial class CharSelect : ColorRect
+public partial class CharSelect : Control
 {
     public enum RaceEnum
     {

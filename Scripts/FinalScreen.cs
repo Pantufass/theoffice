@@ -9,7 +9,7 @@ public partial class FinalScreen : Control
     [Export] public Container HighScoreCont;
     [Export] public Godot.Collections.Array<Container> HighScores;
     private SaveData data;
-    private string path = "res://saved/records.json";
+    private string path = "user://saved/records.json";
 
     public override void _Ready()
     {
@@ -71,14 +71,13 @@ public partial class FinalScreen : Control
             return fetch;
 
         var root = parsed.AsGodotDictionary();
-        // Totals
+
         var totals = root["totals"].AsGodotDictionary();
         fetch.totalScore = (int)totals["score"];
         fetch.totalWords = (int)totals["words"];
         fetch.accuracySum = (float)totals["accuracySum"];
         fetch.plays = (int)totals["plays"];
 
-        // Top 10 WRONG HERE
         var arr = root["topTen"].AsGodotArray();
         foreach (var item in arr)
         {
@@ -97,52 +96,88 @@ public partial class FinalScreen : Control
 
     private void SaveToFile(SaveData data)
     {
-        var root = new Godot.Collections.Dictionary();
-
-        var totals = new Godot.Collections.Dictionary
+        try 
         {
-            { "score", data.totalScore },
-            { "words", data.totalWords },
-            { "accuracySum", data.accuracySum },
-            { "plays", data.plays }
-        };
+            var root = new Godot.Collections.Dictionary();
 
-        var topArr = new Godot.Collections.Array();
-
-        foreach (var s in data.topTen)
-        {
-            topArr.Add(new Godot.Collections.Dictionary
+            var totals = new Godot.Collections.Dictionary
             {
-                { "name", s.Name },
-                { "score", s.Score },
-                { "words", s.Words },
-                { "accuracy", s.Accuracy }
-            });
+                { "score", data.totalScore },
+                { "words", data.totalWords },
+                { "accuracySum", data.accuracySum },
+                { "plays", data.plays }
+            };
+
+            var topArr = new Godot.Collections.Array();
+
+            foreach (var s in data.topTen)
+            {
+                topArr.Add(new Godot.Collections.Dictionary
+                {
+                    { "name", s.Name ?? "" },
+                    { "score", s.Score },
+                    { "words", s.Words },
+                    { "accuracy", s.Accuracy }
+                });
+            }
+
+            root["totals"] = totals;
+            root["topTen"] = topArr;
+
+            // Debug: Check if root has data
+            GD.Print($"Saving - totals: {data.totalScore}, {data.totalWords}, top count: {data.topTen.Count}");
+
+            string json = Json.Stringify(root);
+            GD.Print($"JSON length: {json?.Length ?? 0}"); // Debug
+
+            if (string.IsNullOrEmpty(json))
+            {
+                GD.PrintErr("JSON stringify returned empty!");
+                return;
+            }
+
+            // Ensure directory exists
+            var dir = DirAccess.Open("user://");
+            if (!dir.DirExists("user://saved"))
+            {
+                dir.MakeDir("user://saved");
+                GD.Print("Created directory: user://saved");
+            }
+
+            using var file = FileAccess.Open(path, FileAccess.ModeFlags.Write);
+            if (file == null)
+            {
+                GD.PrintErr("Failed to open file for writing!");
+                return;
+            }
+
+            file.StoreString(json);
+            GD.Print($"File saved successfully to {path}");
         }
-
-        root["totals"] = totals;
-        root["topTen"] = topArr;
-
-        var file = FileAccess.Open(path, FileAccess.ModeFlags.Write);
-        string please = Json.Stringify(root);
-        file.StoreString(please);
+        catch (Exception e)
+        {
+            GD.PrintErr($"Save error: {e.Message}\n{e.StackTrace}");
+        }
     }
 
     private void SaveScore(ScoreData score, int fullPotential)
     {
+        GD.Print($"SaveScore called - score null? {score == null}, fullPotential: {fullPotential}");
+
         if(score == null)
         {
+            GD.Print("Score is null, saving existing data only");
             SaveToFile(data);
             return;
         }
-        //data = FetchData();
-        // ---- Update totals ----
+
         data.totalScore += fullPotential;
         data.totalWords += score.Words;
         data.accuracySum = ((data.accuracySum * data.plays) + score.Accuracy )/ (data.plays+1);
         data.plays += 1;
 
-        // ---- Add to top ten ----
+        GD.Print($"Updated totals - totalScore: {data.totalScore}, plays: {data.plays}");
+
         data.topTen.Add(new ScoreData
         {
             Name = score.Name,
@@ -151,12 +186,15 @@ public partial class FinalScreen : Control
             Accuracy = score.Accuracy
         });
 
-        // Sort by score
+        GD.Print($"Added to topTen, now count: {data.topTen.Count}");
+
         data.topTen.Sort((a, b) => b.Score.CompareTo(a.Score));
 
-        // Keep only 10
         if (data.topTen.Count > 10)
+        {
             data.topTen = data.topTen.GetRange(0, 10);
+            GD.Print("Trimmed to top 10");
+        }
 
         SaveToFile(data);
     }

@@ -11,7 +11,7 @@ public partial class OnPc : CanvasLayer
         hard
     }
 
-    [Export] public ColorRect Typing;
+    [Export] public Control Typing;
     [Export] public CharSelect CharSelect;
     [Export] public RichTextLabel Read;
     [Export] public Label Money;
@@ -38,7 +38,7 @@ public partial class OnPc : CanvasLayer
     private List<string> hardWordList = new List<string>();    
     public override void _Ready()
     {
-        if(Typing == null) Typing = GetNode<ColorRect>("Typing");
+        if(Typing == null) Typing = GetNode<Control>("Typing");
         if(CharSelect == null) CharSelect = GetNode<CharSelect>("CharSelect");
         if(Read == null) Read = Typing.GetNode<RichTextLabel>("ReadLabel");
         if(TimerLabel == null) TimerLabel = Typing.GetNode<Label>("TimerLabel");

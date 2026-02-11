@@ -6,14 +6,14 @@
 [sub_resource type="LabelSettings" id="LabelSettings_uf01e"]
 font_color = Color(0, 0, 0, 1)
 
-[node name="CharSelect" type="ColorRect" unique_id=2031427807 node_paths=PackedStringArray("raceLabel", "genderLabel", "nativeLabel", "citizenLine")]
+[node name="CharSelect" type="Control" unique_id=1029466417 node_paths=PackedStringArray("raceLabel", "genderLabel", "nativeLabel", "citizenLine")]
+layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 scale = Vector2(1, 0.99640566)
-color = Color(0.11764706, 0.02745098, 0.3137255, 1)
 script = ExtResource("1_e34xs")
 raceLabel = NodePath("VSplitContainer/Race/HSplitContainer/ColorRect/RaceValue")
 genderLabel = NodePath("VSplitContainer/Gender/HSplitContainer/ColorRect/GenderValue")
