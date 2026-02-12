@@ -2,6 +2,7 @@
 
 [ext_resource type="Script" uid="uid://cshg44jm410n3" path="res://Scripts/OnPc.cs" id="1_t2wvu"]
 [ext_resource type="PackedScene" uid="uid://cv7y1e8vjfkel" path="res://Scenes/finalScreen.tscn" id="2_2gxi5"]
+[ext_resource type="Theme" uid="uid://cskwxxccp4dup" path="res://UI/background.tres" id="2_4orsc"]
 [ext_resource type="PackedScene" uid="uid://6ro81qds71v3" path="res://Scenes/typing.tscn" id="2_85k7a"]
 [ext_resource type="PackedScene" uid="uid://dpi48qij7xmij" path="res://Scenes/char_select.tscn" id="3_2gxi5"]
 
@@ -11,13 +12,14 @@ Typing = NodePath("Typing")
 CharSelect = NodePath("CharSelect")
 FinalScreen = NodePath("FinalScreen")
 
-[node name="Background" type="ColorRect" parent="." unique_id=644131289]
+[node name="Background" type="PanelContainer" parent="." unique_id=730977411]
+z_index = -2
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
-color = Color(0.11764706, 0.02745098, 0.3137255, 1)
+theme = ExtResource("2_4orsc")
 
 [node name="Typing" parent="." unique_id=1682653831 instance=ExtResource("2_85k7a")]
 

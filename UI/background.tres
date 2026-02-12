@@ -1,0 +1,9 @@
+[gd_resource type="Theme" format=3 uid="uid://cskwxxccp4dup"]
+
+[ext_resource type="Texture2D" uid="uid://bbpfa2k8xp7co" path="res://UI/officebackground.png" id="1_kulfa"]
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_i57mn"]
+texture = ExtResource("1_kulfa")
+
+[resource]
+PanelContainer/styles/panel = SubResource("StyleBoxTexture_i57mn")

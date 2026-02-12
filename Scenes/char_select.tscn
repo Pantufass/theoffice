@@ -2,6 +2,11 @@
 
 [ext_resource type="Script" uid="uid://cm5yudecaikdx" path="res://Scripts/CharSelect.cs" id="1_e34xs"]
 [ext_resource type="LabelSettings" uid="uid://darhnls4fheg8" path="res://UI/new_label_settings.tres" id="2_4q53g"]
+[ext_resource type="Theme" uid="uid://b5ysli7u4fe40" path="res://UI/button.tres" id="3_dpyih"]
+[ext_resource type="Theme" uid="uid://cql4w7ydsgi4f" path="res://UI/body_copy.tres" id="3_vrfhv"]
+[ext_resource type="Theme" uid="uid://bnpho3exddqxr" path="res://UI/Window.tres" id="4_dpyih"]
+[ext_resource type="Theme" uid="uid://0rpmsdwoprm2" path="res://UI/Word_bar.tres" id="5_0tida"]
+[ext_resource type="Theme" uid="uid://tekeevurp7ds" path="res://UI/bold_type.tres" id="7_nbuob"]
 
 [sub_resource type="LabelSettings" id="LabelSettings_uf01e"]
 font_color = Color(0, 0, 0, 1)
@@ -20,20 +25,20 @@ genderLabel = NodePath("VSplitContainer/Gender/HSplitContainer/ColorRect/GenderV
 nativeLabel = NodePath("VSplitContainer/Native/HSplitContainer/ColorRect/NativeValue")
 citizenLine = NodePath("VSplitContainer/Citizen/HSplitContainer/ColorRect/CitizenValue")
 
-[node name="Popup" type="ColorRect" parent="." unique_id=1815040109]
+[node name="Popup" type="PanelContainer" parent="." unique_id=2123837992]
 layout_mode = 1
 anchors_preset = 8
 anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
-offset_left = -252.0
+offset_left = -257.0
 offset_top = -276.05127
-offset_right = -212.0
-offset_bottom = -236.05127
+offset_right = 264.0
+offset_bottom = 270.91467
 grow_horizontal = 2
 grow_vertical = 2
-scale = Vector2(12.799999, 14)
+theme = ExtResource("4_dpyih")
 
 [node name="VSplitContainer" type="VSplitContainer" parent="." unique_id=1427525990]
 layout_mode = 1
@@ -53,11 +58,14 @@ split_offset = 72
 
 [node name="Titlepart" type="VSplitContainer" parent="VSplitContainer" unique_id=1526209612]
 layout_mode = 2
-split_offsets = PackedInt32Array(0, 0)
+split_offsets = PackedInt32Array(23, 58)
+split_offset = 23
 
 [node name="Title" type="Label" parent="VSplitContainer/Titlepart" unique_id=1393125898]
 layout_mode = 2
-text = "VERY IMPORTANT CONTRACT PAPER"
+theme = ExtResource("3_vrfhv")
+text = "VERY IMPORTANT CONTRACT.
+"
 label_settings = SubResource("LabelSettings_uf01e")
 horizontal_alignment = 1
 justification_flags = 161
@@ -66,6 +74,7 @@ metadata/_edit_use_anchors_ = true
 
 [node name="Select" type="Label" parent="VSplitContainer/Titlepart" unique_id=1504171829]
 layout_mode = 2
+theme = ExtResource("3_vrfhv")
 text = "SELECT"
 label_settings = ExtResource("2_4q53g")
 horizontal_alignment = 1
@@ -77,19 +86,20 @@ color = Color(0, 0, 0, 1)
 
 [node name="Citizen" type="VSplitContainer" parent="VSplitContainer" unique_id=1046644634]
 layout_mode = 2
-split_offsets = PackedInt32Array(23, 66)
+split_offsets = PackedInt32Array(23, 77)
 split_offset = 23
 
 [node name="Text" type="Label" parent="VSplitContainer/Citizen" unique_id=905506107]
 layout_mode = 2
-text = "IDENTIFIER"
+theme = ExtResource("3_vrfhv")
+text = "Name or Citizenship Number"
 label_settings = ExtResource("2_4q53g")
 horizontal_alignment = 1
 
 [node name="HSplitContainer" type="HSplitContainer" parent="VSplitContainer/Citizen" unique_id=1005140883]
 layout_mode = 2
-split_offsets = PackedInt32Array(120, 282)
-split_offset = 120
+split_offsets = PackedInt32Array(150, 336)
+split_offset = 150
 
 [node name="Label2" type="Label" parent="VSplitContainer/Citizen/HSplitContainer" unique_id=1702432266]
 custom_minimum_size = Vector2(150, 0)
@@ -103,12 +113,10 @@ color = Color(0.82605994, 0.82606006, 0.8260599, 1)
 
 [node name="CitizenValue" type="LineEdit" parent="VSplitContainer/Citizen/HSplitContainer/ColorRect" unique_id=1825792297]
 unique_name_in_owner = true
-layout_mode = 1
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
+layout_mode = 0
+offset_right = 184.99994
+offset_bottom = 31.0
+theme = ExtResource("7_nbuob")
 virtual_keyboard_enabled = false
 
 [node name="Label" type="Label" parent="VSplitContainer/Citizen/HSplitContainer" unique_id=281548157]
@@ -121,18 +129,19 @@ layout_mode = 2
 
 [node name="Race" type="VSplitContainer" parent="VSplitContainer" unique_id=1763479234]
 layout_mode = 2
-split_offsets = PackedInt32Array(23, 66)
+split_offsets = PackedInt32Array(23, 69)
 split_offset = 23
 
 [node name="Text" type="Label" parent="VSplitContainer/Race" unique_id=246735427]
 layout_mode = 2
+theme = ExtResource("3_vrfhv")
 text = "RACE"
 label_settings = ExtResource("2_4q53g")
 horizontal_alignment = 1
 
 [node name="HSplitContainer" type="HSplitContainer" parent="VSplitContainer/Race" unique_id=1692934915]
 layout_mode = 2
-split_offsets = PackedInt32Array(120, 162, 174, 216)
+split_offsets = PackedInt32Array(120, 162, 324, 366)
 split_offset = 120
 
 [node name="Label2" type="Label" parent="VSplitContainer/Race/HSplitContainer" unique_id=1886599449]
@@ -142,26 +151,27 @@ layout_mode = 2
 [node name="<Button" type="Button" parent="VSplitContainer/Race/HSplitContainer" unique_id=1016857166]
 custom_minimum_size = Vector2(30, 30)
 layout_mode = 2
+theme = ExtResource("3_dpyih")
 text = "<"
 
-[node name="ColorRect" type="ColorRect" parent="VSplitContainer/Race/HSplitContainer" unique_id=1642626072]
+[node name="ColorRect" type="PanelContainer" parent="VSplitContainer/Race/HSplitContainer" unique_id=728049087]
 custom_minimum_size = Vector2(150, 0)
 layout_mode = 2
 size_flags_horizontal = 3
-color = Color(0.82605994, 0.82606006, 0.8260599, 1)
+theme = ExtResource("5_0tida")
 
 [node name="RaceValue" type="Label" parent="VSplitContainer/Race/HSplitContainer/ColorRect" unique_id=191138853]
 unique_name_in_owner = true
 custom_minimum_size = Vector2(150, 0)
-layout_mode = 0
-offset_right = 150.0
-offset_bottom = 23.0
+layout_mode = 2
+theme = ExtResource("7_nbuob")
 label_settings = ExtResource("2_4q53g")
 horizontal_alignment = 1
 
 [node name=">Button" type="Button" parent="VSplitContainer/Race/HSplitContainer" unique_id=234207447]
 custom_minimum_size = Vector2(30, 30)
 layout_mode = 2
+theme = ExtResource("3_dpyih")
 text = ">"
 
 [node name="Label" type="Label" parent="VSplitContainer/Race/HSplitContainer" unique_id=687512323]
@@ -174,18 +184,19 @@ layout_mode = 2
 
 [node name="Gender" type="VSplitContainer" parent="VSplitContainer" unique_id=3824005]
 layout_mode = 2
-split_offsets = PackedInt32Array(23, 66)
+split_offsets = PackedInt32Array(23, 69)
 split_offset = 23
 
 [node name="Text" type="Label" parent="VSplitContainer/Gender" unique_id=61850843]
 layout_mode = 2
+theme = ExtResource("3_vrfhv")
 text = "GENDER"
 label_settings = ExtResource("2_4q53g")
 horizontal_alignment = 1
 
 [node name="HSplitContainer" type="HSplitContainer" parent="VSplitContainer/Gender" unique_id=255742368]
 layout_mode = 2
-split_offsets = PackedInt32Array(120, 162, 174, 216)
+split_offsets = PackedInt32Array(120, 162, 324, 366)
 split_offset = 120
 
 [node name="Label2" type="Label" parent="VSplitContainer/Gender/HSplitContainer" unique_id=1641357064]
@@ -195,26 +206,27 @@ layout_mode = 2
 [node name="<Button" type="Button" parent="VSplitContainer/Gender/HSplitContainer" unique_id=1964198601]
 custom_minimum_size = Vector2(30, 30)
 layout_mode = 2
+theme = ExtResource("3_dpyih")
 text = "<"
 
-[node name="ColorRect" type="ColorRect" parent="VSplitContainer/Gender/HSplitContainer" unique_id=653680105]
+[node name="ColorRect" type="PanelContainer" parent="VSplitContainer/Gender/HSplitContainer" unique_id=173887806]
 custom_minimum_size = Vector2(150, 0)
 layout_mode = 2
 size_flags_horizontal = 3
-color = Color(0.82605994, 0.82606006, 0.8260599, 1)
+theme = ExtResource("5_0tida")
 
 [node name="GenderValue" type="Label" parent="VSplitContainer/Gender/HSplitContainer/ColorRect" unique_id=461094144]
 unique_name_in_owner = true
 custom_minimum_size = Vector2(150, 0)
-layout_mode = 0
-offset_right = 150.0
-offset_bottom = 23.0
+layout_mode = 2
+theme = ExtResource("7_nbuob")
 label_settings = ExtResource("2_4q53g")
 horizontal_alignment = 1
 
 [node name=">Button" type="Button" parent="VSplitContainer/Gender/HSplitContainer" unique_id=1358385252]
 custom_minimum_size = Vector2(30, 30)
 layout_mode = 2
+theme = ExtResource("3_dpyih")
 text = ">"
 
 [node name="Label" type="Label" parent="VSplitContainer/Gender/HSplitContainer" unique_id=1937901288]
@@ -227,18 +239,19 @@ layout_mode = 2
 
 [node name="Native" type="VSplitContainer" parent="VSplitContainer" unique_id=1757144014]
 layout_mode = 2
-split_offsets = PackedInt32Array(23, 66)
+split_offsets = PackedInt32Array(23, 69)
 split_offset = 23
 
 [node name="Text" type="Label" parent="VSplitContainer/Native" unique_id=1858320008]
 layout_mode = 2
+theme = ExtResource("3_vrfhv")
 text = "NATIVE LANGUAGE"
 label_settings = ExtResource("2_4q53g")
 horizontal_alignment = 1
 
 [node name="HSplitContainer" type="HSplitContainer" parent="VSplitContainer/Native" unique_id=1218480644]
 layout_mode = 2
-split_offsets = PackedInt32Array(120, 162, 174, 216)
+split_offsets = PackedInt32Array(120, 162, 324, 366)
 split_offset = 120
 
 [node name="Label2" type="Label" parent="VSplitContainer/Native/HSplitContainer" unique_id=1851773029]
@@ -248,26 +261,27 @@ layout_mode = 2
 [node name="<Button" type="Button" parent="VSplitContainer/Native/HSplitContainer" unique_id=140641156]
 custom_minimum_size = Vector2(30, 30)
 layout_mode = 2
+theme = ExtResource("3_dpyih")
 text = "<"
 
-[node name="ColorRect" type="ColorRect" parent="VSplitContainer/Native/HSplitContainer" unique_id=852768854]
+[node name="ColorRect" type="PanelContainer" parent="VSplitContainer/Native/HSplitContainer" unique_id=925074887]
 custom_minimum_size = Vector2(150, 0)
 layout_mode = 2
 size_flags_horizontal = 3
-color = Color(0.82605994, 0.82606006, 0.8260599, 1)
+theme = ExtResource("5_0tida")
 
 [node name="NativeValue" type="Label" parent="VSplitContainer/Native/HSplitContainer/ColorRect" unique_id=380663065]
 unique_name_in_owner = true
 custom_minimum_size = Vector2(150, 0)
-layout_mode = 0
-offset_right = 150.0
-offset_bottom = 23.0
+layout_mode = 2
+theme = ExtResource("7_nbuob")
 label_settings = ExtResource("2_4q53g")
 horizontal_alignment = 1
 
 [node name=">Button" type="Button" parent="VSplitContainer/Native/HSplitContainer" unique_id=267650829]
 custom_minimum_size = Vector2(30, 30)
 layout_mode = 2
+theme = ExtResource("3_dpyih")
 text = ">"
 
 [node name="Label" type="Label" parent="VSplitContainer/Native/HSplitContainer" unique_id=1272261318]
@@ -284,6 +298,7 @@ layout_mode = 2
 [node name="Button" type="Button" parent="VSplitContainer/CenterContainer" unique_id=551769631]
 custom_minimum_size = Vector2(120, 0)
 layout_mode = 2
+theme = ExtResource("3_dpyih")
 text = "START
 "
 

@@ -1,0 +1,6 @@
+[gd_resource type="Theme" format=3 uid="uid://tekeevurp7ds"]
+
+[ext_resource type="FontFile" uid="uid://b1walkhyyhkce" path="res://UI/Courier New Bold.ttf" id="1_3nfek"]
+
+[resource]
+default_font = ExtResource("1_3nfek")

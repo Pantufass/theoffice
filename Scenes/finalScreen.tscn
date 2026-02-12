@@ -1,6 +1,8 @@
 [gd_scene format=3 uid="uid://cv7y1e8vjfkel"]
 
 [ext_resource type="Script" uid="uid://cd6j2fk5s4jqw" path="res://Scripts/FinalScreen.cs" id="1_vewkw"]
+[ext_resource type="Theme" uid="uid://b5ysli7u4fe40" path="res://UI/button.tres" id="2_58s36"]
+[ext_resource type="Theme" uid="uid://tekeevurp7ds" path="res://UI/bold_type.tres" id="2_lng5a"]
 
 [sub_resource type="LabelSettings" id="LabelSettings_85k7a"]
 font_size = 30
@@ -43,11 +45,12 @@ anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
 offset_left = -71.0
-offset_top = -26.5
+offset_top = 133.0
 offset_right = 71.0
-offset_bottom = 26.5
+offset_bottom = 186.0
 grow_horizontal = 2
 grow_vertical = 2
+theme = ExtResource("2_58s36")
 theme_override_font_sizes/font_size = 32
 text = "RESTART"
 
@@ -61,6 +64,7 @@ split_offset = 23
 
 [node name="Label" type="Label" parent="HighScore" unique_id=1172733969]
 layout_mode = 2
+theme = ExtResource("2_lng5a")
 text = "Best employees"
 horizontal_alignment = 1
 
@@ -72,6 +76,7 @@ split_offset = 200
 [node name="Name" type="Label" parent="HighScore/Number1" unique_id=1439602766]
 custom_minimum_size = Vector2(200, 0)
 layout_mode = 2
+theme = ExtResource("2_lng5a")
 text = "asda"
 
 [node name="Money" type="Label" parent="HighScore/Number1" unique_id=1028634776]
@@ -94,6 +99,7 @@ split_offset = 200
 [node name="Name" type="Label" parent="HighScore/Number2" unique_id=648095379]
 custom_minimum_size = Vector2(200, 0)
 layout_mode = 2
+theme = ExtResource("2_lng5a")
 text = "asde"
 
 [node name="Money" type="Label" parent="HighScore/Number2" unique_id=30681445]
@@ -116,6 +122,7 @@ split_offset = 200
 [node name="Name" type="Label" parent="HighScore/Number3" unique_id=1443552113]
 custom_minimum_size = Vector2(200, 0)
 layout_mode = 2
+theme = ExtResource("2_lng5a")
 text = "aass"
 
 [node name="Money" type="Label" parent="HighScore/Number3" unique_id=859494171]
@@ -138,6 +145,7 @@ split_offset = 200
 [node name="Name" type="Label" parent="HighScore/Number4" unique_id=889111049]
 custom_minimum_size = Vector2(200, 0)
 layout_mode = 2
+theme = ExtResource("2_lng5a")
 text = "uaua"
 
 [node name="Money" type="Label" parent="HighScore/Number4" unique_id=264679533]
@@ -282,6 +290,6 @@ layout_mode = 2
 layout_mode = 0
 offset_left = 738.0
 offset_right = 1920.0
-offset_bottom = 255.0
+offset_bottom = 254.9999
 
 [connection signal="pressed" from="Button" to="." method="Restart"]
