@@ -13,7 +13,7 @@ dest_files=["res://.godot/imported/trendy Shirt from substance.fbx-cc45d62ecef0c
 
 [params]
 
-nodes/root_type=""
+nodes/root_type="MeshInstance3D"
 nodes/root_name=""
 nodes/root_script=null
 nodes/apply_root_scale=true
