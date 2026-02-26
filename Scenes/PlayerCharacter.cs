@@ -81,6 +81,8 @@ public partial class PlayerCharacter : CharacterBody3D
 	public Action<Item> SetCurrentPickupable;
 
     private Transform3D originalCameraTransform;
+    [Export] public Node3D TV;
+    private bool sitting = false;
 
 
 	// ────────── Ready ──────────
@@ -162,7 +164,8 @@ public partial class PlayerCharacter : CharacterBody3D
         if(Input.IsActionJustPressed("sit"))
         {
             var tv = GetNode<TV>("%TV");
-            ZoomToTV(tv.Transform);
+            if(tv != null) GD.Print("TV found");
+            ZoomToTV(TV.Transform);
         }
 		if(Input.IsActionJustPressed("Interact") && CurrentInteractable != null)
 		{
@@ -405,7 +408,7 @@ public partial class PlayerCharacter : CharacterBody3D
 		}
 
 		// ───── Movement ─────
-		Vector2 inputDir = Input.GetVector("ui_left", "ui_right", "ui_up", "ui_down");
+		Vector2 inputDir = Input.GetVector("left", "right", "up", "down");
 		if(IsOnFloor())
 		{
 			direction = (Transform.Basis * new Vector3(inputDir.X, 0, inputDir.Y)).Normalized();
@@ -540,27 +543,24 @@ public partial class PlayerCharacter : CharacterBody3D
 
     internal void ZoomToTV(Transform3D transform)
     {   
-        // Store original camera transform (if you want to return later)
+        GD.Print("EH");
         originalCameraTransform = MainCamera.GlobalTransform;
 
-        // Create a target position for the camera (in front of the TV)
         float zoomDistance = 2.0f; // How close to zoom to the TV
         Vector3 tvForward = -transform.Basis.Z; // TV's forward direction (assuming -Z is forward)
         Vector3 tvUp = transform.Basis.Y; // TV's up direction
 
-        // Position camera directly in front of TV at specified distance
         Vector3 targetPosition = transform.Origin + (tvForward * zoomDistance);
 
-        // Create target transform looking at the TV
         Transform3D targetTransform = new Transform3D();
         targetTransform.Origin = targetPosition;
         targetTransform.Basis = Basis.LookingAt(-tvForward, tvUp); // Look towards TV
 
-        // Smoothly interpolate to target (you can also set directly with camera.GlobalTransform = targetTransform)
         Tween tween = CreateTween();
         tween.TweenProperty(MainCamera, "global_transform", targetTransform, 1.0f)
              .SetEase(Tween.EaseType.Out)
              .SetTrans(Tween.TransitionType.Quad);
-        }
+        sitting = true;
+    }
 
 }

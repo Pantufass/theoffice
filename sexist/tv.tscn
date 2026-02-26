@@ -6,6 +6,8 @@
 
 [sub_resource type="BoxMesh" id="BoxMesh_rmefe"]
 
+[sub_resource type="QuadMesh" id="QuadMesh_7kvnu"]
+
 [node name="TV" type="Node3D" unique_id=1405747118]
 script = ExtResource("1_7kvnu")
 
@@ -16,3 +18,9 @@ shape = SubResource("BoxShape3D_rmefe")
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="RigidBody3D" unique_id=1334033686]
 mesh = SubResource("BoxMesh_rmefe")
+
+[node name="Screen" type="MeshInstance3D" parent="." unique_id=98691599]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0.51)
+mesh = SubResource("QuadMesh_7kvnu")
+
+[node name="SubViewport" type="SubViewport" parent="Screen" unique_id=621334124]
