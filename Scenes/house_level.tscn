@@ -1,0 +1,7 @@
+[gd_scene format=3 uid="uid://d2i8l8i8cilwh"]
+
+[ext_resource type="PackedScene" uid="uid://bw45yrxnm4hhj" path="res://3D Assets/level.tscn" id="1_jnkus"]
+
+[node name="HouseLevel" type="Node3D" unique_id=1864180722]
+
+[node name="level" parent="." unique_id=77072260 instance=ExtResource("1_jnkus")]
