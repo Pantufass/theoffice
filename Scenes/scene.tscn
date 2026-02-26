@@ -1,7 +1,7 @@
 [gd_scene format=3 uid="uid://sn5j5yndxw48"]
 
 [ext_resource type="PackedScene" uid="uid://cns0p2a8vv2c2" path="res://Scenes/player.tscn" id="1_gjdyk"]
-[ext_resource type="PackedScene" uid="uid://b5ewn5005750q" path="res://sexist/tv.tscn" id="2_p6gg1"]
+[ext_resource type="PackedScene" uid="uid://b5ewn5005750q" path="res://sexist/Usable items/tv.tscn" id="2_p6gg1"]
 
 [sub_resource type="BoxMesh" id="BoxMesh_drvgu"]
 size = Vector3(40, 0.2, 40)

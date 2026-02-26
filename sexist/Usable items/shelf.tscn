@@ -1,0 +1,16 @@
+[gd_scene format=3 uid="uid://t6p1tbnvemvf"]
+
+[ext_resource type="PackedScene" uid="uid://ddpjrkrm3si68" path="res://sexist/House Assets/Shelf.fbx" id="1_aw007"]
+[ext_resource type="Texture2D" uid="uid://b2btvi5nvngbm" path="res://sexist/House textures/Shelf.png" id="2_0iu12"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_7o7sa"]
+albedo_texture = ExtResource("2_0iu12")
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_xng2s"]
+albedo_texture = ExtResource("2_0iu12")
+
+[node name="Shelf" unique_id=1982737464 instance=ExtResource("1_aw007")]
+
+[node name="Shelf" parent="." index="0" unique_id=1241521952]
+surface_material_override/0 = SubResource("StandardMaterial3D_7o7sa")
+surface_material_override/1 = SubResource("StandardMaterial3D_xng2s")

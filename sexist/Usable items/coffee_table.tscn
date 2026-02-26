@@ -1,0 +1,16 @@
+[gd_scene format=3 uid="uid://cfcyj5v1gufif"]
+
+[ext_resource type="PackedScene" uid="uid://dsn7e43813nwg" path="res://sexist/House Assets/CoffeeTable.fbx" id="1_5ibkd"]
+[ext_resource type="Texture2D" uid="uid://cen22to7ctsi3" path="res://sexist/House textures/CoffeeTable.png" id="2_ykxxm"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_yc0ix"]
+albedo_texture = ExtResource("2_ykxxm")
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_irpmh"]
+albedo_texture = ExtResource("2_ykxxm")
+
+[node name="CoffeeTable" unique_id=1387814654 instance=ExtResource("1_5ibkd")]
+
+[node name="Cofee Table" parent="." index="0" unique_id=475758634]
+surface_material_override/0 = SubResource("StandardMaterial3D_yc0ix")
+surface_material_override/1 = SubResource("StandardMaterial3D_irpmh")
