@@ -50,8 +50,8 @@ public partial class PlayerCharacter : CharacterBody3D
 	private bool sprintOnCooldown = false;
 	private float sprintTimeRemaining;
 
-	private const float NORMAL_SPEED = 3.5f;
-	[Export] public float SprintSpeed = 1f;
+	private const float NORMAL_SPEED = 1f;
+	[Export] public float SprintSpeed = 1.5f;
 	[Export] public float WalkSpeed = 0.5f;
 
 	private float speedModifier = NORMAL_SPEED;
@@ -79,10 +79,13 @@ public partial class PlayerCharacter : CharacterBody3D
 
 	public static Action Die;
 	public Action<Item> SetCurrentPickupable;
-
     private Transform3D originalCameraTransform;
+    private Transform3D targetTVTransform;
     [Export] public Node3D TV;
     private bool sitting = false;
+    public bool Sitting {get => sitting;}
+    private Tween currentTween;    
+    private bool isCameraMoving = false;
 
 
 	// ────────── Ready ──────────
@@ -161,9 +164,14 @@ public partial class PlayerCharacter : CharacterBody3D
 	// ────────── Input ──────────
 	public override void _Input(InputEvent input)
 	{
+        if(Input.IsActionJustPressed("up") || Input.IsActionJustPressed("down") ||
+            Input.IsActionJustPressed("right") || Input.IsActionJustPressed("right") )
+        {
+            ReturnCamera();
+        }
         if(Input.IsActionJustPressed("sit"))
         {
-            var tv = GetNode<TV>("%TV");
+            var tv = GetNode<TV>("../%TV");
             if(tv != null) GD.Print("TV found");
             ZoomToTV(TV.Transform);
         }
@@ -354,13 +362,13 @@ public partial class PlayerCharacter : CharacterBody3D
 			if (Velocity.Y > 0)
 				Velocity = new Vector3(
 					Velocity.X,
-					Velocity.Y - jumpGravity * d/1.4f,
+					Velocity.Y - jumpGravity * d,
 					Velocity.Z
 				);
 			else
 				Velocity = new Vector3(
 					Velocity.X,
-					Velocity.Y - fallGravity * d/2.8f ,
+					Velocity.Y - fallGravity * d ,
 					Velocity.Z
 				);
 			Velocity = new Vector3(
@@ -541,26 +549,139 @@ public partial class PlayerCharacter : CharacterBody3D
 		}
 	}
 
-    internal void ZoomToTV(Transform3D transform)
+    internal void ZoomToTV(Transform3D tvTransform)
     {   
-        GD.Print("EH");
-        originalCameraTransform = MainCamera.GlobalTransform;
-
-        float zoomDistance = 2.0f; // How close to zoom to the TV
-        Vector3 tvForward = -transform.Basis.Z; // TV's forward direction (assuming -Z is forward)
-        Vector3 tvUp = transform.Basis.Y; // TV's up direction
-
-        Vector3 targetPosition = transform.Origin + (tvForward * zoomDistance);
-
-        Transform3D targetTransform = new Transform3D();
-        targetTransform.Origin = targetPosition;
-        targetTransform.Basis = Basis.LookingAt(-tvForward, tvUp); // Look towards TV
-
-        Tween tween = CreateTween();
-        tween.TweenProperty(MainCamera, "global_transform", targetTransform, 1.0f)
+        GD.Print("=== Zoom To TV ===");
+        GD.Print($"TV Transform - Origin: {tvTransform.Origin}, Basis: {tvTransform.Basis}");
+        GD.Print($"Camera Current - Origin: {MainCamera.GlobalPosition}");
+        
+        if (isCameraMoving) return;
+        
+        // Kill any existing tween
+        currentTween?.Kill();
+        
+        // Store original camera position - MAKE A DEEP COPY
+        originalCameraTransform = new Transform3D(
+            MainCamera.GlobalTransform.Basis,
+            MainCamera.GlobalTransform.Origin
+        );
+        
+        // Calculate target position and transform
+        float zoomDistance = 2.0f;
+        Vector3 tvForward = -tvTransform.Basis.Z; // TV's forward direction
+        Vector3 tvUp = tvTransform.Basis.Y; // TV's up direction
+        
+        // Position camera directly in front of TV
+        Vector3 targetPosition = tvTransform.Origin + (tvForward * zoomDistance);
+        
+        // Create transform that looks at the TV
+        targetTVTransform = new Transform3D();
+        targetTVTransform.Origin = targetPosition;
+        targetTVTransform.Basis = Basis.LookingAt(tvTransform.Origin - targetPosition, tvUp);
+        
+        GD.Print($"Target - Origin: {targetPosition}");
+        GD.Print($"Target - Looking at: {tvTransform.Origin - targetPosition}");
+        
+        // Disable player input
+        SetPlayerInputEnabled(false);
+        isCameraMoving = true;
+        
+        // Create tween
+        currentTween = CreateTween();
+        currentTween.SetParallel(false); // Run sequentially for more control
+        
+        // First tween position
+        currentTween.TweenProperty(MainCamera, "global_position", targetPosition, 0.8f)
              .SetEase(Tween.EaseType.Out)
              .SetTrans(Tween.TransitionType.Quad);
+        
+        // Then tween rotation (or use parallel with both)
+        // For parallel:
+        // currentTween.SetParallel(true);
+        // currentTween.TweenProperty(MainCamera, "global_position", targetPosition, 1.0f)
+        //      .SetEase(Tween.EaseType.Out)
+        //      .SetTrans(Tween.TransitionType.Quad);
+        // currentTween.TweenProperty(MainCamera, "global_transform:basis", targetTVTransform.Basis, 1.0f)
+        //      .SetEase(Tween.EaseType.Out)
+        //      .SetTrans(Tween.TransitionType.Quad);
+        
+        // Set up completion callback
+        currentTween.Finished += OnZoomToTVComplete;
+    }
+    
+    private void OnZoomToTVComplete()
+    {
+        // Force exact position and rotation
+        MainCamera.GlobalPosition = targetTVTransform.Origin;
+        MainCamera.GlobalTransform = new Transform3D(targetTVTransform.Basis, targetTVTransform.Origin);
+        
         sitting = true;
+        isCameraMoving = false;
+        
+        GD.Print($"Camera reached TV - Position: {MainCamera.GlobalPosition}");
+        GD.Print($"Expected Position: {targetTVTransform.Origin}");
+    }
+    
+    internal void ReturnCamera()
+    {
+        GD.Print("=== Return Camera ===");
+        GD.Print($"Current Camera: {MainCamera.GlobalPosition}");
+        GD.Print($"Original Camera: {originalCameraTransform.Origin}");
+        
+        if (!sitting || isCameraMoving) return;
+        
+        isCameraMoving = true;
+        
+        currentTween?.Kill();
+        
+        currentTween = CreateTween();
+        
+        // Make a fresh copy of the original transform
+        Transform3D returnTransform = new Transform3D(
+            originalCameraTransform.Basis,
+            originalCameraTransform.Origin
+        );
+        
+        GD.Print($"Returning to: {returnTransform.Origin}");
+        
+        // Tween back - use sequential for better control
+        currentTween.TweenProperty(MainCamera, "global_position", returnTransform.Origin, 0.8f)
+             .SetEase(Tween.EaseType.Out)
+             .SetTrans(Tween.TransitionType.Quad);
+        
+        // Set up completion callback
+        currentTween.Finished += () => OnReturnCameraComplete(returnTransform);
+    }
+    
+    private void OnReturnCameraComplete(Transform3D expectedTransform)
+    {
+        // Force exact original position and rotation
+        MainCamera.GlobalPosition = expectedTransform.Origin;
+        MainCamera.GlobalTransform = new Transform3D(expectedTransform.Basis, expectedTransform.Origin);
+        
+        sitting = false;
+        isCameraMoving = false;
+        
+        // Re-enable player input
+        SetPlayerInputEnabled(true);
+        
+        GD.Print($"Camera returned - Position: {MainCamera.GlobalPosition}");
+        GD.Print($"Expected Position: {expectedTransform.Origin}");
+    }
+
+    private void SetPlayerInputEnabled(bool enabled)
+    {
+        var playerController = GetNodeOrNull<CharacterBody3D>(".."); 
+
+        if (playerController != null)
+        {
+            if (playerController.HasMethod("SetMovementEnabled"))
+            {
+                playerController.Call("SetMovementEnabled", enabled);
+            }
+        }
+
+        GD.Print($"Player input {(enabled ? "enabled" : "disabled")}");
     }
 
 }
