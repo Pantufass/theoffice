@@ -8,8 +8,10 @@
 
 [sub_resource type="QuadMesh" id="QuadMesh_7kvnu"]
 
-[node name="TV" type="Node3D" unique_id=1405747118]
+[node name="TV" type="Node3D" unique_id=1405747118 node_paths=PackedStringArray("Screen", "SubViewport")]
 script = ExtResource("1_7kvnu")
+Screen = NodePath("Screen")
+SubViewport = NodePath("Screen/SubViewport")
 
 [node name="RigidBody3D" type="RigidBody3D" parent="." unique_id=1646868632]
 
@@ -20,7 +22,7 @@ shape = SubResource("BoxShape3D_rmefe")
 mesh = SubResource("BoxMesh_rmefe")
 
 [node name="Screen" type="MeshInstance3D" parent="." unique_id=98691599]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0.51)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -0.51)
 mesh = SubResource("QuadMesh_7kvnu")
 
 [node name="SubViewport" type="SubViewport" parent="Screen" unique_id=621334124]
