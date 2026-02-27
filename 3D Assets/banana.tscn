@@ -1,0 +1,12 @@
+[gd_scene format=3 uid="uid://dqihelncp2hy7"]
+
+[ext_resource type="PackedScene" uid="uid://clla6gl3r3wpv" path="res://sexist/special items/banana.fbx" id="1_gxc7q"]
+[ext_resource type="Texture2D" uid="uid://dcpk56um7uy86" path="res://sexist/special items/defaultMat_Base_Color.png" id="2_ettjm"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_7502k"]
+albedo_texture = ExtResource("2_ettjm")
+
+[node name="banana" unique_id=337617875 instance=ExtResource("1_gxc7q")]
+
+[node name="banana_UVs" parent="." index="0" unique_id=727023090]
+surface_material_override/0 = SubResource("StandardMaterial3D_7502k")

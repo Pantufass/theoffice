@@ -1,0 +1,5 @@
+[gd_scene format=3 uid="uid://i8cwr8m0se8q"]
+
+[ext_resource type="PackedScene" uid="uid://3kk8ruvajo8m" path="res://sexist/special items/Easel_redo.fbx" id="1_heybn"]
+
+[node name="Easel_redo" unique_id=877771524 instance=ExtResource("1_heybn")]
