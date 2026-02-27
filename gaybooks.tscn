@@ -1,0 +1,74 @@
+[gd_scene format=3 uid="uid://be1t82nug26g6"]
+
+[ext_resource type="PackedScene" uid="uid://cafnvgiqfdvqf" path="res://sexist/special items/gaybooks.gltf" id="1_i7svu"]
+[ext_resource type="Texture2D" uid="uid://ck3qb0xxb2byx" path="res://sexist/special items/GAUGUIN_baseColor.jpeg" id="2_cpeom"]
+[ext_resource type="Texture2D" uid="uid://bftaxg0w4tcix" path="res://sexist/special items/BACON_baseColor.jpeg" id="3_opcfa"]
+[ext_resource type="Texture2D" uid="uid://sqsrpw43pend" path="res://sexist/special items/pages_baseColor.jpeg" id="4_2w5lr"]
+[ext_resource type="Texture2D" uid="uid://bc1ud0gmmdks6" path="res://sexist/special items/BASQUIAT_baseColor.jpeg" id="5_3tigs"]
+[ext_resource type="Texture2D" uid="uid://bxwgw0uwlbyq6" path="res://sexist/special items/BOTTICELLI_baseColor.jpeg" id="6_lgn8x"]
+[ext_resource type="Texture2D" uid="uid://l5bcyr2hbt3e" path="res://sexist/special items/BRUEGEL_baseColor.jpeg" id="7_rvh6w"]
+[ext_resource type="Texture2D" uid="uid://bmcqp005ad5l2" path="res://sexist/special items/CHAGALL_baseColor.jpeg" id="8_x1308"]
+[ext_resource type="Texture2D" uid="uid://cwkrcjq2chkf0" path="res://sexist/special items/DEGAS_baseColor.jpeg" id="9_lyn1k"]
+[ext_resource type="Texture2D" uid="uid://cejmhiml7hhdx" path="res://sexist/special items/HOKUSAI_baseColor.jpeg" id="10_6sf5t"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_phpl3"]
+albedo_texture = ExtResource("2_cpeom")
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_6rn15"]
+albedo_texture = ExtResource("3_opcfa")
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_jetbv"]
+albedo_texture = ExtResource("4_2w5lr")
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_qwck3"]
+albedo_texture = ExtResource("5_3tigs")
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_xleo0"]
+albedo_texture = ExtResource("6_lgn8x")
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_iuyrd"]
+albedo_texture = ExtResource("7_rvh6w")
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_mgskd"]
+albedo_texture = ExtResource("8_x1308")
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_ggna8"]
+albedo_texture = ExtResource("9_lyn1k")
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_hn0lb"]
+albedo_texture = ExtResource("10_6sf5t")
+
+[node name="Sketchfab_Scene" unique_id=335216392 instance=ExtResource("1_i7svu")]
+
+[node name="Object_5" parent="Sketchfab_model/root/GLTF_SceneRootNode/Artbook - Gauguin_2/cover_0" parent_id_path=PackedInt32Array(1358127229) index="0" unique_id=1685605413]
+material_override = SubResource("StandardMaterial3D_phpl3")
+
+[node name="Object_10" parent="Sketchfab_model/root/GLTF_SceneRootNode/Artbook - Bacon_5/cover_001_3" parent_id_path=PackedInt32Array(751853138) index="0" unique_id=1932066637]
+surface_material_override/0 = SubResource("StandardMaterial3D_6rn15")
+
+[node name="Object_12" parent="Sketchfab_model/root/GLTF_SceneRootNode/Artbook - Bacon_5/pages_001_4" parent_id_path=PackedInt32Array(1518633733) index="0" unique_id=19780415]
+surface_material_override/0 = SubResource("StandardMaterial3D_jetbv")
+
+[node name="Object_15" parent="Sketchfab_model/root/GLTF_SceneRootNode/Artbook - Basquiat_8/cover_002_6" parent_id_path=PackedInt32Array(55581846) index="0" unique_id=173159153]
+material_override = SubResource("StandardMaterial3D_qwck3")
+
+[node name="Object_20" parent="Sketchfab_model/root/GLTF_SceneRootNode/Artbook - Botticelli_11/cover_003_9" parent_id_path=PackedInt32Array(321518696) index="0" unique_id=933015777]
+material_override = SubResource("StandardMaterial3D_xleo0")
+
+[node name="Object_25" parent="Sketchfab_model/root/GLTF_SceneRootNode/Artbook - Bruegel_14/cover_004_12" parent_id_path=PackedInt32Array(1848951707) index="0" unique_id=358637041]
+material_override = SubResource("StandardMaterial3D_iuyrd")
+
+[node name="Object_30" parent="Sketchfab_model/root/GLTF_SceneRootNode/Artbook - Chagall_17/cover_005_15" parent_id_path=PackedInt32Array(1546639822) index="0" unique_id=727868895]
+material_override = SubResource("StandardMaterial3D_mgskd")
+
+[node name="Object_35" parent="Sketchfab_model/root/GLTF_SceneRootNode/Artbook - Degas_20/cover_006_18" parent_id_path=PackedInt32Array(1647712105) index="0" unique_id=249884896]
+material_override = SubResource("StandardMaterial3D_ggna8")
+
+[node name="Artbook - Hokusai_23" parent="Sketchfab_model/root/GLTF_SceneRootNode" parent_id_path=PackedInt32Array(812129507) index="7" unique_id=420138630]
+visible = false
+
+[node name="Object_40" parent="Sketchfab_model/root/GLTF_SceneRootNode/Artbook - Hokusai_23/cover_007_21" parent_id_path=PackedInt32Array(1751693854) index="0" unique_id=1446009708]
+material_override = SubResource("StandardMaterial3D_hn0lb")
+
+[node name="Artbook - Kahlo_26" parent="Sketchfab_model/root/GLTF_SceneRootNode" parent_id_path=PackedInt32Array(812129507) index="8" unique_id=324102953]
+visible = false
