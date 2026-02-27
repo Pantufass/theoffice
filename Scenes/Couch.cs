@@ -17,6 +17,8 @@ public partial class Couch : Node3D, IInteractable
     private bool _isOccupied = false;
     private PlayerCharacter _currentPlayer;
 
+    private bool first = true;
+
     public override void _Ready()
     {
         _audioPlayer = new AudioStreamPlayer3D();
@@ -50,6 +52,11 @@ public partial class Couch : Node3D, IInteractable
 
     private void SitDown(PlayerCharacter player)
     {
+        if (first)
+        {
+            HouseLevel.Next?.Invoke();
+            first = false;
+        } 
         GD.Print("Player sitting on couch");
         
         _isOccupied = true;

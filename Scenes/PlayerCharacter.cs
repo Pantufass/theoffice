@@ -596,26 +596,57 @@ public partial class PlayerCharacter : CharacterBody3D
             MainCamera.GlobalTransform.Basis,
             MainCamera.GlobalTransform.Origin
         );
-        
+
         // Calculate target position and transform
         float zoomDistance = 2.0f;
         Vector3 tvForward = -tvTransform.Basis.Z;
         Vector3 tvUp = tvTransform.Basis.Y;
         
-        // Position camera directly in front of TV
-        Vector3 targetPosition = tvTransform.Origin + (tvForward * zoomDistance);
+        // TV position (assuming this is at the base of the TV)
+        Vector3 tvBase = tvTransform.Origin;
+        
+        // TV center height (adjust based on your TV's actual height)
+        float tvHeight = 1.2f; // Height of TV center from floor
+        float eyeLevel = 1.6f; // Camera eye level when sitting
+        
+        // Calculate TV center position
+        Vector3 tvCenter = new Vector3(tvBase.X, tvHeight, tvBase.Z);
+        
+        // OPTION: Position camera between eye level and TV height
+        // 0.0 = eye level, 1.0 = TV center level
+        float blendFactor = 0.7f; // 0.7 = 70% toward TV level, 30% eye level
+        
+        float cameraHeight = Mathf.Lerp(eyeLevel, tvHeight, blendFactor);
+        
+        // Position camera at the blended height
+        Vector3 targetPosition = new Vector3(
+            tvBase.X + (tvForward.X * zoomDistance),
+            cameraHeight,
+            tvBase.Z + (tvForward.Z * zoomDistance)
+        );
+        
+        // Look at TV center (or slightly below for natural gaze)
+        Vector3 lookAtPoint = new Vector3(
+            tvCenter.X,
+            tvCenter.Y - 0.1f, // Slight downward tilt
+            tvCenter.Z
+        );
+        
+        GD.Print($"TV Base: {tvBase}");
+        GD.Print($"TV Center: {tvCenter}");
+        GD.Print($"Eye Level: {eyeLevel}");
+        GD.Print($"Blend Factor: {blendFactor} -> Camera Height: {cameraHeight}");
+        GD.Print($"Target Position: {targetPosition}");
+        GD.Print($"Looking at: {lookAtPoint}");
         
         // Create transform that looks at the TV
         targetTVTransform = new Transform3D(
-            Basis.LookingAt(tvTransform.Origin - targetPosition, tvUp),
+            Basis.LookingAt(lookAtPoint - targetPosition, Vector3.Up),
             targetPosition
         );
         
-        GD.Print($"Target - Origin: {targetPosition}");
-        
         // Disable player input
         SetPlayerInputEnabled(false);
-        isCameraMoving = true;
         
         // Create tween
         currentTween = CreateTween();

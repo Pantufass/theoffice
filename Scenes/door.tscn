@@ -6,10 +6,13 @@
 [sub_resource type="BoxShape3D" id="BoxShape3D_muvbp"]
 size = Vector3(1.4538909, 2.520147, 0.17782399)
 
+[sub_resource type="BoxShape3D" id="BoxShape3D_p0e35"]
+size = Vector3(1.2375488, 1.9355469, 2.508789)
+
 [node name="Door" type="Node3D" unique_id=1777515661]
 
 [node name="DoorMesh" type="MeshInstance3D" parent="." unique_id=1925439038]
-transform = Transform3D(-4.371139e-08, 0, 1, 0, 1, 0, -1, 0, -4.371139e-08, 0, 0, 0)
+transform = Transform3D(-1, 0, -8.742278e-08, 0, 1, 0, 8.742278e-08, 0, -1, 0, 0, 0)
 mesh = ExtResource("1_w6aom")
 script = ExtResource("2_p0e35")
 
@@ -18,3 +21,10 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.7075035, 1.2600735, -0.000
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="DoorMesh/StaticBody3D" unique_id=1139063447]
 shape = SubResource("BoxShape3D_muvbp")
+
+[node name="Area3D" type="Area3D" parent="." unique_id=1989014681]
+transform = Transform3D(3.1226933, 0, 0, 0, 1, 0, 0, 0, 1, -0.23175025, 0, 0)
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Area3D" unique_id=797609335]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.65397555, 0.46777344, 0.53759766)
+shape = SubResource("BoxShape3D_p0e35")

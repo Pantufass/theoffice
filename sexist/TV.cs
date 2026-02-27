@@ -6,7 +6,7 @@ public partial class TV : Node3D, IInteractable
     [Export] public MeshInstance3D Screen;
     [Export] public SubViewport SubViewport;
     [Export] public Color TextColor = Colors.White;
-    [Export] public int FontSize = 48;
+    [Export] public int FontSize = 36;
     
     private StandardMaterial3D _screenMaterial;
     private Control _textContainer;
