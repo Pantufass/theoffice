@@ -1,7 +1,7 @@
 [gd_scene format=3 uid="uid://c6e4a0tt6pjeb"]
 
 [ext_resource type="PackedScene" uid="uid://dgg5hi27q3j7t" path="res://sexist/special items/trendy Shirt from substance.fbx" id="1_g6hdb"]
-[ext_resource type="Texture2D" uid="uid://d4esmrjm1r6jy" path="res://sexist/special items/trendy Shirt_T_SHIRT3_lambert1_BaseColor.jpg" id="2_tnalq"]
+[ext_resource type="Texture2D" uid="uid://d4esmrjm1r6jy" path="res://sexist/special items/special af textures wtf/trendy Shirt_T_SHIRT3_lambert1_BaseColor.jpg" id="2_tnalq"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_pl524"]
 albedo_texture = ExtResource("2_tnalq")
