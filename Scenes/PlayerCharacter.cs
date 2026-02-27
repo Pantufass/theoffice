@@ -50,8 +50,8 @@ public partial class PlayerCharacter : CharacterBody3D
 	private bool sprintOnCooldown = false;
 	private float sprintTimeRemaining;
 
-	private const float NORMAL_SPEED = 1f;
-	[Export] public float SprintSpeed = 1.5f;
+	private const float NORMAL_SPEED = 1.5f;
+	[Export] public float SprintSpeed = 1.8f;
 	[Export] public float WalkSpeed = 0.5f;
 
 	private float speedModifier = NORMAL_SPEED;
@@ -754,18 +754,16 @@ public partial class PlayerCharacter : CharacterBody3D
     public void StandFromCouch(Vector3 targetPosition, float duration)
     {
         if (!sitting) return;
-    
+
         GD.Print($"Player standing at position: {targetPosition}");
-    
-        // First return camera from TV zoom if it's zoomed
-        if (originalCameraTransform != null && 
-            !MainCamera.GlobalPosition.IsEqualApprox(originalCameraTransform.Origin))
+
+        if (!MainCamera.GlobalPosition.IsEqualApprox(originalCameraTransform.Origin))
         {
             GD.Print("Camera needs to return first");
             GD.Print($"Current: {MainCamera.GlobalPosition}, Target: {originalCameraTransform.Origin}");
-            
+
             ReturnCamera();
-            
+
             // Use a loop to check when camera is done moving
             void CheckCameraDone()
             {
@@ -782,7 +780,7 @@ public partial class PlayerCharacter : CharacterBody3D
                     timer.Timeout += CheckCameraDone;
                 }
             }
-            
+
             // Start checking after a short delay
             var startTimer = GetTree().CreateTimer(0.1f);
             startTimer.Timeout += CheckCameraDone;

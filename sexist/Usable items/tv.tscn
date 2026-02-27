@@ -1,10 +1,12 @@
-[gd_scene format=3 uid="uid://b5ewn5005750q"]
+[gd_scene format=3 uid="uid://c1w1vmm7yolxx"]
 
 [ext_resource type="Script" uid="uid://8sujpm0hbx7h" path="res://sexist/TV.cs" id="1_7kvnu"]
+[ext_resource type="PackedScene" uid="uid://0d1p2lvq23yf" path="res://sexist/House Assets/TV.fbx" id="2_1lwt1"]
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_rmefe"]
 
-[sub_resource type="BoxMesh" id="BoxMesh_rmefe"]
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_nj70f"]
+albedo_color = Color(0, 0, 0, 1)
 
 [sub_resource type="QuadMesh" id="QuadMesh_7kvnu"]
 
@@ -16,13 +18,15 @@ SubViewport = NodePath("Screen/SubViewport")
 [node name="RigidBody3D" type="RigidBody3D" parent="." unique_id=1646868632]
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="RigidBody3D" unique_id=1227217912]
+transform = Transform3D(1.8277063, 0, 0, 0, 1.1147019, 0, 0, 0, 1, 0, 0.7007704, 0)
 shape = SubResource("BoxShape3D_rmefe")
 
-[node name="MeshInstance3D" type="MeshInstance3D" parent="RigidBody3D" unique_id=1334033686]
-mesh = SubResource("BoxMesh_rmefe")
-
 [node name="Screen" type="MeshInstance3D" parent="." unique_id=98691599]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -0.51)
+transform = Transform3D(-1.2389383, 0, -8.742278e-08, 0, 1, 0, 1.08311426e-07, 0, -1, 0.15228397, 0.67482316, -0.41490686)
+material_override = SubResource("StandardMaterial3D_nj70f")
 mesh = SubResource("QuadMesh_7kvnu")
 
 [node name="SubViewport" type="SubViewport" parent="Screen" unique_id=621334124]
+
+[node name="TV" parent="." unique_id=1585681781 instance=ExtResource("2_1lwt1")]
+transform = Transform3D(2.5, 0, 0, 0, 2.5, 0, 0, 0, 2.5, 0, 0, 0)

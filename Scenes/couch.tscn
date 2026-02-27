@@ -6,18 +6,19 @@
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_lbuvq"]
 
-[node name="Couch" type="Node3D" unique_id=528926874]
+[node name="Couch" type="Node3D" unique_id=1973527995 node_paths=PackedStringArray("SitPosition")]
 script = ExtResource("1_nbwog")
+SitPosition = NodePath("Node3D")
 
-[node name="MeshInstance3D" type="MeshInstance3D" parent="." unique_id=257112540]
+[node name="MeshInstance3D" type="MeshInstance3D" parent="." unique_id=877265484]
 transform = Transform3D(3, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0)
 mesh = SubResource("BoxMesh_lbuvq")
 
-[node name="RigidBody3D" type="RigidBody3D" parent="." unique_id=1950224103]
+[node name="RigidBody3D" type="RigidBody3D" parent="." unique_id=90967023]
 
-[node name="CollisionShape3D" type="CollisionShape3D" parent="RigidBody3D" unique_id=212184931]
+[node name="CollisionShape3D" type="CollisionShape3D" parent="RigidBody3D" unique_id=42575433]
 transform = Transform3D(3, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0)
 shape = SubResource("BoxShape3D_lbuvq")
 
-[node name="Node3D" type="Node3D" parent="." unique_id=1607287901]
+[node name="Node3D" type="Node3D" parent="." unique_id=74901658]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0.322937)
