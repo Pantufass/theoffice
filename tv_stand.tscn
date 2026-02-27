@@ -1,0 +1,22 @@
+[gd_scene format=3 uid="uid://c6idshjo2cm24"]
+
+[ext_resource type="PackedScene" uid="uid://dj0dtpbk7j813" path="res://sexist/House Assets/TVStand.fbx" id="1_ntmdp"]
+[ext_resource type="Texture2D" uid="uid://d4fp5ff67210w" path="res://sexist/House textures/TVStandDrawer.png" id="2_8lexq"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_inach"]
+albedo_texture = ExtResource("2_8lexq")
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_72ae5"]
+albedo_texture = ExtResource("2_8lexq")
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_83hna"]
+albedo_texture = ExtResource("2_8lexq")
+
+[node name="TVStand" unique_id=855665164 instance=ExtResource("1_ntmdp")]
+
+[node name="Main Structure" parent="." index="0" unique_id=1656477656]
+material_override = SubResource("StandardMaterial3D_inach")
+surface_material_override/0 = SubResource("StandardMaterial3D_72ae5")
+
+[node name="Drawer" parent="Main Structure" index="0" unique_id=398706526]
+surface_material_override/0 = SubResource("StandardMaterial3D_83hna")

@@ -1,0 +1,19 @@
+[gd_scene format=3 uid="uid://ddas2c7pwo4n8"]
+
+[ext_resource type="PackedScene" uid="uid://ctscu6pdk6ljp" path="res://sexist/House Assets/BigPictureFrame.fbx" id="1_10alw"]
+[ext_resource type="Texture2D" uid="uid://b08yahq2lj0j3" path="res://sexist/House textures/BigPictureFrame.png" id="2_dxnhg"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_7kib1"]
+albedo_texture = ExtResource("2_dxnhg")
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_dxnhg"]
+size = Vector3(0.007453467, 0.01050545, 0.001)
+
+[node name="BigPictureFrame" unique_id=1102552990 instance=ExtResource("1_10alw")]
+
+[node name="Cube" parent="." index="0" unique_id=60782534]
+surface_material_override/0 = SubResource("StandardMaterial3D_7kib1")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="." index="1" unique_id=1267248631]
+transform = Transform3D(100, 0, 0, 0, 100, 7.54979e-06, 0, -7.54979e-06, 100, 0, -0.16567218, -0.002779006)
+shape = SubResource("BoxShape3D_dxnhg")
