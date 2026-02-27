@@ -2,17 +2,20 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://c0bfc3hj5ixia"
-path.s3tc="res://.godot/imported/KAHLO_baseColor.jpeg-88f087d453b246553b1847e2aac24aff.s3tc.ctex"
+uid="uid://dhe0kaiqpr3f"
+path.s3tc="res://.godot/imported/maya2sketchfab_6.png-2c9792ad28da1306e0f15003ea618692.s3tc.ctex"
 metadata={
 "imported_formats": ["s3tc_bptc"],
 "vram_texture": true
 }
+generator_parameters={
+"md5": "e340f28cd8f6112e5361ebb06a463e8f"
+}
 
 [deps]
 
-source_file="res://sexist/special items/special af textures wtf/KAHLO_baseColor.jpeg"
-dest_files=["res://.godot/imported/KAHLO_baseColor.jpeg-88f087d453b246553b1847e2aac24aff.s3tc.ctex"]
+source_file="res://sexist/special items/maya2sketchfab_6.png"
+dest_files=["res://.godot/imported/maya2sketchfab_6.png-2c9792ad28da1306e0f15003ea618692.s3tc.ctex"]
 
 [params]
 

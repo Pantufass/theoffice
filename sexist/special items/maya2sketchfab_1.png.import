@@ -2,21 +2,23 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://c0bfc3hj5ixia"
-path.s3tc="res://.godot/imported/KAHLO_baseColor.jpeg-88f087d453b246553b1847e2aac24aff.s3tc.ctex"
+uid="uid://cs821p7hnn02l"
+path="res://.godot/imported/maya2sketchfab_1.png-b65d6345bae5c6ef341af0e322c932b2.ctex"
 metadata={
-"imported_formats": ["s3tc_bptc"],
-"vram_texture": true
+"vram_texture": false
+}
+generator_parameters={
+"md5": "82828b6f895ee5f77ca7a0d62c6f2372"
 }
 
 [deps]
 
-source_file="res://sexist/special items/special af textures wtf/KAHLO_baseColor.jpeg"
-dest_files=["res://.godot/imported/KAHLO_baseColor.jpeg-88f087d453b246553b1847e2aac24aff.s3tc.ctex"]
+source_file="res://sexist/special items/maya2sketchfab_1.png"
+dest_files=["res://.godot/imported/maya2sketchfab_1.png-b65d6345bae5c6ef341af0e322c932b2.ctex"]
 
 [params]
 
-compress/mode=2
+compress/mode=0
 compress/high_quality=false
 compress/lossy_quality=0.7
 compress/uastc_level=0
@@ -38,4 +40,4 @@ process/normal_map_invert_y=false
 process/hdr_as_srgb=false
 process/hdr_clamp_exposure=false
 process/size_limit=0
-detect_3d/compress_to=0
+detect_3d/compress_to=1
