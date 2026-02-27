@@ -1,0 +1,20 @@
+[gd_scene format=3 uid="uid://i5sjwjfd4dpo"]
+
+[ext_resource type="PackedScene" uid="uid://ilwhnapgts80" path="res://sexist/special items/maya2sketchfab.fbx" id="1_pab1i"]
+
+[node name="maya2sketchfab" unique_id=180806920 instance=ExtResource("1_pab1i")]
+
+[node name="left" parent="." index="0" unique_id=1659364917]
+visible = false
+
+[node name="bottom" parent="." index="1" unique_id=7644857]
+visible = false
+
+[node name="back" parent="." index="2" unique_id=507956960]
+visible = false
+
+[node name="bottom1" parent="." index="3" unique_id=1883428169]
+visible = false
+
+[node name="ice_default1" parent="." index="6" unique_id=911384016]
+visible = false
