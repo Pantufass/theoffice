@@ -31,12 +31,14 @@ public partial class TV : Node3D, IInteractable
         }
     }
 
-    public void OnFocus()
+    public void OnFocus(PlayerCharacter player)
     {
+        player.SetText("");
     }
 
-    public void OnUnfocus()
+    public void OnUnfocus(PlayerCharacter player)
     {
+        player.SetText("");
     }
 
     internal void SetupTVText(string text)

@@ -86,6 +86,12 @@ public partial class PlayerCharacter : CharacterBody3D
     public bool Sitting {get => sitting;}
     private Tween currentTween;    
     private bool isCameraMoving = false;
+    private Vector3 _originalPosition;
+    private Basis _originalRotation;
+    private bool movementEnabled = true;
+
+    [Export] public CanvasLayer HUD;
+    [Export] public Label DialogText;
 
 
 	// ────────── Ready ──────────
@@ -110,10 +116,11 @@ public partial class PlayerCharacter : CharacterBody3D
 		UpdateCameraRotation();
 		Input.MouseMode = Input.MouseModeEnum.Captured;
 		CalculateMovementParameters();
-		if(Hand == null)
-		{
-			Hand = GetNode<Node3D>("%Hand");
-		}
+
+        if(HUD == null) HUD = GetNode<CanvasLayer>("HUD");
+		if(Hand == null) Hand = GetNode<Node3D>("%Hand");
+        if(DialogText == null) DialogText = HUD.GetNode<Label>("Dialog");
+
 		SetCurrentPickupable += EquipItem;
         originalCameraTransform = MainCamera.Transform;
 	}
@@ -392,6 +399,8 @@ public partial class PlayerCharacter : CharacterBody3D
 			}
 		}
 
+        if(!movementEnabled) return;
+        
 		// ───── Jump input ─────
 		if (Input.IsActionJustPressed("ui_accept"))
 		{
@@ -479,9 +488,9 @@ public partial class PlayerCharacter : CharacterBody3D
 		if (CurrentInteractable == interactable)
 			return;
 
-		CurrentInteractable?.OnUnfocus();
+		CurrentInteractable?.OnUnfocus(this);
 		CurrentInteractable = interactable;
-		CurrentInteractable?.OnFocus();
+		CurrentInteractable?.OnFocus(this);
 	}
 
 	private void ClearInteractable()
@@ -540,7 +549,7 @@ public partial class PlayerCharacter : CharacterBody3D
 			{
 				ClearInteractable();
 				CurrentInteractable = found;
-				CurrentInteractable.OnFocus();
+				CurrentInteractable.OnFocus(this);
 			}
 		}
 		else
@@ -548,6 +557,11 @@ public partial class PlayerCharacter : CharacterBody3D
 			ClearInteractable();
 		}
 	}
+
+    public void SetText(string text)
+    {
+        DialogText.Text = text;
+    }
 
     internal void ZoomToTV(Transform3D tvTransform)
     {   
@@ -682,6 +696,89 @@ public partial class PlayerCharacter : CharacterBody3D
         }
 
         GD.Print($"Player input {(enabled ? "enabled" : "disabled")}");
+    }
+
+    public void SitOnCouch(Vector3 targetPosition, Basis targetRotation, float duration)
+    {
+        if (sitting) return;
+
+        GD.Print($"Player sitting at position: {targetPosition}");
+
+        // Store original transform
+        _originalPosition = GlobalPosition;
+        _originalRotation = GlobalTransform.Basis;
+
+        // Kill any existing tween
+        currentTween?.Kill();
+
+        // Disable movement
+        SetMovementEnabled(false);
+
+        // Create tween for smooth sitting
+        currentTween = CreateTween();
+        currentTween.SetParallel(true);
+
+
+        currentTween.TweenProperty(this, "global_position", targetPosition, duration)
+             .SetEase(Tween.EaseType.Out)
+             .SetTrans(Tween.TransitionType.Quad);
+
+        currentTween.TweenProperty(this, "global_transform:basis", targetRotation, duration)
+             .SetEase(Tween.EaseType.Out)
+             .SetTrans(Tween.TransitionType.Quad);
+
+        currentTween.Finished += () =>
+        {
+            // Snap to exact position
+            GlobalPosition = targetPosition;
+            GlobalTransform = new Transform3D(targetRotation, targetPosition);
+            sitting = true;
+            GD.Print("Player is now sitting");
+        };
+    }
+
+    public void StandFromCouch(Vector3 targetPosition, float duration)
+    {
+        if (!sitting) return;
+
+        GD.Print($"Player standing at position: {targetPosition}");
+
+        currentTween?.Kill();
+
+        currentTween = CreateTween();
+        currentTween.SetParallel(true);
+        currentTween.TweenProperty(this, "global_position", targetPosition, duration)
+             .SetEase(Tween.EaseType.Out)
+             .SetTrans(Tween.TransitionType.Quad);
+
+        // Optional: Add a small upward motion for standing
+        // Vector3 standWithBounce = targetPosition + new Vector3(0, 0.2f, 0);
+        // _currentTween.TweenProperty(this, "global_position", standWithBounce, duration * 0.5f)
+        //      .SetEase(Tween.EaseType.Out);
+
+        currentTween.Finished += () =>
+        {
+            GlobalPosition = targetPosition;
+            sitting = false;
+
+            // Re-enable movement
+            SetMovementEnabled(true);
+
+            GD.Print("Player is now standing");
+        };
+    }
+
+    private void SetMovementEnabled(bool enabled)
+    {
+        // Implement based on your movement system
+        // For CharacterBody3D:
+        // SetPhysicsProcess(enabled);
+        // SetProcess(enabled);
+
+        // Or if you have a custom flag:
+        movementEnabled = enabled;
+
+        GD.Print($"Player movement {(enabled ? "enabled" : "disabled")}");
     }
 
 }

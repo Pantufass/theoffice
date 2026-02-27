@@ -92,4 +92,15 @@ public partial class Item : RigidBody3D, IPickupable
         if(mesh != null)
             mesh.Layers = 1;
     }
+
+    public void OnFocus(PlayerCharacter player)
+    {
+        player.SetText("Pick up");
+    }
+
+    public void OnUnfocus(PlayerCharacter player)
+    {
+        player.SetText("");
+    }
+
 }

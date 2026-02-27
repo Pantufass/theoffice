@@ -2,11 +2,14 @@
 
 [ext_resource type="Script" uid="uid://diwebis108ee0" path="res://Scenes/PlayerCharacter.cs" id="1_v0iea"]
 
+[sub_resource type="LabelSettings" id="LabelSettings_v0iea"]
+font_size = 36
+
 [sub_resource type="CapsuleMesh" id="CapsuleMesh_v0iea"]
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_cvnsp"]
 
-[node name="PlayerCharacter" type="CharacterBody3D" unique_id=1521709859 node_paths=PackedStringArray("Hand", "MainCamera", "AnimationTree", "SprintTimer", "CoyoteTimer")]
+[node name="PlayerCharacter" type="CharacterBody3D" unique_id=1521709859 node_paths=PackedStringArray("Hand", "MainCamera", "AnimationTree", "SprintTimer", "CoyoteTimer", "DialogText")]
 script = ExtResource("1_v0iea")
 Hand = NodePath("Hand")
 MainCamera = NodePath("Main Camera")
@@ -20,6 +23,7 @@ JumpHeight = 1.0
 JumpDistance = 2.0
 CoyoteTime = 0.2
 MaxFallSpeed = 10.0
+DialogText = NodePath("HUD/Dialog")
 
 [node name="Main Camera" type="Camera3D" parent="." unique_id=699025919]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.6128306, 0)
@@ -31,6 +35,15 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.6128306, 0)
 [node name="SprintBar" type="HSlider" parent="HUD" unique_id=859706938]
 offset_right = 8.0
 offset_bottom = 16.0
+
+[node name="Dialog" type="Label" parent="HUD" unique_id=1620340338]
+offset_left = 8.0
+offset_top = 773.0
+offset_right = 1920.0
+offset_bottom = 1072.0
+text = "oioi"
+label_settings = SubResource("LabelSettings_v0iea")
+horizontal_alignment = 1
 
 [node name="CoyoteTimer" type="Timer" parent="." unique_id=1003665990]
 

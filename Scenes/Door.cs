@@ -56,15 +56,13 @@ public partial class Door : MeshInstance3D, IInteractable
         _isOpen = !_isOpen;
     }
 
-    public void OnFocus()
+    public void OnFocus(PlayerCharacter player)
     {
-        string prompt = IsLocked ? "Locked" : (_isOpen ? "Close" : "Open");
-        GD.Print($"Press E to {prompt} door");
-        Scale = new Vector3(1.05f, 1.05f, 1.05f);
+        player.SetText("");
     }
 
-    public void OnUnfocus()
+    public void OnUnfocus(PlayerCharacter player)
     {
-        Scale = Vector3.One;
+        player.SetText("");
     }
 }
