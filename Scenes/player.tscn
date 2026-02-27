@@ -1,6 +1,7 @@
 [gd_scene format=3 uid="uid://cns0p2a8vv2c2"]
 
 [ext_resource type="Script" uid="uid://diwebis108ee0" path="res://Scenes/PlayerCharacter.cs" id="1_v0iea"]
+[ext_resource type="Script" uid="uid://d36roaobpdhqt" path="res://Scenes/MainCamera.cs" id="2_cvnsp"]
 
 [sub_resource type="LabelSettings" id="LabelSettings_v0iea"]
 font_size = 36
@@ -26,7 +27,8 @@ MaxFallSpeed = 10.0
 DialogText = NodePath("HUD/Dialog")
 
 [node name="Main Camera" type="Camera3D" parent="." unique_id=699025919]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.6128306, 0)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.6, 0)
+script = ExtResource("2_cvnsp")
 
 [node name="Hand" type="Node3D" parent="." unique_id=356077926]
 

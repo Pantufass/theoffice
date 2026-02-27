@@ -3,42 +3,48 @@ using System;
 
 public partial class Couch : Node3D, IInteractable
 {
-    [Export] public Node3D SitPosition; // Position where player should sit
-    [Export] public float SitDistance = 1.0f; // How far from couch to place player
-    [Export] public float StandUpDistance = 1.5f; // How far to place player when standing
-    [Export] public float SitAnimationDuration = 0.8f; // Duration of sitting/standing animation
+    [Export] public Node3D SitPosition;
+    [Export] public float SitDistance = 1.0f;
+    [Export] public float StandUpDistance = 1.5f;
+    [Export] public float SitAnimationDuration = 0.8f;
     [Export] public AudioStream SitSound;
     [Export] public AudioStream StandSound;
+    [Export] public Node3D TVTarget;
+    [Export] public bool AutoZoomToTV = true;
+    [Export] public float CameraZoomDelay = 0.3f; // Delay after sitting before zoom
     
     private AudioStreamPlayer3D _audioPlayer;
     private bool _isOccupied = false;
+    private PlayerCharacter _currentPlayer;
+
     public override void _Ready()
     {
-        // Create audio player
         _audioPlayer = new AudioStreamPlayer3D();
         AddChild(_audioPlayer);
         
-        // Create sit position if not set in editor
         if (SitPosition == null)
         {
             SitPosition = new Node3D();
             SitPosition.Name = "SitPosition";
-            
-            // Default sitting position in front of couch
             SitPosition.Position = new Vector3(0, 0, 0.5f);
-            SitPosition.Rotation = new Vector3(0, 0, 0);
-            
             AddChild(SitPosition);
-            GD.Print("Created default SitPosition for couch");
+        }
+        
+        if (TVTarget == null)
+        {
+            TVTarget = GetNodeOrNull<Node3D>("../TV");
         }
     }
 
     public void Interact(PlayerCharacter player)
     {
-        player.SetText("Interacted");
         if (!_isOccupied)
         {
             SitDown(player);
+        }
+        else if (_isOccupied && _currentPlayer == player)
+        {
+            StandUp(player);
         }
     }
 
@@ -47,52 +53,67 @@ public partial class Couch : Node3D, IInteractable
         GD.Print("Player sitting on couch");
         
         _isOccupied = true;
+        _currentPlayer = player;
         
-        // Play sit sound
         PlaySound(SitSound);
         
         // Calculate sitting position
         Vector3 sitWorldPosition = ToGlobal(SitPosition.Position);
-        Vector3 sitDirection = -GlobalTransform.Basis.Z; // Forward direction of couch
-        
-        // Adjust position to be in front of the couch
+        Vector3 sitDirection = -GlobalTransform.Basis.Z;
         Vector3 targetPosition = sitWorldPosition + (sitDirection * SitDistance);
         
-        // Face the same direction as the couch (or slightly toward TV if you want)
-        Basis targetRotation = GlobalTransform.Basis; // Face same direction as couch
+        // Face player toward TV
+        Basis targetRotation;
+        if (TVTarget != null)
+        {
+            Vector3 directionToTV = (TVTarget.GlobalPosition - targetPosition).Normalized();
+            targetRotation = Basis.LookingAt(directionToTV, Vector3.Up);
+        }
+        else
+        {
+            targetRotation = GlobalTransform.Basis;
+        }
         
-        // Alternative: Face toward a specific point (like a TV)
-        // Vector3 lookAtPoint = GetNode<Node3D>("../TV").GlobalPosition;
-        // Basis targetRotation = Basis.LookingAt(lookAtPoint - targetPosition, Vector3.Up);
-        
-        // Tell player to sit
+        // Sit the player
         player.SitOnCouch(targetPosition, targetRotation, SitAnimationDuration);
         
-        // Optional: Disable player collision while sitting
-        // player.SetCollisionLayerValue(1, false);
+        // Zoom camera to TV after sitting
+        if (AutoZoomToTV && TVTarget != null)
+        {
+            // Use a timer to zoom after sitting animation completes
+            var timer = GetTree().CreateTimer(SitAnimationDuration + CameraZoomDelay);
+            timer.Timeout += () => {
+                if (_isOccupied && _currentPlayer == player)
+                {
+                    GD.Print("Zooming camera to TV");
+                    player.ZoomToTV(TVTarget.GlobalTransform);
+                }
+            };
+        }
     }
 
     private void StandUp(PlayerCharacter player)
     {
         GD.Print("Player standing up from couch");
         
-        // Play stand sound
+        // Return camera first
+        player.ReturnCamera();
+        
         PlaySound(StandSound);
         
-        // Calculate standing position (behind the couch or to the side)
+        // Calculate standing position
         Vector3 standWorldPosition = ToGlobal(SitPosition.Position);
-        Vector3 standDirection = GlobalTransform.Basis.Z; // Behind the couch
-        
+        Vector3 standDirection = GlobalTransform.Basis.Z;
         Vector3 targetPosition = standWorldPosition + (standDirection * StandUpDistance);
         
-        // Tell player to stand
-        player.StandFromCouch(targetPosition, SitAnimationDuration);
-        
-        // Reset couch state
-        _isOccupied = false;
-        
-        // Optional: Re-enable player collision
-        // player.SetCollisionLayerValue(1, true);
+        // Small delay to let camera return before standing
+        var timer = GetTree().CreateTimer(0.3f);
+        timer.Timeout += () => {
+            if (!_isOccupied) return; // Check if we haven't been re-interacted
+            player.StandFromCouch(targetPosition, SitAnimationDuration);
+            _isOccupied = false;
+            _currentPlayer = null;
+        };
     }
 
     private void PlaySound(AudioStream sound)
@@ -109,6 +130,10 @@ public partial class Couch : Node3D, IInteractable
         if (!_isOccupied)
         {
             player.SetText("Sit");
+        }
+        else if (_isOccupied && _currentPlayer == player)
+        {
+            player.SetText("Stand Up");
         }
     }
 

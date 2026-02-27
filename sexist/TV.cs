@@ -1,7 +1,7 @@
 using Godot;
 using System;
 
-public partial class TV : Node3D, IInteractable
+public partial class TV : Node3D
 {
     [Export] public MeshInstance3D Screen;
     [Export] public SubViewport SubViewport;
