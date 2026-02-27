@@ -43,7 +43,6 @@ offset_left = 8.0
 offset_top = 773.0
 offset_right = 1920.0
 offset_bottom = 1072.0
-text = "oioi"
 label_settings = SubResource("LabelSettings_v0iea")
 horizontal_alignment = 1
 
