@@ -1,0 +1,5 @@
+[gd_scene format=3 uid="uid://ctaqvlikpkgbx"]
+
+[ext_resource type="PackedScene" uid="uid://c56dlp33uear5" path="res://sexist/NewItems/car/MiniCooperForTexturing.fbx" id="1_352dc"]
+
+[node name="MiniCooperForTexturing" unique_id=1673405838 instance=ExtResource("1_352dc")]

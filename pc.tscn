@@ -1,0 +1,24 @@
+[gd_scene format=3 uid="uid://brjqfnoi7dpbt"]
+
+[ext_resource type="PackedScene" uid="uid://2nxektp5jul0" path="res://sexist/NewItems/pc/LaptopSET.fbx" id="1_de6uy"]
+[ext_resource type="Texture2D" uid="uid://55vbcgad027p" path="res://sexist/NewItems/pc/Laptop_Base_Color.png" id="2_s818i"]
+[ext_resource type="Texture2D" uid="uid://d2md38jk6ca3h" path="res://sexist/NewItems/pc/Laptop_Metallic.png" id="3_3d7xj"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_gbtml"]
+albedo_texture = ExtResource("2_s818i")
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_hue7p"]
+albedo_texture = ExtResource("2_s818i")
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_oj12w"]
+albedo_texture = ExtResource("3_3d7xj")
+
+[node name="LaptopSET" unique_id=526198785 instance=ExtResource("1_de6uy")]
+
+[node name="Cube_000" parent="." index="0" unique_id=21629537]
+visible = false
+
+[node name="Cube_002" parent="." index="1" unique_id=307336573]
+material_override = SubResource("StandardMaterial3D_gbtml")
+surface_material_override/0 = SubResource("StandardMaterial3D_hue7p")
+surface_material_override/1 = SubResource("StandardMaterial3D_oj12w")
