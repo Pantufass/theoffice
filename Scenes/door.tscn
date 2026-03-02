@@ -9,13 +9,13 @@ size = Vector3(1.4538909, 2.520147, 0.17782399)
 [sub_resource type="BoxShape3D" id="BoxShape3D_p0e35"]
 size = Vector3(0.57922363, 1, 1.1169434)
 
-[node name="Door" type="Node3D" unique_id=1777515661]
+[node name="Door" type="Node3D" unique_id=1777515661 node_paths=PackedStringArray("OutsideArea")]
+script = ExtResource("2_p0e35")
+OutsideArea = NodePath("Area3D")
 
-[node name="DoorMesh" type="MeshInstance3D" parent="." unique_id=1925439038 node_paths=PackedStringArray("OutsideArea")]
+[node name="DoorMesh" type="MeshInstance3D" parent="." unique_id=1925439038]
 transform = Transform3D(-1, 0, -8.742278e-08, 0, 1, 0, 8.742278e-08, 0, -1, 0, 0, 0)
 mesh = ExtResource("1_w6aom")
-script = ExtResource("2_p0e35")
-OutsideArea = NodePath("../Area3D")
 
 [node name="StaticBody3D" type="StaticBody3D" parent="DoorMesh" unique_id=1411234800]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.7075035, 1.2600735, -0.00058900565)

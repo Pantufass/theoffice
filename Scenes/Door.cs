@@ -17,6 +17,7 @@ public partial class Door : MeshInstance3D, IInteractable
     private float _targetAngle;
 
     public bool Active = false;
+    [Export] public string InteractText = "Interact";
 
     public override void _Ready()
     {
@@ -93,6 +94,7 @@ public partial class Door : MeshInstance3D, IInteractable
         }
         
         CloseAndLock();
+        player.SetText(InteractText);
     }
 
     private void CloseAndLock()
@@ -117,7 +119,6 @@ public partial class Door : MeshInstance3D, IInteractable
             
             if (OutsideArea != null)
                 OutsideArea.Monitoring = false;
-            
         };
     }
     
