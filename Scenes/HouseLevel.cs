@@ -11,7 +11,6 @@ public partial class HouseLevel : Node3D
 
     public static Action NextStep;
     public static Action ItemFound;
-    public static bool ItemWasFound = false;
     private int step = 0;
     private int stepItem = 0;
     public override void _Ready()
@@ -28,6 +27,7 @@ public partial class HouseLevel : Node3D
         if(TV == null) TV = house.GetNode<TV>("TV");
 
         NextStep += NextAction;
+        ItemFound += ItemFoundAction;
     }
 
     public void NextAction()
@@ -43,7 +43,6 @@ public partial class HouseLevel : Node3D
     public void ItemFoundAction()
     {
         stepItem++;
-        ItemWasFound = true;
         if(step == 1) doorArt.Active = true;
         else if(step == 2) doorBedroom.Active = true;
         else if(step == 3) doorKitchen.Active = true;
@@ -61,7 +60,6 @@ public partial class HouseLevel : Node3D
         {
             throw new Exception("Wrong item assigned to " + itemName);
         }
-        ItemWasFound = false;
     }
 
     internal void First()

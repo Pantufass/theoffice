@@ -93,15 +93,43 @@ public partial class PlayerCharacter : CharacterBody3D
     [Export] public CanvasLayer HUD;
     [Export] public Label DialogText;
     [Export] public Label HintText;
+	private Timer _dialogTimer;
+	private Timer _hintTimer;
 
 
 	// ────────── Ready ──────────
 	public override void _Ready()
 	{
-        if(MainCamera == null) MainCamera = GetNode<Camera3D>("MainCamera");
+        SetNodes();
+
+		sprintTimeRemaining = SprintTime;
+		
+		SprintTimer.Timeout += OnSprintTimerTimeout;
+		CoyoteTimer.Timeout += OnCoyoteTimerTimeout;
+    	_dialogTimer.Timeout += OnDialogTimerTimeout;
+		_hintTimer.Timeout += OnHintTimerTimeout;
+
+		SetCurrentPickupable += EquipItem;
+
+		UpdateCameraRotation();
+		CalculateMovementParameters();
+
+    	SetupSimpleCrosshair();
+        UpdateOriginalTransforms();
+
+		Input.MouseMode = Input.MouseModeEnum.Captured;
+	}
+
+	internal void SetNodes()
+	{	
+		if(MainCamera == null) MainCamera = GetNode<Camera3D>("MainCamera");
 		if(AnimationTree == null) AnimationTree = GetNode<AnimationTree>("AnimationTree");
 		sprintBar = GetNode<CanvasLayer>("HUD").GetNode<Godot.Range>("SprintBar");
-		sprintTimeRemaining = SprintTime;
+		
+        if(HUD == null) HUD = GetNode<CanvasLayer>("HUD");
+		if(Hand == null) Hand = GetNode<Node3D>("%Hand");
+        if(DialogText == null) DialogText = HUD.GetNode<Label>("Dialog");
+        if(HintText == null) HintText = HUD.GetNode<Label>("Hint");
 
 		if(SprintTimer == null)
 		{
@@ -111,21 +139,20 @@ public partial class PlayerCharacter : CharacterBody3D
 		{
 			CoyoteTimer = GetNode<Timer>("CoyoteTimer");
 		}
-		SprintTimer.Timeout += OnSprintTimerTimeout;
-		CoyoteTimer.Timeout += OnCoyoteTimerTimeout;
 
-		UpdateCameraRotation();
-		Input.MouseMode = Input.MouseModeEnum.Captured;
-		CalculateMovementParameters();
+        _dialogTimer = new Timer
+        {
+            Name = "DialogTimer",
+            OneShot = true
+        };
+        AddChild(_dialogTimer);
 
-        if(HUD == null) HUD = GetNode<CanvasLayer>("HUD");
-		if(Hand == null) Hand = GetNode<Node3D>("%Hand");
-        if(DialogText == null) DialogText = HUD.GetNode<Label>("Dialog");
-        if(HintText == null) HintText = HUD.GetNode<Label>("Hint");
-
-		SetCurrentPickupable += EquipItem;
-        
-        UpdateOriginalTransforms();
+        _hintTimer = new Timer
+        {
+            Name = "HintTimer",
+            OneShot = true
+        };
+        AddChild(_hintTimer);
 	}
     
     private void UpdateOriginalTransforms()
@@ -521,7 +548,7 @@ public partial class PlayerCharacter : CharacterBody3D
 			rayOrigin,
 			rayEnd
 		);
-
+		
 		query.CollideWithAreas = true;
 		query.CollideWithBodies = true;
 		query.Exclude = new Godot.Collections.Array<Rid> { GetRid() };
@@ -565,103 +592,157 @@ public partial class PlayerCharacter : CharacterBody3D
 		}
 	}
 
-    public void SetText(string text)
-    {
-        DialogText.Text = text;
-    }
+	public void SetText(string text)
+	{
+	    DialogText.Text = text;
 	
-    public void SetHint(string text)
-    {
-        HintText.Text = text;
-    }
+	    RestartDialogTimer();
+	}
+
+	public void SetHint(string text)
+	{
+	    HintText.Text = text;
+	
+	    RestartHintTimer();
+	}
+
+	private void RestartHintTimer()
+	{
+	    if (_hintTimer.IsStopped() == false)
+	        _hintTimer.Stop();
+
+	    _hintTimer.Start(3.0f);
+	}
+
+	private void RestartDialogTimer()
+	{
+	    if (_dialogTimer.IsStopped() == false)
+	        _dialogTimer.Stop();
+	
+	    _dialogTimer.Start(3.0f);
+	}
+
+	private void OnDialogTimerTimeout()
+	{
+	    DialogText.Text = "";
+	}
+	private void OnHintTimerTimeout()
+	{
+	    HintText.Text = "";
+	}
+
+	private void SetupSimpleCrosshair()
+	{
+	    var dot = new ColorRect();
+    	dot.Color = Colors.White;
+    	dot.SetSize(new Vector2(4, 4));
+    	dot.SetAnchorsPreset(Control.LayoutPreset.Center);
+    	GetNode<CanvasLayer>("HUD").AddChild(dot);
+	}
 
     internal void ZoomToTV(Transform3D tvTransform)
-    {   
-        if (!sitting) 
-        {
-            GD.Print("Cannot zoom - player not sitting");
-            return;
-        }
-        
-        GD.Print("=== Zoom To TV ===");
-        GD.Print($"TV Transform - Origin: {tvTransform.Origin}, Basis: {tvTransform.Basis}");
-        GD.Print($"Camera Current - Origin: {MainCamera.GlobalPosition}");
-        
-        // Kill any existing tween
-        currentTween?.Kill();
-        
-        // Store original camera position
-        originalCameraTransform = new Transform3D(
-            MainCamera.GlobalTransform.Basis,
-            MainCamera.GlobalTransform.Origin
-        );
+	{   
+	    if (!sitting) 
+	    {
+	        GD.Print("Cannot zoom - player not sitting");
+	        return;
+	    }
+	
+	    GD.Print("=== Zoom To TV ===");
+	
+	    // Kill any existing tween
+	    currentTween?.Kill();
+	
+	    // Store original camera position
+	    originalCameraTransform = new Transform3D(
+	        MainCamera.GlobalTransform.Basis,
+	        MainCamera.GlobalTransform.Origin
+	    );
 
-        // Calculate target position and transform
-        float zoomDistance = 2.0f;
-        Vector3 tvForward = -tvTransform.Basis.Z;
-        Vector3 tvUp = tvTransform.Basis.Y;
-        
-        // TV position (assuming this is at the base of the TV)
-        Vector3 tvBase = tvTransform.Origin;
-        
-        // TV center height (adjust based on your TV's actual height)
-        float tvHeight = 1.2f; // Height of TV center from floor
-        float eyeLevel = 1.6f; // Camera eye level when sitting
-        
-        // Calculate TV center position
-        Vector3 tvCenter = new Vector3(tvBase.X, tvHeight, tvBase.Z);
-        
-        // OPTION: Position camera between eye level and TV height
-        // 0.0 = eye level, 1.0 = TV center level
-        float blendFactor = 0.7f; // 0.7 = 70% toward TV level, 30% eye level
-        
-        float cameraHeight = Mathf.Lerp(eyeLevel, tvHeight, blendFactor);
-        
-        // Position camera at the blended height
-        Vector3 targetPosition = new Vector3(
-            tvBase.X + (tvForward.X * zoomDistance),
-            cameraHeight,
-            tvBase.Z + (tvForward.Z * zoomDistance)
-        );
-        
-        // Look at TV center (or slightly below for natural gaze)
-        Vector3 lookAtPoint = new Vector3(
-            tvCenter.X,
-            tvCenter.Y - 0.1f, // Slight downward tilt
-            tvCenter.Z
-        );
-        
-        GD.Print($"TV Base: {tvBase}");
-        GD.Print($"TV Center: {tvCenter}");
-        GD.Print($"Eye Level: {eyeLevel}");
-        GD.Print($"Blend Factor: {blendFactor} -> Camera Height: {cameraHeight}");
-        GD.Print($"Target Position: {targetPosition}");
-        GD.Print($"Looking at: {lookAtPoint}");
-        
-        // Create transform that looks at the TV
-        targetTVTransform = new Transform3D(
-            Basis.LookingAt(lookAtPoint - targetPosition, Vector3.Up),
-            targetPosition
-        );
-        
-        // Disable player input
-        SetPlayerInputEnabled(false);
-        
-        // Create tween
-        currentTween = CreateTween();
-        currentTween.SetParallel(true);
-        
-        currentTween.TweenProperty(MainCamera, "global_position", targetPosition, 0.8f)
-             .SetEase(Tween.EaseType.Out)
-             .SetTrans(Tween.TransitionType.Quad);
-        
-        currentTween.TweenProperty(MainCamera, "global_transform:basis", targetTVTransform.Basis, 0.8f)
-             .SetEase(Tween.EaseType.Out)
-             .SetTrans(Tween.TransitionType.Quad);
-        
-        // Set up completion callback
-        currentTween.Finished += OnZoomToTVComplete;
-    }
+	    // Calculate target position and transform
+	    float zoomDistance = 2.0f;
+	    Vector3 tvForward = -tvTransform.Basis.Z;
+	    Vector3 tvUp = tvTransform.Basis.Y;
+	
+	    // TV position
+	    Vector3 tvBase = tvTransform.Origin;
+	
+	    // TV center height
+	    float tvHeight = 1.2f;
+	    float eyeLevel = 1.6f;
+	
+	    // Calculate TV center
+	    Vector3 tvCenter = new Vector3(tvBase.X, tvHeight, tvBase.Z);
+	
+	    // Camera height blend
+	    float blendFactor = 0.7f;
+	    float cameraHeight = Mathf.Lerp(eyeLevel, tvHeight, blendFactor);
+	
+	    // Position camera
+	    Vector3 targetPosition = new Vector3(
+	        tvBase.X + (tvForward.X * zoomDistance),
+	        cameraHeight,
+	        tvBase.Z + (tvForward.Z * zoomDistance)
+	    );
+	
+	    // Look at point (with tilt)
+	    Vector3 lookAtPoint = new Vector3(
+	        tvCenter.X,
+	        tvCenter.Y - 0.1f,
+	        tvCenter.Z
+	    );
+	
+	    // CRITICAL FIX: Calculate direction and check if it's valid
+	    Vector3 lookDirection = lookAtPoint - targetPosition;
+	
+	    GD.Print($"Look direction: {lookDirection}");
+	    GD.Print($"Direction length: {lookDirection.Length()}");
+	
+	    // SAFETY CHECK: If direction is too small, use a default direction
+	    if (lookDirection.Length() < 0.001f)
+	    {
+	        GD.PrintErr("WARNING: Look direction is zero! Using fallback direction.");
+	        lookDirection = -tvForward; // Look in the direction of the TV
+	    }
+	
+	    // Normalize the direction
+	    lookDirection = lookDirection.Normalized();
+	
+	    // Create transform that looks at the TV
+	    targetTVTransform = new Transform3D(
+	        Basis.LookingAt(lookDirection, Vector3.Up),
+	        targetPosition
+	    );
+	
+	    // Additional safety: Check the basis determinant
+	    float det = targetTVTransform.Basis.Determinant();
+	    GD.Print($"Target transform determinant: {det}");
+	
+	    if (Mathf.Abs(det) < 0.001f)
+	    {
+	        GD.PrintErr("WARNING: Target transform has invalid basis! Using identity fallback.");
+	        targetTVTransform = new Transform3D(Basis.Identity, targetPosition);
+	    }
+	
+	    // Disable player input
+	    SetPlayerInputEnabled(false);
+	    isCameraMoving = true;
+	
+	    // Create tween
+	    currentTween = CreateTween();
+	    currentTween.SetParallel(true);
+	
+	    currentTween.TweenProperty(MainCamera, "global_position", targetPosition, 0.8f)
+	         .SetEase(Tween.EaseType.Out)
+	         .SetTrans(Tween.TransitionType.Quad);
+	
+	    currentTween.TweenProperty(MainCamera, "global_transform:basis", targetTVTransform.Basis, 0.8f)
+	         .SetEase(Tween.EaseType.Out)
+	         .SetTrans(Tween.TransitionType.Quad);
+	
+	    // Set up completion callback
+	    currentTween.Finished += OnZoomToTVComplete;
+	}
     
     private void OnZoomToTVComplete()
     {

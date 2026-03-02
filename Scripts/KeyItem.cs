@@ -21,9 +21,19 @@ public partial class KeyItem : Interactable
     {
         if(Active)
         {
-            
+            HouseLevel.ItemFound?.Invoke();
         }
         base.Interact(player);
     }
-
+    public override void OnFocus(PlayerCharacter player)
+    {
+        if(Active)
+        {
+            player.SetHint("Interact to know more");
+        }
+        else
+        {
+            player.SetHint("");
+        }
+    }
 }

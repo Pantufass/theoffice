@@ -58,14 +58,21 @@ public partial class Door : MeshInstance3D, IInteractable
     
     private void OnOutsideAreaEntered(Node body)
     {
-        if (body is PlayerCharacter)
+        
+        if (body is PlayerCharacter player)
+        {
             _playerOutside = true;
+            //player.SetHint("INSIDE");
+        }
     }
     
     private void OnOutsideAreaExited(Node body)
     {
-        if (body is PlayerCharacter)
+        if (body is PlayerCharacter player)
+        {
             _playerOutside = false;
+            //player.SetHint("OUTSIDE");
+        }
     }
 
     public void Interact(PlayerCharacter player)
@@ -80,7 +87,7 @@ public partial class Door : MeshInstance3D, IInteractable
         
         if (!_playerOutside)
         {
-            player.SetText("Must be in corridor");
+            player.SetHint("Must be in corridor");
             PlaySound(DeniedSound);
             return;
         }
@@ -126,14 +133,11 @@ public partial class Door : MeshInstance3D, IInteractable
     public void OnFocus(PlayerCharacter player)
     {
         if(!Active) return;
-        if (_isClosedAndLocked)
-            player.SetText("Door is locked");
         
     }
 
     public void OnUnfocus(PlayerCharacter player)
     {
         if(!Active) return;
-        player.SetText("");
     }
 }
