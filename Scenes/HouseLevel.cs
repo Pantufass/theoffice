@@ -9,25 +9,30 @@ public partial class HouseLevel : Node3D
     [Export] public TV TV;
     [Export] public PlayerCharacter player;
 
-    public static Action Next;
+    public static Action NextStep;
+    public static Action ItemFound;
+    public static bool ItemWasFound = false;
     private int step = 0;
+    private int stepItem = 0;
     public override void _Ready()
     {
         base._Ready();
 
         Node3D house = GetNode<Node3D>("House");
-        if(doorArt == null) doorArt = house.GetNode<Node3D>("DoorArt").GetNode<Door>("DoorMesh");
-        if(doorBedroom == null) doorBedroom = house.GetNode<Node3D>("DoorBedroom").GetNode<Door>("DoorMesh");
-        if(doorKitchen == null) doorKitchen = house.GetNode<Node3D>("DoorKitchen").GetNode<Door>("DoorMesh");
+        Node3D doors = house.GetNode<Node3D>("Doors");
+        if(doorArt == null) doorArt = doors.GetNode<Node3D>("DoorArt").GetNode<Door>("DoorMesh");
+        if(doorBedroom == null) doorBedroom = doors.GetNode<Node3D>("DoorBedroom").GetNode<Door>("DoorMesh");
+        if(doorKitchen == null) doorKitchen = doors.GetNode<Node3D>("DoorKitchen").GetNode<Door>("DoorMesh");
 
         if(player == null) player = GetNode<PlayerCharacter>("PlayerCharacter");
         if(TV == null) TV = house.GetNode<TV>("TV");
 
-        Next += NextAction;
+        NextStep += NextAction;
     }
 
     public void NextAction()
     {
+        if(stepItem != step) return;
         GD.Print("NEXT");
         if(step == 0) First();
         else if(step == 1) Second();
@@ -35,22 +40,46 @@ public partial class HouseLevel : Node3D
         else if(step == 3) AllDone();
     }
 
+    public void ItemFoundAction()
+    {
+        stepItem++;
+        ItemWasFound = true;
+        if(step == 1) doorArt.Active = true;
+        else if(step == 2) doorBedroom.Active = true;
+        else if(step == 3) doorKitchen.Active = true;
+    }
+
+    internal void SetItem(string itemName, KeyItem.EnumItemType itemType)
+    {
+        var name = "%"+ itemName;
+        KeyItem item = GetNode<KeyItem>(name);
+        if(item.ItemType == itemType)
+        {
+            item.Active = true;
+        }
+        else
+        {
+            throw new Exception("Wrong item assigned to " + itemName);
+        }
+        ItemWasFound = false;
+    }
+
     internal void First()
     {
-        TV.UpdateTVText("Drawing is for \n weak men");
-        doorArt.Active = true;
+        TV.UpdateTVText("Drawing is for \n weak men"); 
+        SetItem("ArtItem", KeyItem.EnumItemType.Paiting);
         step = 1;
     }
     internal void Second()
     {
         TV.UpdateTVText("Don't dress up or \n you are gay");
-        doorBedroom.Active = true;
+        SetItem("Shirt",KeyItem.EnumItemType.Shirt);
         step = 2;
     }
     internal void Third()
     {
         TV.UpdateTVText("Eating bananas is gay");
-        doorKitchen.Active = true;
+        SetItem("Bananas",KeyItem.EnumItemType.Bananas);
         step = 3;
     }
 

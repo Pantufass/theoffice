@@ -569,6 +569,11 @@ public partial class PlayerCharacter : CharacterBody3D
     {
         DialogText.Text = text;
     }
+	
+    public void SetHint(string text)
+    {
+        HintText.Text = text;
+    }
 
     internal void ZoomToTV(Transform3D tvTransform)
     {   

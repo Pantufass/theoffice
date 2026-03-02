@@ -54,7 +54,7 @@ public partial class Couch : Node3D, IInteractable
     {
         if (first)
         {
-            HouseLevel.Next?.Invoke();
+            HouseLevel.NextStep?.Invoke();
             first = false;
         } 
         GD.Print("Player sitting on couch");
