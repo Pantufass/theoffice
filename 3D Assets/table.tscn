@@ -1,4 +1,4 @@
-[gd_scene format=3 uid="uid://cjjacb37mftba"]
+[gd_scene format=3 uid="uid://7rvs17iun8xr"]
 
 [ext_resource type="PackedScene" uid="uid://cmd5avcobegyh" path="res://sexist/House Assets/Table.fbx" id="1_1enff"]
 [ext_resource type="Texture2D" uid="uid://cguo4hg23s2ix" path="res://sexist/House textures/Table Clean.png" id="2_y74eq"]
@@ -11,10 +11,10 @@ size = Vector3(0.0120317815, 0.008424804, 0.012031781)
 
 [node name="Table" unique_id=541598213 instance=ExtResource("1_1enff")]
 
-[node name="Cube" parent="." index="0" unique_id=157856310]
+[node name="Cube" parent="." index="0" unique_id=1529811093]
 surface_material_override/0 = SubResource("StandardMaterial3D_sdim3")
 
-[node name="Area3D" type="Area3D" parent="." index="1" unique_id=111625206]
+[node name="Area3D" type="RigidBody3D" parent="." index="1" unique_id=2013369210]
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="Area3D" index="0" unique_id=613140210]
 transform = Transform3D(100, 0, 0, 0, 100, 7.54979e-06, 0, -7.54979e-06, 100, 0.00031358004, 0.4212455, 0.0011460556)

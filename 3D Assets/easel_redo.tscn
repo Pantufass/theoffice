@@ -1,5 +1,14 @@
-[gd_scene format=3 uid="uid://i8cwr8m0se8q"]
+[gd_scene format=3 uid="uid://bjf3whoheggcx"]
 
 [ext_resource type="PackedScene" uid="uid://3kk8ruvajo8m" path="res://sexist/special items/Easel_redo.fbx" id="1_heybn"]
 
+[sub_resource type="BoxShape3D" id="BoxShape3D_heybn"]
+size = Vector3(0.07055664, 0.13641357, 0.083984375)
+
 [node name="Easel_redo" unique_id=877771524 instance=ExtResource("1_heybn")]
+
+[node name="RigidBody3D" type="RigidBody3D" parent="." index="2" unique_id=1335609286]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="RigidBody3D" index="0" unique_id=535752987]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.00061035156, 0.07376099, 0.005859375)
+shape = SubResource("BoxShape3D_heybn")

@@ -6,6 +6,9 @@
 [sub_resource type="LabelSettings" id="LabelSettings_v0iea"]
 font_size = 36
 
+[sub_resource type="LabelSettings" id="LabelSettings_cvnsp"]
+font_size = 32
+
 [sub_resource type="CapsuleMesh" id="CapsuleMesh_v0iea"]
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_cvnsp"]
@@ -44,6 +47,13 @@ offset_top = 773.0
 offset_right = 1920.0
 offset_bottom = 1072.0
 label_settings = SubResource("LabelSettings_v0iea")
+horizontal_alignment = 1
+
+[node name="Hint" type="Label" parent="HUD" unique_id=1463201705]
+offset_top = 187.0
+offset_right = 1920.0
+offset_bottom = 363.0
+label_settings = SubResource("LabelSettings_cvnsp")
 horizontal_alignment = 1
 
 [node name="CoyoteTimer" type="Timer" parent="." unique_id=1003665990]
