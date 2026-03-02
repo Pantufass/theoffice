@@ -21,7 +21,6 @@ public partial class PlayerCharacter : CharacterBody3D
 	// ────────── Crouch ──────────
 	private bool crouched = false;
 	private bool crouchBlocked = false;
-
 	[Export] public bool EnableCrouch = true;
 	[Export] public bool CrouchToggle = false;
 	[Export] public ShapeCast3D CrouchCollision;
@@ -32,20 +31,14 @@ public partial class PlayerCharacter : CharacterBody3D
 	private const int STANDING = 0;
 	private const int AIR_CROUCH = 1;
 
-	private Tween leanTween;
-
-	private const int LEFT = 1;
-	private const int CENTRE = 0;
-	private const int RIGHT = -1;
-
 	// ────────── Sprint ──────────
 	[Export] public bool EnableSprint = true;
 	[Export] public Timer SprintTimer;
 	[Export] public float SprintCooldownTime = 3f;
 	[Export] public float SprintTime = 1f;
 	[Export] public float SprintReplenishRate = 0.30f;
-	[Export] public float Acceleration = 120f;
-	[Export] public float AirAccelerationModifier = 0.1f;
+	[Export] public float Acceleration = 80f;
+	[Export] public float AirAccelerationModifier = 0.2f;
 
 	private bool sprintOnCooldown = false;
 	private float sprintTimeRemaining;
@@ -99,13 +92,14 @@ public partial class PlayerCharacter : CharacterBody3D
 
     [Export] public CanvasLayer HUD;
     [Export] public Label DialogText;
+    [Export] public Label HintText;
 
 
 	// ────────── Ready ──────────
 	public override void _Ready()
 	{
         if(MainCamera == null) MainCamera = GetNode<Camera3D>("MainCamera");
-		if (AnimationTree == null) AnimationTree = GetNode<AnimationTree>("AnimationTree");
+		if(AnimationTree == null) AnimationTree = GetNode<AnimationTree>("AnimationTree");
 		sprintBar = GetNode<CanvasLayer>("HUD").GetNode<Godot.Range>("SprintBar");
 		sprintTimeRemaining = SprintTime;
 
@@ -127,10 +121,10 @@ public partial class PlayerCharacter : CharacterBody3D
         if(HUD == null) HUD = GetNode<CanvasLayer>("HUD");
 		if(Hand == null) Hand = GetNode<Node3D>("%Hand");
         if(DialogText == null) DialogText = HUD.GetNode<Label>("Dialog");
+        if(HintText == null) HintText = HUD.GetNode<Label>("Hint");
 
 		SetCurrentPickupable += EquipItem;
         
-        // Store initial camera transform relative to player
         UpdateOriginalTransforms();
 	}
     
@@ -574,6 +568,11 @@ public partial class PlayerCharacter : CharacterBody3D
     public void SetText(string text)
     {
         DialogText.Text = text;
+    }
+	
+    public void SetHint(string text)
+    {
+        HintText.Text = text;
     }
 
     internal void ZoomToTV(Transform3D tvTransform)

@@ -87,7 +87,7 @@ public partial class Door : MeshInstance3D, IInteractable
         
         CloseAndLock();
     }
-    
+
     private void CloseAndLock()
     {
         GD.Print("Closing and locking door");
@@ -111,7 +111,6 @@ public partial class Door : MeshInstance3D, IInteractable
             if (OutsideArea != null)
                 OutsideArea.Monitoring = false;
             
-            HouseLevel.Next?.Invoke();
         };
     }
     
