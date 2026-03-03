@@ -66,6 +66,7 @@ public partial class HouseLevel : Node3D
     {
         SetItem("ArtItem", KeyItem.EnumItemType.Paiting);
         step = 1;
+        TV.TurnOn();
         TV.UpdateImage(step);
     }
     internal void Second()

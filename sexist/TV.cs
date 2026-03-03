@@ -16,6 +16,8 @@ public partial class TV : Node3D, IInteractable
     private TextureRect _tvImage;
     private Timer _imageTimer;
 
+    private bool tvOn = false;
+
     public override void _Ready()
     {
         // Get references
@@ -95,6 +97,12 @@ public partial class TV : Node3D, IInteractable
 
     public void Interact(PlayerCharacter player)
     {
+        if(!tvOn)
+        {
+            player.SetHint("TV is off") ;
+            return;
+        }
+        
         if (_tvImage.Visible)
         {
             HideImage();
@@ -112,7 +120,6 @@ public partial class TV : Node3D, IInteractable
             _screenMaterial.EmissionEnergyMultiplier = 1.5f;
         }
         
-        player.SetHint("Press E to interact with TV");
     }
 
     public void OnUnfocus(PlayerCharacter player)
@@ -122,7 +129,6 @@ public partial class TV : Node3D, IInteractable
             _screenMaterial.EmissionEnergyMultiplier = 1.0f;
         }
         
-        player.SetHint("");
     }
     
     internal void UpdateImage(int step)
@@ -208,5 +214,10 @@ public partial class TV : Node3D, IInteractable
         {
             SubViewport.RenderTargetUpdateMode = SubViewport.UpdateMode.Always;
         }
+    }
+
+    public void TurnOn()
+    {
+        tvOn = true;
     }
 }
