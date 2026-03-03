@@ -117,6 +117,8 @@ public partial class PlayerCharacter : CharacterBody3D
     	SetupSimpleCrosshair();
         UpdateOriginalTransforms();
 
+		ClearText();
+
 		Input.MouseMode = Input.MouseModeEnum.Captured;
 	}
 
@@ -595,8 +597,18 @@ public partial class PlayerCharacter : CharacterBody3D
 	public void SetText(string text)
 	{
 	    DialogText.Text = text;
+		DialogText.Visible = true;
 	
 	    RestartDialogTimer();
+	}
+
+	public void ClearText()
+	{
+	    DialogText.Text = "";
+		DialogText.Visible = false;
+	
+	    if (!_dialogTimer.IsStopped())
+	        _dialogTimer.Stop();
 	}
 
 	public void SetHint(string text)
@@ -619,12 +631,12 @@ public partial class PlayerCharacter : CharacterBody3D
 	    if (_dialogTimer.IsStopped() == false)
 	        _dialogTimer.Stop();
 	
-	    _dialogTimer.Start(3.0f);
+	    _dialogTimer.Start(5.0f);
 	}
 
 	private void OnDialogTimerTimeout()
 	{
-	    DialogText.Text = "";
+	    ClearText();
 	}
 	private void OnHintTimerTimeout()
 	{

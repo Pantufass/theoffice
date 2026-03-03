@@ -1,7 +1,7 @@
 using Godot;
 using System;
 
-public partial class Door : MeshInstance3D, IInteractable
+public partial class Door : Node3D, IInteractable
 {
     [Export] public float ClosedAngle = -90f; // Degrees to rotate when closing
     [Export] public AudioStream CloseAndLockSound;

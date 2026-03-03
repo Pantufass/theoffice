@@ -19,9 +19,9 @@ public partial class HouseLevel : Node3D
 
         Node3D house = GetNode<Node3D>("House");
         Node3D doors = house.GetNode<Node3D>("Doors");
-        if(doorArt == null) doorArt = doors.GetNode<Node3D>("DoorArt").GetNode<Door>("DoorMesh");
-        if(doorBedroom == null) doorBedroom = doors.GetNode<Node3D>("DoorBedroom").GetNode<Door>("DoorMesh");
-        if(doorKitchen == null) doorKitchen = doors.GetNode<Node3D>("DoorKitchen").GetNode<Door>("DoorMesh");
+        if(doorArt == null) doorArt = doors.GetNode<Door>("DoorArt");
+        if(doorBedroom == null) doorBedroom = doors.GetNode<Door>("DoorBedroom");
+        if(doorKitchen == null) doorKitchen = doors.GetNode<Door>("DoorKitchen");
 
         if(player == null) player = GetNode<PlayerCharacter>("PlayerCharacter");
         if(TV == null) TV = house.GetNode<TV>("TV");
