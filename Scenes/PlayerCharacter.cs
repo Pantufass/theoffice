@@ -76,7 +76,7 @@ public partial class PlayerCharacter : CharacterBody3D
     // Camera and sitting variables
     private Transform3D originalCameraTransform;
     private Transform3D targetTVTransform;
-    [Export] public Node3D TV;
+    [Export] public TV TV;
     private bool sitting = false;
     public bool Sitting {get => sitting;}
     private Tween currentTween;    
@@ -815,6 +815,7 @@ public partial class PlayerCharacter : CharacterBody3D
         isCameraMoving = false;
         
         GD.Print($"Camera returned - Position: {MainCamera.GlobalPosition}");
+		TV.HideImage();
     }
 
     private void SetPlayerInputEnabled(bool enabled)

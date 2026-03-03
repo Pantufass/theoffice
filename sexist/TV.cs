@@ -137,7 +137,7 @@ public partial class TV : Node3D, IInteractable
         }
         
         GD.Print($"TV image updated for step {step}");
-        ShowImage();
+        HideImage();
     }
     // Show the image (called from player when zoom completes)
     internal void ShowImage()
