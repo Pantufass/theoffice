@@ -2,6 +2,9 @@
 
 [ext_resource type="Script" uid="uid://8sujpm0hbx7h" path="res://sexist/TV.cs" id="1_7kvnu"]
 [ext_resource type="PackedScene" uid="uid://0d1p2lvq23yf" path="res://sexist/House Assets/TV.fbx" id="2_1lwt1"]
+[ext_resource type="Texture2D" uid="uid://djyq4lbkqbc14" path="res://sexist/TVScenes/bananaTVProcessed.png" id="2_g7gg4"]
+[ext_resource type="Texture2D" uid="uid://dx12mociqthsh" path="res://sexist/TVScenes/paintingTVProcessed.png" id="3_ge84i"]
+[ext_resource type="Texture2D" uid="uid://blqffdxofm5fx" path="res://sexist/TVScenes/TShirtTVProcessed.png" id="4_m338s"]
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_rmefe"]
 
@@ -14,6 +17,9 @@ albedo_color = Color(0, 0, 0, 1)
 script = ExtResource("1_7kvnu")
 Screen = NodePath("Screen")
 SubViewport = NodePath("Screen/SubViewport")
+BananaImage = ExtResource("2_g7gg4")
+PaitingImage = ExtResource("3_ge84i")
+ShirtImage = ExtResource("4_m338s")
 
 [node name="RigidBody3D" type="RigidBody3D" parent="." unique_id=1646868632]
 
@@ -22,11 +28,12 @@ transform = Transform3D(1.8277063, 0, 0, 0, 1.1147019, 0, 0, 0, 1, 0, 0.7007704,
 shape = SubResource("BoxShape3D_rmefe")
 
 [node name="Screen" type="MeshInstance3D" parent="." unique_id=98691599]
-transform = Transform3D(-1.2389383, 0, -8.742278e-08, 0, 1, 0, 1.08311426e-07, 0, -1, 0.15228397, 0.67482316, -0.41490686)
+transform = Transform3D(-1.3, 0, -1.509958e-07, 0, 1, 0, 1.9629454e-07, 0, -1, 0.15228397, 0.67482316, -0.41490686)
 material_override = SubResource("StandardMaterial3D_nj70f")
 mesh = SubResource("QuadMesh_7kvnu")
 
 [node name="SubViewport" type="SubViewport" parent="Screen" unique_id=621334124]
+size = Vector2i(1200, 900)
 
 [node name="TV" parent="." unique_id=1585681781 instance=ExtResource("2_1lwt1")]
 transform = Transform3D(2.5, 0, 0, 0, 2.5, 0, 0, 0, 2.5, 0, 0, 0)

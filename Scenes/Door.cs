@@ -120,6 +120,7 @@ public partial class Door : Node3D, IInteractable
             if (OutsideArea != null)
                 OutsideArea.Monitoring = false;
         };
+        HouseLevel.NextStep?.Invoke();
     }
     
     private void PlaySound(AudioStream sound)

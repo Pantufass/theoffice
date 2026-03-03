@@ -758,13 +758,19 @@ public partial class PlayerCharacter : CharacterBody3D
     
     private void OnZoomToTVComplete()
     {
-        // Force exact position and rotation
         MainCamera.GlobalPosition = targetTVTransform.Origin;
-        MainCamera.GlobalTransform = targetTVTransform;
-        
-        isCameraMoving = false;
-        
-        GD.Print($"Camera reached TV - Position: {MainCamera.GlobalPosition}");
+    	MainCamera.GlobalTransform = targetTVTransform;
+	
+    	isCameraMoving = false;
+	
+    	// SHOW IMAGE ON TV WHEN ZOOM COMPLETES
+    	if (TV != null && TV is TV tvNode)
+    	{
+    	    tvNode.ShowImage(); // This shows your PNG
+    	    GD.Print("TV should now show image");
+    	}
+	
+    	GD.Print($"Camera reached TV - Position: {MainCamera.GlobalPosition}");
     }
     
     internal void ReturnCamera()

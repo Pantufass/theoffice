@@ -64,27 +64,26 @@ public partial class HouseLevel : Node3D
 
     internal void First()
     {
-        TV.UpdateTVText("Drawing is for \n weak men"); 
         SetItem("ArtItem", KeyItem.EnumItemType.Paiting);
         step = 1;
+        TV.UpdateImage(step);
     }
     internal void Second()
     {
-        TV.UpdateTVText("Don't dress up or \n you are gay");
         SetItem("Shirt",KeyItem.EnumItemType.Shirt);
         step = 2;
+        TV.UpdateImage(step);
     }
     internal void Third()
     {
-        TV.UpdateTVText("Eating bananas is gay");
         SetItem("Bananas",KeyItem.EnumItemType.Bananas);
         step = 3;
+        TV.UpdateImage(step);
     }
 
     internal void AllDone()
     {
-        TV.UpdateTVText("Real men only surround \n themselves with hard men");
-        player.SetText("uf im not gay");
+        TV.UpdateImage(4);
     }
 
 }

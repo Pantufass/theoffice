@@ -5,13 +5,16 @@ public partial class TV : Node3D, IInteractable
 {
     [Export] public MeshInstance3D Screen;
     [Export] public SubViewport SubViewport;
-    [Export] public Color TextColor = Colors.White;
-    [Export] public int FontSize = 36;
+    
+    [Export] public Texture2D BananaImage; 
+    [Export] public Texture2D PaitingImage; 
+    [Export] public Texture2D ShirtImage; 
+    private Texture2D current; 
     
     private StandardMaterial3D _screenMaterial;
-    private Control _textContainer;
-    private Label _tvLabel;
-    private ColorRect _background;
+    private Control _imageContainer;
+    private TextureRect _tvImage;
+    private Timer _imageTimer;
 
     public override void _Ready()
     {
@@ -19,161 +22,191 @@ public partial class TV : Node3D, IInteractable
         if(Screen == null) Screen = GetNode<MeshInstance3D>("Screen");
         if(SubViewport == null) SubViewport = GetNode<SubViewport>("SubViewport");
         
-        // IMPORTANT: Configure the viewport properly
+        // Configure the viewport
         ConfigureViewport();
-        
+
         // Create and store the material
-        _screenMaterial = new StandardMaterial3D();
-        
-        // Make sure texture is assigned
-        var viewportTexture = SubViewport.GetTexture();
-        _screenMaterial.AlbedoTexture = viewportTexture;
-        
-        // Add emission for glow effect
-        _screenMaterial.EmissionEnabled = true;
-        _screenMaterial.Emission = new Color(1, 1, 1);
-        _screenMaterial.EmissionEnergyMultiplier = 1.0f;
-        
-        // Disable shading to show full brightness
-        _screenMaterial.ShadingMode = BaseMaterial3D.ShadingModeEnum.Unshaded;
-        
-        // Apply material to screen
+
+        _screenMaterial = new StandardMaterial3D
+        {
+            AlbedoTexture = SubViewport.GetTexture(),
+            EmissionEnabled = true,
+            Emission = new Color(1, 1, 1),
+            EmissionEnergyMultiplier = 1.0f,
+            ShadingMode = BaseMaterial3D.ShadingModeEnum.Unshaded
+        };
+
+
         Screen.MaterialOverride = _screenMaterial;
         
-        // Setup the UI
-        SetupTVUI();
+        SetupImageDisplay();
         
-        // Set initial text
-        UpdateTVText("Booting up");
+        HideImage();
+
+        current = PaitingImage;
         
-        GD.Print("TV initialized with viewport texture");
+        GD.Print("TV initialized - ready to show images");
     }
     
     private void ConfigureViewport()
     {
         if (SubViewport == null) return;
         
-        // CRITICAL: Set these properties for the viewport to render properly
-        SubViewport.RenderTargetUpdateMode = SubViewport.UpdateMode.Always; // Or .Once if you want manual updates
-        SubViewport.RenderTargetClearMode = SubViewport.ClearMode.Always; // Clear before rendering
+        SubViewport.RenderTargetUpdateMode = SubViewport.UpdateMode.Always;
+        SubViewport.RenderTargetClearMode = SubViewport.ClearMode.Always;
         
-        // Set a reasonable size if not set
         if (SubViewport.Size == Vector2I.Zero)
         {
             SubViewport.Size = new Vector2I(1920, 1080);
-            GD.Print("Set default viewport size to 1920x1080");
         }
         
-        // Disable 3D rendering if not needed
         SubViewport.Disable3D = true;
-        
-        // Enable 2D rendering
         SubViewport.HandleInputLocally = false;
-        
-        GD.Print($"Viewport configured - Size: {SubViewport.Size}, UpdateMode: {SubViewport.RenderTargetUpdateMode}");
     }
 
-    private void SetupTVUI()
+    private void SetupImageDisplay()
     {
-        // Create UI for text if it doesn't exist
-        _textContainer = SubViewport.GetNodeOrNull<Control>("TextContainer");
-        if (_textContainer == null)
+        // Create container for image
+        _imageContainer = SubViewport.GetNodeOrNull<Control>("ImageContainer");
+        if (_imageContainer == null)
         {
-            // Create container
-            _textContainer = new Control();
-            _textContainer.Name = "TextContainer";
-            _textContainer.SetSize(new Vector2(SubViewport.Size.X, SubViewport.Size.Y));
-            SubViewport.AddChild(_textContainer);
-            GD.Print("Created TextContainer");
+            _imageContainer = new Control();
+            _imageContainer.Name = "ImageContainer";
+            _imageContainer.SetSize(new Vector2(SubViewport.Size.X, SubViewport.Size.Y));
+            SubViewport.AddChild(_imageContainer);
 
-            // Add a background
-            _background = new ColorRect();
-            _background.Name = "Background";
-            _background.SetAnchorsPreset(Control.LayoutPreset.FullRect);
-            _background.Color = new Color(0, 0, 0, 0.7f); // Semi-transparent black
-            _textContainer.AddChild(_background);
-            GD.Print("Created Background");
-
-            // Create label
-            _tvLabel = new Label();
-            _tvLabel.Name = "TVLabel";
-            _tvLabel.SetAnchorsPreset(Control.LayoutPreset.FullRect);
-            _tvLabel.HorizontalAlignment = HorizontalAlignment.Center;
-            _tvLabel.VerticalAlignment = VerticalAlignment.Center;
-            _tvLabel.AddThemeFontSizeOverride("font_size", FontSize);
-            _tvLabel.AddThemeColorOverride("font_color", TextColor);
-            _tvLabel.AddThemeConstantOverride("outline_size", 4);
-            _tvLabel.AddThemeColorOverride("font_outline_color", Colors.Black);
-
-            _textContainer.AddChild(_tvLabel);
-            GD.Print("Created Label");
+            // Create image display
+            _tvImage = new TextureRect();
+            _tvImage.Name = "TVImage";
+            _tvImage.SetAnchorsPreset(Control.LayoutPreset.FullRect);
+            _tvImage.StretchMode = TextureRect.StretchModeEnum.KeepAspectCentered;
+            _tvImage.ExpandMode = TextureRect.ExpandModeEnum.FitWidth;
+            _tvImage.Visible = false;
+            
+            _imageContainer.AddChild(_tvImage);
+            
+            GD.Print("Created image display");
         }
         else
         {
-            _tvLabel = _textContainer.GetNode<Label>("TVLabel");
-            _background = _textContainer.GetNode<ColorRect>("Background");
-            GD.Print("Found existing UI elements");
+            _tvImage = _imageContainer.GetNode<TextureRect>("TVImage");
         }
     }
 
     public void Interact(PlayerCharacter player)
     {
+        if (_tvImage.Visible)
+        {
+            HideImage();
+        }
+        else
+        {
+            ShowImage();
+        }
     }
 
     public void OnFocus(PlayerCharacter player)
     {
-        // Highlight effect
         if (_screenMaterial != null)
         {
             _screenMaterial.EmissionEnergyMultiplier = 1.5f;
         }
+        
+        player.SetHint("Press E to interact with TV");
     }
 
     public void OnUnfocus(PlayerCharacter player)
     {
-    }
-
-    internal void UpdateTVText(string newText)
-    {
-        // Make sure the label exists
-        if (_tvLabel == null)
+        if (_screenMaterial != null)
         {
-            SetupTVUI();
+            _screenMaterial.EmissionEnergyMultiplier = 1.0f;
         }
         
-        if (_tvLabel != null)
+        player.SetHint("");
+    }
+    
+    internal void UpdateImage(int step)
+    {
+        if (step == 1) current = PaitingImage;
+        else if (step == 2) current = ShirtImage;
+        else if (step == 3) current = BananaImage;
+        else
         {
-            _tvLabel.Text = newText;
-            GD.Print($"TV text updated to: '{newText}'");
+            GD.PrintErr($"Invalid step {step} for TV image update");
+            return;
         }
+        
+        GD.Print($"TV image updated for step {step}");
+        ShowImage();
+    }
+    // Show the image (called from player when zoom completes)
+    internal void ShowImage()
+    {
+        ShowImage(current);
+    }
+    
+    internal void ShowImage(Texture2D image)
+    {
+        if (image == null)
+        {
+            GD.PrintErr("No image to display!");
+            return;
+        }
+        
+        GD.Print($"Showing image on TV: {image.ResourcePath}");
+        
+        // Make sure UI exists
+        if (_tvImage == null)
+        {
+            SetupImageDisplay();
+        }
+        
+        // Show image
+        _tvImage.Visible = true;
+        _tvImage.Texture = image;
+        
         
         // Force viewport to update
+        ForceViewportUpdate();
+    }
+    
+    internal void HideImage()
+    {
+        GD.Print("Hiding TV image");
+        
+        if (_tvImage != null)
+        {
+            _tvImage.Visible = false;
+        }
+        
+        ForceViewportUpdate();
+    }
+    
+    private void OnImageTimerTimeout()
+    {
+        HideImage();
+    }
+    
+    private void ForceViewportUpdate()
+    {
         if (SubViewport != null)
         {
-            SubViewport.RenderTargetUpdateMode = SubViewport.UpdateMode.Always;
+            SubViewport.RenderTargetUpdateMode = SubViewport.UpdateMode.Once;
             
-            // Force material to refresh texture
             if (_screenMaterial != null)
             {
                 _screenMaterial.AlbedoTexture = SubViewport.GetTexture();
             }
+            
+            CallDeferred("RestoreViewportMode");
         }
     }
     
-    // Call this to show just the viewport content without text
-    internal void HideText()
+    private void RestoreViewportMode()
     {
-        if (_textContainer != null)
+        if (SubViewport != null)
         {
-            _textContainer.Visible = false;
-        }
-    }
-    
-    internal void ShowText()
-    {
-        if (_textContainer != null)
-        {
-            _textContainer.Visible = true;
+            SubViewport.RenderTargetUpdateMode = SubViewport.UpdateMode.Always;
         }
     }
 }
