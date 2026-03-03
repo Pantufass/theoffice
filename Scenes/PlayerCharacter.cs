@@ -90,7 +90,7 @@ public partial class PlayerCharacter : CharacterBody3D
     private Basis _originalCameraRotation;
     
     private bool movementEnabled = true;
-
+	private float zoomDistance = 1.5f;
     [Export] public CanvasLayer HUD;
     [Export] public Label DialogText;
     [Export] public Label HintText;
@@ -735,7 +735,6 @@ public partial class PlayerCharacter : CharacterBody3D
 	    );
 
 	    // Calculate target position and transform
-	    float zoomDistance = 2.0f;
 	    Vector3 tvForward = -tvTransform.Basis.Z;
 	    Vector3 tvUp = tvTransform.Basis.Y;
 	
@@ -743,7 +742,7 @@ public partial class PlayerCharacter : CharacterBody3D
 	    Vector3 tvBase = tvTransform.Origin;
 	
 	    // TV center height
-	    float tvHeight = 1.2f;
+	    float tvHeight = 0.6f;
 	    float eyeLevel = 1.6f;
 	
 	    // Calculate TV center
@@ -763,7 +762,7 @@ public partial class PlayerCharacter : CharacterBody3D
 	    // Look at point (with tilt)
 	    Vector3 lookAtPoint = new Vector3(
 	        tvCenter.X,
-	        tvCenter.Y - 0.1f,
+	        tvCenter.Y - 0.15f,
 	        tvCenter.Z
 	    );
 	
