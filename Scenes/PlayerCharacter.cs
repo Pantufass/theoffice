@@ -35,16 +35,17 @@ public partial class PlayerCharacter : CharacterBody3D
 	[Export] public bool EnableSprint = true;
 	[Export] public Timer SprintTimer;
 	[Export] public float SprintCooldownTime = 3f;
-	[Export] public float SprintTime = 1f;
+	[Export] public float SprintTime = 5f;
 	[Export] public float SprintReplenishRate = 0.30f;
 	[Export] public float Acceleration = 80f;
 	[Export] public float AirAccelerationModifier = 0.2f;
 
 	private bool sprintOnCooldown = false;
 	private float sprintTimeRemaining;
+	private bool isSprinting = false;
 
 	private const float NORMAL_SPEED = 1.5f;
-	[Export] public float SprintSpeed = 1.8f;
+	[Export] public float SprintSpeed = 3f;
 	[Export] public float WalkSpeed = 0.5f;
 
 	private float speedModifier = NORMAL_SPEED;
@@ -57,7 +58,7 @@ public partial class PlayerCharacter : CharacterBody3D
 	[Export] public float JumpDistance = 4f;
 	[Export] public float CoyoteTime = 0.1f;
 	[Export] public float JumpBufferTime = 0.2f;
-	[Export] public float MaxFallSpeed = 6f;
+	[Export] public float MaxFallSpeed = 12f;
 	public IInteractable CurrentInteractable { get; private set; }
 
 	private Vector3 direction = Vector3.Zero;
@@ -120,6 +121,12 @@ public partial class PlayerCharacter : CharacterBody3D
 		ClearText();
 
 		Input.MouseMode = Input.MouseModeEnum.Captured;
+
+		if (sprintBar != null)
+    {
+        sprintBar.Value = 100;
+        sprintBar.Show();
+    }
 	}
 
 	internal void SetNodes()
@@ -248,36 +255,6 @@ public partial class PlayerCharacter : CharacterBody3D
 					ToggleCrouch();
 			}
 		}
-
-		// ───── Sprint / Walk ─────
-		if (EnableSprint && !sitting)
-		{
-			// Released sprint or walk
-			if (Input.IsActionJustReleased("sprint") || Input.IsActionJustReleased("walk"))
-			{
-				if (!(Input.IsActionPressed("walk") || Input.IsActionPressed("sprint")))
-				{
-					speedModifier = NORMAL_SPEED;
-					ExitSprint();
-				}
-			}
-
-			// Press sprint
-			if (Input.IsActionJustPressed("sprint") && !crouched)
-			{
-				if (!sprintOnCooldown)
-				{
-					speedModifier = SprintSpeed;
-					SprintTimer.Start(sprintTimeRemaining);
-				}
-			}
-
-			// Press walk
-			if (Input.IsActionJustPressed("walk") && !crouched)
-			{
-				speedModifier = WalkSpeed;
-			}
-	    }
     }
 
 	// ────────── Camera ──────────
@@ -331,6 +308,63 @@ public partial class PlayerCharacter : CharacterBody3D
 		crouched = !crouched;
 	}
 
+	private void HandleSprint()
+	{
+	    if (!EnableSprint || sitting || crouched || !IsOnFloor()) 
+	    {
+	        // Exit sprint if conditions not met
+	        if (isSprinting)
+	        {
+	            isSprinting = false;
+	            speedModifier = NORMAL_SPEED;
+	            ExitSprint();
+	        }
+	        return;
+	    }
+	
+	    bool sprintPressed = Input.IsActionPressed("sprint");
+	    bool walkPressed = Input.IsActionPressed("walk");
+	
+	    // Sprint logic
+	    if (sprintPressed && !sprintOnCooldown && sprintTimeRemaining > 0)
+	    {
+	        // Start sprinting
+	        isSprinting = true;
+	        speedModifier = SprintSpeed;
+	
+	        // Start timer if not running
+	        if (SprintTimer.IsStopped())
+	        {
+	            SprintTimer.Start(sprintTimeRemaining);
+	        }
+	
+	        // Consume sprint time
+	        sprintTimeRemaining -= 0.01f; // Decrease over time
+	        if (sprintTimeRemaining < 0) sprintTimeRemaining = 0;
+	    }
+	    else if (walkPressed)
+	    {
+	        // Walking
+	        isSprinting = false;
+	        speedModifier = WalkSpeed;
+	        ExitSprint();
+	    }
+	    else
+	    {
+	        // Normal speed
+	        isSprinting = false;
+	        speedModifier = NORMAL_SPEED;
+	        ExitSprint();
+	    }
+	
+	    // Replenish sprint when not sprinting and on cooldown
+	    if (!isSprinting && !sprintOnCooldown && sprintTimeRemaining < SprintTime)
+	    {
+	        sprintTimeRemaining += SprintReplenishRate * 0.01f;
+	        if (sprintTimeRemaining > SprintTime) 
+	            sprintTimeRemaining = SprintTime;
+	    }
+	}
 	private void SprintReplenish(float delta)
 	{
 		float sprintBarValue;
@@ -359,6 +393,34 @@ public partial class PlayerCharacter : CharacterBody3D
 		else
 			sprintBar.Show();
 	}
+	
+	private void UpdateSprintBar()
+	{
+	    if (sprintBar == null) return;
+	
+	    float percentage;
+	
+	    if (sprintOnCooldown)
+	    {
+	        // During cooldown, show cooldown progress
+	        float cooldownRemaining = (float)SprintTimer.TimeLeft;
+	        percentage = (cooldownRemaining / SprintCooldownTime) * 100f;
+	        sprintBar.Value = percentage;
+	        sprintBar.Show();
+	    }
+	    else
+	    {
+	        // Show sprint energy
+	        percentage = (sprintTimeRemaining / SprintTime) * 100f;
+	        sprintBar.Value = percentage;
+	
+	        // Hide when full
+	        if (percentage >= 99.9f)
+	            sprintBar.Hide();
+	        else
+	            sprintBar.Show();
+	    }
+	}
 
 	public override void _Process(double delta)
 	{
@@ -368,6 +430,7 @@ public partial class PlayerCharacter : CharacterBody3D
 		{
 			SubviewportCamera.GlobalTransform = MainCamera.GlobalTransform;
 		}
+		HandleSprint();
 	}
 	
 	// ────────── Physics ──────────
