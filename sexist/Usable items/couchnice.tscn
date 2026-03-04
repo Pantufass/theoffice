@@ -1,0 +1,12 @@
+[gd_scene format=3 uid="uid://bol7th75lau28"]
+
+[ext_resource type="PackedScene" uid="uid://bjimu2xbc1ji5" path="res://sexist/NewItems/newsofa/MSH_Sofa_Soviet.fbx" id="1_dbqha"]
+[ext_resource type="Texture2D" uid="uid://cvsrkgjaauyed" path="res://sexist/NewItems/newsofa/TEX_Sofa_Soviet_AL.png" id="2_nd00y"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_qel60"]
+albedo_texture = ExtResource("2_nd00y")
+
+[node name="MSH_Sofa_Soviet" unique_id=129053614 instance=ExtResource("1_dbqha")]
+
+[node name="MSH_Sofa_Soviet" parent="." index="0" unique_id=2144968529]
+material_override = SubResource("StandardMaterial3D_qel60")
