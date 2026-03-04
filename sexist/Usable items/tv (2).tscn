@@ -70,6 +70,7 @@ surface_material_override/0 = SubResource("StandardMaterial3D_3aikg")
 surface_material_override/0 = SubResource("StandardMaterial3D_7evx1")
 
 [node name="Screen Surround" parent="Wooden Frame/TV Front Panel 01" index="1" unique_id=1131858554]
+visible = false
 surface_material_override/0 = SubResource("StandardMaterial3D_th6tn")
 
 [node name="Screen" parent="Wooden Frame/TV Front Panel 01/Screen Surround" index="0" unique_id=1389573863]

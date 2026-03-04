@@ -1,6 +1,7 @@
 [gd_scene format=3 uid="uid://76rsq4vkfi8d"]
 
 [ext_resource type="Script" uid="uid://yxys1mxdejsu" path="res://Scenes/Couch.cs" id="1_nbwog"]
+[ext_resource type="PackedScene" uid="uid://bol7th75lau28" path="res://sexist/Usable items/couchnice.tscn" id="2_a26vg"]
 
 [sub_resource type="BoxMesh" id="BoxMesh_lbuvq"]
 
@@ -12,6 +13,7 @@ SitPosition = NodePath("Node3D")
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="." unique_id=877265484]
 transform = Transform3D(3, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0)
+visible = false
 mesh = SubResource("BoxMesh_lbuvq")
 
 [node name="RigidBody3D" type="StaticBody3D" parent="." unique_id=465442523]
@@ -22,3 +24,6 @@ shape = SubResource("BoxShape3D_lbuvq")
 
 [node name="Node3D" type="Node3D" parent="." unique_id=74901658]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0.322937)
+
+[node name="MSH_Sofa_Soviet" parent="." unique_id=129053614 instance=ExtResource("2_a26vg")]
+transform = Transform3D(-6.9938224e-08, 0, 1.6, 0, 1.6, 0, -1.6, 0, -6.9938224e-08, -0.03534484, -0.48004675, 0.2851839)
