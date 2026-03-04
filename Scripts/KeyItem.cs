@@ -11,6 +11,7 @@ public partial class KeyItem : Interactable
         Other
     }
     [Export]public EnumItemType ItemType = EnumItemType.Other;
+    [Export] public string FoundText = "";
     private bool _active = false;
     public bool Active{get => _active; set => _active = value;}
     public override void _Ready()
@@ -21,9 +22,21 @@ public partial class KeyItem : Interactable
     {
         if(Active)
         {
-            
+            HouseLevel.ItemFound?.Invoke();
+            player.SetText(FoundText);
+            Active = false;
         }
-        base.Interact(player);
+        else base.Interact(player);
     }
-
+    public override void OnFocus(PlayerCharacter player)
+    {
+        if(Active)
+        {
+            player.SetHint("Interact to know more");
+        }
+        else
+        {
+            player.SetHint("");
+        }
+    }
 }

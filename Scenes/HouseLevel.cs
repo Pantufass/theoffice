@@ -11,7 +11,6 @@ public partial class HouseLevel : Node3D
 
     public static Action NextStep;
     public static Action ItemFound;
-    public static bool ItemWasFound = false;
     private int step = 0;
     private int stepItem = 0;
     public override void _Ready()
@@ -20,14 +19,15 @@ public partial class HouseLevel : Node3D
 
         Node3D house = GetNode<Node3D>("House");
         Node3D doors = house.GetNode<Node3D>("Doors");
-        if(doorArt == null) doorArt = doors.GetNode<Node3D>("DoorArt").GetNode<Door>("DoorMesh");
-        if(doorBedroom == null) doorBedroom = doors.GetNode<Node3D>("DoorBedroom").GetNode<Door>("DoorMesh");
-        if(doorKitchen == null) doorKitchen = doors.GetNode<Node3D>("DoorKitchen").GetNode<Door>("DoorMesh");
+        if(doorArt == null) doorArt = doors.GetNode<Door>("DoorArt");
+        if(doorBedroom == null) doorBedroom = doors.GetNode<Door>("DoorBedroom");
+        if(doorKitchen == null) doorKitchen = doors.GetNode<Door>("DoorKitchen");
 
         if(player == null) player = GetNode<PlayerCharacter>("PlayerCharacter");
         if(TV == null) TV = house.GetNode<TV>("TV");
 
         NextStep += NextAction;
+        ItemFound += ItemFoundAction;
     }
 
     public void NextAction()
@@ -43,7 +43,6 @@ public partial class HouseLevel : Node3D
     public void ItemFoundAction()
     {
         stepItem++;
-        ItemWasFound = true;
         if(step == 1) doorArt.Active = true;
         else if(step == 2) doorBedroom.Active = true;
         else if(step == 3) doorKitchen.Active = true;
@@ -61,32 +60,31 @@ public partial class HouseLevel : Node3D
         {
             throw new Exception("Wrong item assigned to " + itemName);
         }
-        ItemWasFound = false;
     }
 
     internal void First()
     {
-        TV.UpdateTVText("Drawing is for \n weak men"); 
         SetItem("ArtItem", KeyItem.EnumItemType.Paiting);
         step = 1;
+        TV.TurnOn();
+        TV.UpdateImage(step);
     }
     internal void Second()
     {
-        TV.UpdateTVText("Don't dress up or \n you are gay");
         SetItem("Shirt",KeyItem.EnumItemType.Shirt);
         step = 2;
+        TV.UpdateImage(step);
     }
     internal void Third()
     {
-        TV.UpdateTVText("Eating bananas is gay");
         SetItem("Bananas",KeyItem.EnumItemType.Bananas);
         step = 3;
+        TV.UpdateImage(step);
     }
 
     internal void AllDone()
     {
-        TV.UpdateTVText("Real men only surround \n themselves with hard men");
-        player.SetText("uf im not gay");
+        TV.UpdateImage(4);
     }
 
 }

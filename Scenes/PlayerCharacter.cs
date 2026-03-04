@@ -35,16 +35,17 @@ public partial class PlayerCharacter : CharacterBody3D
 	[Export] public bool EnableSprint = true;
 	[Export] public Timer SprintTimer;
 	[Export] public float SprintCooldownTime = 3f;
-	[Export] public float SprintTime = 1f;
+	[Export] public float SprintTime = 5f;
 	[Export] public float SprintReplenishRate = 0.30f;
 	[Export] public float Acceleration = 80f;
 	[Export] public float AirAccelerationModifier = 0.2f;
 
 	private bool sprintOnCooldown = false;
 	private float sprintTimeRemaining;
+	private bool isSprinting = false;
 
 	private const float NORMAL_SPEED = 1.5f;
-	[Export] public float SprintSpeed = 1.8f;
+	[Export] public float SprintSpeed = 3f;
 	[Export] public float WalkSpeed = 0.5f;
 
 	private float speedModifier = NORMAL_SPEED;
@@ -57,7 +58,7 @@ public partial class PlayerCharacter : CharacterBody3D
 	[Export] public float JumpDistance = 4f;
 	[Export] public float CoyoteTime = 0.1f;
 	[Export] public float JumpBufferTime = 0.2f;
-	[Export] public float MaxFallSpeed = 6f;
+	[Export] public float MaxFallSpeed = 12f;
 	public IInteractable CurrentInteractable { get; private set; }
 
 	private Vector3 direction = Vector3.Zero;
@@ -76,7 +77,7 @@ public partial class PlayerCharacter : CharacterBody3D
     // Camera and sitting variables
     private Transform3D originalCameraTransform;
     private Transform3D targetTVTransform;
-    [Export] public Node3D TV;
+    [Export] public TV TV;
     private bool sitting = false;
     public bool Sitting {get => sitting;}
     private Tween currentTween;    
@@ -89,19 +90,55 @@ public partial class PlayerCharacter : CharacterBody3D
     private Basis _originalCameraRotation;
     
     private bool movementEnabled = true;
-
+	private float zoomDistance = 1.5f;
     [Export] public CanvasLayer HUD;
     [Export] public Label DialogText;
     [Export] public Label HintText;
+	private Timer _dialogTimer;
+	private Timer _hintTimer;
 
 
 	// ────────── Ready ──────────
 	public override void _Ready()
 	{
-        if(MainCamera == null) MainCamera = GetNode<Camera3D>("MainCamera");
+        SetNodes();
+
+		sprintTimeRemaining = SprintTime;
+		
+		SprintTimer.Timeout += OnSprintTimerTimeout;
+		CoyoteTimer.Timeout += OnCoyoteTimerTimeout;
+    	_dialogTimer.Timeout += OnDialogTimerTimeout;
+		_hintTimer.Timeout += OnHintTimerTimeout;
+
+		SetCurrentPickupable += EquipItem;
+
+		UpdateCameraRotation();
+		CalculateMovementParameters();
+
+    	SetupSimpleCrosshair();
+        UpdateOriginalTransforms();
+
+		ClearText();
+
+		Input.MouseMode = Input.MouseModeEnum.Captured;
+
+		if (sprintBar != null)
+    {
+        sprintBar.Value = 100;
+        sprintBar.Show();
+    }
+	}
+
+	internal void SetNodes()
+	{	
+		if(MainCamera == null) MainCamera = GetNode<Camera3D>("MainCamera");
 		if(AnimationTree == null) AnimationTree = GetNode<AnimationTree>("AnimationTree");
 		sprintBar = GetNode<CanvasLayer>("HUD").GetNode<Godot.Range>("SprintBar");
-		sprintTimeRemaining = SprintTime;
+		
+        if(HUD == null) HUD = GetNode<CanvasLayer>("HUD");
+		if(Hand == null) Hand = GetNode<Node3D>("%Hand");
+        if(DialogText == null) DialogText = HUD.GetNode<Label>("Dialog");
+        if(HintText == null) HintText = HUD.GetNode<Label>("Hint");
 
 		if(SprintTimer == null)
 		{
@@ -111,21 +148,20 @@ public partial class PlayerCharacter : CharacterBody3D
 		{
 			CoyoteTimer = GetNode<Timer>("CoyoteTimer");
 		}
-		SprintTimer.Timeout += OnSprintTimerTimeout;
-		CoyoteTimer.Timeout += OnCoyoteTimerTimeout;
 
-		UpdateCameraRotation();
-		Input.MouseMode = Input.MouseModeEnum.Captured;
-		CalculateMovementParameters();
+        _dialogTimer = new Timer
+        {
+            Name = "DialogTimer",
+            OneShot = true
+        };
+        AddChild(_dialogTimer);
 
-        if(HUD == null) HUD = GetNode<CanvasLayer>("HUD");
-		if(Hand == null) Hand = GetNode<Node3D>("%Hand");
-        if(DialogText == null) DialogText = HUD.GetNode<Label>("Dialog");
-        if(HintText == null) HintText = HUD.GetNode<Label>("Hint");
-
-		SetCurrentPickupable += EquipItem;
-        
-        UpdateOriginalTransforms();
+        _hintTimer = new Timer
+        {
+            Name = "HintTimer",
+            OneShot = true
+        };
+        AddChild(_hintTimer);
 	}
     
     private void UpdateOriginalTransforms()
@@ -219,36 +255,6 @@ public partial class PlayerCharacter : CharacterBody3D
 					ToggleCrouch();
 			}
 		}
-
-		// ───── Sprint / Walk ─────
-		if (EnableSprint && !sitting)
-		{
-			// Released sprint or walk
-			if (Input.IsActionJustReleased("sprint") || Input.IsActionJustReleased("walk"))
-			{
-				if (!(Input.IsActionPressed("walk") || Input.IsActionPressed("sprint")))
-				{
-					speedModifier = NORMAL_SPEED;
-					ExitSprint();
-				}
-			}
-
-			// Press sprint
-			if (Input.IsActionJustPressed("sprint") && !crouched)
-			{
-				if (!sprintOnCooldown)
-				{
-					speedModifier = SprintSpeed;
-					SprintTimer.Start(sprintTimeRemaining);
-				}
-			}
-
-			// Press walk
-			if (Input.IsActionJustPressed("walk") && !crouched)
-			{
-				speedModifier = WalkSpeed;
-			}
-	    }
     }
 
 	// ────────── Camera ──────────
@@ -302,6 +308,63 @@ public partial class PlayerCharacter : CharacterBody3D
 		crouched = !crouched;
 	}
 
+	private void HandleSprint()
+	{
+	    if (!EnableSprint || sitting || crouched || !IsOnFloor()) 
+	    {
+	        // Exit sprint if conditions not met
+	        if (isSprinting)
+	        {
+	            isSprinting = false;
+	            speedModifier = NORMAL_SPEED;
+	            ExitSprint();
+	        }
+	        return;
+	    }
+	
+	    bool sprintPressed = Input.IsActionPressed("sprint");
+	    bool walkPressed = Input.IsActionPressed("walk");
+	
+	    // Sprint logic
+	    if (sprintPressed && !sprintOnCooldown && sprintTimeRemaining > 0)
+	    {
+	        // Start sprinting
+	        isSprinting = true;
+	        speedModifier = SprintSpeed;
+	
+	        // Start timer if not running
+	        if (SprintTimer.IsStopped())
+	        {
+	            SprintTimer.Start(sprintTimeRemaining);
+	        }
+	
+	        // Consume sprint time
+	        sprintTimeRemaining -= 0.01f; // Decrease over time
+	        if (sprintTimeRemaining < 0) sprintTimeRemaining = 0;
+	    }
+	    else if (walkPressed)
+	    {
+	        // Walking
+	        isSprinting = false;
+	        speedModifier = WalkSpeed;
+	        ExitSprint();
+	    }
+	    else
+	    {
+	        // Normal speed
+	        isSprinting = false;
+	        speedModifier = NORMAL_SPEED;
+	        ExitSprint();
+	    }
+	
+	    // Replenish sprint when not sprinting and on cooldown
+	    if (!isSprinting && !sprintOnCooldown && sprintTimeRemaining < SprintTime)
+	    {
+	        sprintTimeRemaining += SprintReplenishRate * 0.01f;
+	        if (sprintTimeRemaining > SprintTime) 
+	            sprintTimeRemaining = SprintTime;
+	    }
+	}
 	private void SprintReplenish(float delta)
 	{
 		float sprintBarValue;
@@ -330,6 +393,34 @@ public partial class PlayerCharacter : CharacterBody3D
 		else
 			sprintBar.Show();
 	}
+	
+	private void UpdateSprintBar()
+	{
+	    if (sprintBar == null) return;
+	
+	    float percentage;
+	
+	    if (sprintOnCooldown)
+	    {
+	        // During cooldown, show cooldown progress
+	        float cooldownRemaining = (float)SprintTimer.TimeLeft;
+	        percentage = (cooldownRemaining / SprintCooldownTime) * 100f;
+	        sprintBar.Value = percentage;
+	        sprintBar.Show();
+	    }
+	    else
+	    {
+	        // Show sprint energy
+	        percentage = (sprintTimeRemaining / SprintTime) * 100f;
+	        sprintBar.Value = percentage;
+	
+	        // Hide when full
+	        if (percentage >= 99.9f)
+	            sprintBar.Hide();
+	        else
+	            sprintBar.Show();
+	    }
+	}
 
 	public override void _Process(double delta)
 	{
@@ -339,6 +430,7 @@ public partial class PlayerCharacter : CharacterBody3D
 		{
 			SubviewportCamera.GlobalTransform = MainCamera.GlobalTransform;
 		}
+		HandleSprint();
 	}
 	
 	// ────────── Physics ──────────
@@ -521,7 +613,7 @@ public partial class PlayerCharacter : CharacterBody3D
 			rayOrigin,
 			rayEnd
 		);
-
+		
 		query.CollideWithAreas = true;
 		query.CollideWithBodies = true;
 		query.Exclude = new Godot.Collections.Array<Rid> { GetRid() };
@@ -565,113 +657,182 @@ public partial class PlayerCharacter : CharacterBody3D
 		}
 	}
 
-    public void SetText(string text)
-    {
-        DialogText.Text = text;
-    }
+	public void SetText(string text)
+	{
+	    DialogText.Text = text;
+		DialogText.Visible = true;
 	
-    public void SetHint(string text)
-    {
-        HintText.Text = text;
-    }
+	    RestartDialogTimer();
+	}
+
+	public void ClearText()
+	{
+	    DialogText.Text = "";
+		DialogText.Visible = false;
+	
+	    if (!_dialogTimer.IsStopped())
+	        _dialogTimer.Stop();
+	}
+
+	public void SetHint(string text)
+	{
+	    HintText.Text = text;
+	
+	    RestartHintTimer();
+	}
+
+	private void RestartHintTimer()
+	{
+	    if (_hintTimer.IsStopped() == false)
+	        _hintTimer.Stop();
+
+	    _hintTimer.Start(3.0f);
+	}
+
+	private void RestartDialogTimer()
+	{
+	    if (_dialogTimer.IsStopped() == false)
+	        _dialogTimer.Stop();
+	
+	    _dialogTimer.Start(5.0f);
+	}
+
+	private void OnDialogTimerTimeout()
+	{
+	    ClearText();
+	}
+	private void OnHintTimerTimeout()
+	{
+	    HintText.Text = "";
+	}
+
+	private void SetupSimpleCrosshair()
+	{
+	    var dot = new ColorRect();
+    	dot.Color = Colors.White;
+    	dot.SetSize(new Vector2(4, 4));
+    	dot.SetAnchorsPreset(Control.LayoutPreset.Center);
+    	GetNode<CanvasLayer>("HUD").AddChild(dot);
+	}
 
     internal void ZoomToTV(Transform3D tvTransform)
-    {   
-        if (!sitting) 
-        {
-            GD.Print("Cannot zoom - player not sitting");
-            return;
-        }
-        
-        GD.Print("=== Zoom To TV ===");
-        GD.Print($"TV Transform - Origin: {tvTransform.Origin}, Basis: {tvTransform.Basis}");
-        GD.Print($"Camera Current - Origin: {MainCamera.GlobalPosition}");
-        
-        // Kill any existing tween
-        currentTween?.Kill();
-        
-        // Store original camera position
-        originalCameraTransform = new Transform3D(
-            MainCamera.GlobalTransform.Basis,
-            MainCamera.GlobalTransform.Origin
-        );
+	{   
+	    if (!sitting) 
+	    {
+	        GD.Print("Cannot zoom - player not sitting");
+	        return;
+	    }
+	
+	    GD.Print("=== Zoom To TV ===");
+	
+	    // Kill any existing tween
+	    currentTween?.Kill();
+	
+	    // Store original camera position
+	    originalCameraTransform = new Transform3D(
+	        MainCamera.GlobalTransform.Basis,
+	        MainCamera.GlobalTransform.Origin
+	    );
 
-        // Calculate target position and transform
-        float zoomDistance = 2.0f;
-        Vector3 tvForward = -tvTransform.Basis.Z;
-        Vector3 tvUp = tvTransform.Basis.Y;
-        
-        // TV position (assuming this is at the base of the TV)
-        Vector3 tvBase = tvTransform.Origin;
-        
-        // TV center height (adjust based on your TV's actual height)
-        float tvHeight = 1.2f; // Height of TV center from floor
-        float eyeLevel = 1.6f; // Camera eye level when sitting
-        
-        // Calculate TV center position
-        Vector3 tvCenter = new Vector3(tvBase.X, tvHeight, tvBase.Z);
-        
-        // OPTION: Position camera between eye level and TV height
-        // 0.0 = eye level, 1.0 = TV center level
-        float blendFactor = 0.7f; // 0.7 = 70% toward TV level, 30% eye level
-        
-        float cameraHeight = Mathf.Lerp(eyeLevel, tvHeight, blendFactor);
-        
-        // Position camera at the blended height
-        Vector3 targetPosition = new Vector3(
-            tvBase.X + (tvForward.X * zoomDistance),
-            cameraHeight,
-            tvBase.Z + (tvForward.Z * zoomDistance)
-        );
-        
-        // Look at TV center (or slightly below for natural gaze)
-        Vector3 lookAtPoint = new Vector3(
-            tvCenter.X,
-            tvCenter.Y - 0.1f, // Slight downward tilt
-            tvCenter.Z
-        );
-        
-        GD.Print($"TV Base: {tvBase}");
-        GD.Print($"TV Center: {tvCenter}");
-        GD.Print($"Eye Level: {eyeLevel}");
-        GD.Print($"Blend Factor: {blendFactor} -> Camera Height: {cameraHeight}");
-        GD.Print($"Target Position: {targetPosition}");
-        GD.Print($"Looking at: {lookAtPoint}");
-        
-        // Create transform that looks at the TV
-        targetTVTransform = new Transform3D(
-            Basis.LookingAt(lookAtPoint - targetPosition, Vector3.Up),
-            targetPosition
-        );
-        
-        // Disable player input
-        SetPlayerInputEnabled(false);
-        
-        // Create tween
-        currentTween = CreateTween();
-        currentTween.SetParallel(true);
-        
-        currentTween.TweenProperty(MainCamera, "global_position", targetPosition, 0.8f)
-             .SetEase(Tween.EaseType.Out)
-             .SetTrans(Tween.TransitionType.Quad);
-        
-        currentTween.TweenProperty(MainCamera, "global_transform:basis", targetTVTransform.Basis, 0.8f)
-             .SetEase(Tween.EaseType.Out)
-             .SetTrans(Tween.TransitionType.Quad);
-        
-        // Set up completion callback
-        currentTween.Finished += OnZoomToTVComplete;
-    }
+	    // Calculate target position and transform
+	    Vector3 tvForward = -tvTransform.Basis.Z;
+	    Vector3 tvUp = tvTransform.Basis.Y;
+	
+	    // TV position
+	    Vector3 tvBase = tvTransform.Origin;
+	
+	    // TV center height
+	    float tvHeight = 0.6f;
+	    float eyeLevel = 1.6f;
+	
+	    // Calculate TV center
+	    Vector3 tvCenter = new Vector3(tvBase.X, tvHeight, tvBase.Z);
+	
+	    // Camera height blend
+	    float blendFactor = 0.7f;
+	    float cameraHeight = Mathf.Lerp(eyeLevel, tvHeight, blendFactor);
+	
+	    // Position camera
+	    Vector3 targetPosition = new Vector3(
+	        tvBase.X + (tvForward.X * zoomDistance),
+	        cameraHeight,
+	        tvBase.Z + (tvForward.Z * zoomDistance)
+	    );
+	
+	    // Look at point (with tilt)
+	    Vector3 lookAtPoint = new Vector3(
+	        tvCenter.X,
+	        tvCenter.Y - 0.15f,
+	        tvCenter.Z
+	    );
+	
+	    // CRITICAL FIX: Calculate direction and check if it's valid
+	    Vector3 lookDirection = lookAtPoint - targetPosition;
+	
+	    GD.Print($"Look direction: {lookDirection}");
+	    GD.Print($"Direction length: {lookDirection.Length()}");
+	
+	    // SAFETY CHECK: If direction is too small, use a default direction
+	    if (lookDirection.Length() < 0.001f)
+	    {
+	        GD.PrintErr("WARNING: Look direction is zero! Using fallback direction.");
+	        lookDirection = -tvForward; // Look in the direction of the TV
+	    }
+	
+	    // Normalize the direction
+	    lookDirection = lookDirection.Normalized();
+	
+	    // Create transform that looks at the TV
+	    targetTVTransform = new Transform3D(
+	        Basis.LookingAt(lookDirection, Vector3.Up),
+	        targetPosition
+	    );
+	
+	    // Additional safety: Check the basis determinant
+	    float det = targetTVTransform.Basis.Determinant();
+	    GD.Print($"Target transform determinant: {det}");
+	
+	    if (Mathf.Abs(det) < 0.001f)
+	    {
+	        GD.PrintErr("WARNING: Target transform has invalid basis! Using identity fallback.");
+	        targetTVTransform = new Transform3D(Basis.Identity, targetPosition);
+	    }
+	
+	    // Disable player input
+	    SetPlayerInputEnabled(false);
+	    isCameraMoving = true;
+	
+	    // Create tween
+	    currentTween = CreateTween();
+	    currentTween.SetParallel(true);
+	
+	    currentTween.TweenProperty(MainCamera, "global_position", targetPosition, 0.8f)
+	         .SetEase(Tween.EaseType.Out)
+	         .SetTrans(Tween.TransitionType.Quad);
+	
+	    currentTween.TweenProperty(MainCamera, "global_transform:basis", targetTVTransform.Basis, 0.8f)
+	         .SetEase(Tween.EaseType.Out)
+	         .SetTrans(Tween.TransitionType.Quad);
+	
+	    // Set up completion callback
+	    currentTween.Finished += OnZoomToTVComplete;
+	}
     
     private void OnZoomToTVComplete()
     {
-        // Force exact position and rotation
         MainCamera.GlobalPosition = targetTVTransform.Origin;
-        MainCamera.GlobalTransform = targetTVTransform;
-        
-        isCameraMoving = false;
-        
-        GD.Print($"Camera reached TV - Position: {MainCamera.GlobalPosition}");
+    	MainCamera.GlobalTransform = targetTVTransform;
+	
+    	isCameraMoving = false;
+	
+    	// SHOW IMAGE ON TV WHEN ZOOM COMPLETES
+    	if (TV != null && TV is TV tvNode)
+    	{
+    	    tvNode.ShowImage(); // This shows your PNG
+    	    GD.Print("TV should now show image");
+    	}
+	
+    	GD.Print($"Camera reached TV - Position: {MainCamera.GlobalPosition}");
     }
     
     internal void ReturnCamera()
@@ -716,6 +877,7 @@ public partial class PlayerCharacter : CharacterBody3D
         isCameraMoving = false;
         
         GD.Print($"Camera returned - Position: {MainCamera.GlobalPosition}");
+		TV.HideImage();
     }
 
     private void SetPlayerInputEnabled(bool enabled)

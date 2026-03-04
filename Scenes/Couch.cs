@@ -136,16 +136,16 @@ public partial class Couch : Node3D, IInteractable
     {
         if (!_isOccupied)
         {
-            player.SetText("Sit");
+            player.SetHint("Sit");
         }
         else if (_isOccupied && _currentPlayer == player)
         {
-            player.SetText("Stand Up");
+            player.SetHint("Stand Up");
         }
     }
 
     public void OnUnfocus(PlayerCharacter player)
     {
-        player.SetText("");
+        player.SetHint("");
     }
 }

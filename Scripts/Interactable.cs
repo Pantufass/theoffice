@@ -15,12 +15,11 @@ public partial class Interactable : Node3D, IInteractable
         player.SetText(InteractText);
     }
 
-    public void OnFocus(PlayerCharacter player)
+    public virtual void OnFocus(PlayerCharacter player)
     {
-        player.SetHint("Pick up");
     }
 
-    public void OnUnfocus(PlayerCharacter player)
+    public virtual void OnUnfocus(PlayerCharacter player)
     {
         player.SetHint("");
     }
