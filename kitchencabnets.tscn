@@ -1,0 +1,5 @@
+[gd_scene format=3 uid="uid://c8pdwcu5svy15"]
+
+[ext_resource type="PackedScene" uid="uid://co5t4ujmh20o3" path="res://sexist/kitchencabniet/kitchen small.fbx" id="1_lqbkb"]
+
+[node name="kitchen small" unique_id=1329355188 instance=ExtResource("1_lqbkb")]
