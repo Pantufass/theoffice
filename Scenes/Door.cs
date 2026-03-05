@@ -1,7 +1,7 @@
 using Godot;
 using System;
 
-public partial class Door : Node3D, IInteractable
+public partial class Door : Interactable
 {
 	[Export] public float ClosedAngle = -90f; // Degrees to rotate when closing
 	[Export] public AudioStream CloseAndLockSound;
@@ -17,10 +17,10 @@ public partial class Door : Node3D, IInteractable
 	private float _targetAngle;
 
 	public bool Active = false;
-	[Export] public string InteractText = "Interact";
 
 	public override void _Ready()
 	{
+		base._Ready();
 		_audioPlayer = new AudioStreamPlayer3D();
 		AddChild(_audioPlayer);
 		
@@ -76,7 +76,7 @@ public partial class Door : Node3D, IInteractable
 		}
 	}
 
-	public void Interact(PlayerCharacter player)
+	public override void Interact(PlayerCharacter player)
 	{
 		if(!Active) return;
 		if (_isClosedAndLocked)
@@ -94,7 +94,7 @@ public partial class Door : Node3D, IInteractable
 		}
 		
 		CloseAndLock();
-		player.SetText(InteractText);
+		base.Interact(player);
 	}
 
 	private void CloseAndLock()
@@ -132,14 +132,15 @@ public partial class Door : Node3D, IInteractable
 		}
 	}
 
-	public void OnFocus(PlayerCharacter player)
+	public override void OnFocus(PlayerCharacter player)
 	{
 		if(!Active) return;
-		
+		base.OnFocus(player);
 	}
 
-	public void OnUnfocus(PlayerCharacter player)
+	public override void OnUnfocus(PlayerCharacter player)
 	{
 		if(!Active) return;
+		base.OnUnfocus(player);
 	}
 }

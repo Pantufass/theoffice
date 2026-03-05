@@ -35,5 +35,5 @@ mesh = SubResource("QuadMesh_7kvnu")
 [node name="SubViewport" type="SubViewport" parent="Screen" unique_id=621334124]
 size = Vector2i(1200, 900)
 
-[node name="TVMesh" parent="." unique_id=1608499963 instance=ExtResource("3_ci4nm")]
+[node name="Mesh" parent="." unique_id=1608499963 instance=ExtResource("3_ci4nm")]
 transform = Transform3D(2.5, 0, 0, 0, 2.5, 0, 0, 0, 2.5, 0, 0, 0)

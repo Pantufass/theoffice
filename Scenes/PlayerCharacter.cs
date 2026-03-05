@@ -722,163 +722,154 @@ public partial class PlayerCharacter : CharacterBody3D
 	        GD.Print("Cannot zoom - player not sitting");
 	        return;
 	    }
-	
+
 	    GD.Print("=== Zoom To TV ===");
-	
+
 	    // Kill any existing tween
 	    currentTween?.Kill();
-	
+
 	    // Store original camera position
 	    originalCameraTransform = new Transform3D(
 	        MainCamera.GlobalTransform.Basis,
 	        MainCamera.GlobalTransform.Origin
 	    );
 
-	    // Calculate target position and transform
+	    float zoomDistance = 1.5f;
 	    Vector3 tvForward = -tvTransform.Basis.Z;
-	    Vector3 tvUp = tvTransform.Basis.Y;
 	
 	    // TV position
 	    Vector3 tvBase = tvTransform.Origin;
-	
-	    // TV center height
-	    float tvHeight = 0.6f;
-	    float eyeLevel = 1.6f;
+
+	    float tvHeight = 0.6f;      
+	    float eyeLevel = 1.6f;      
 	
 	    // Calculate TV center
 	    Vector3 tvCenter = new Vector3(tvBase.X, tvHeight, tvBase.Z);
-	
+
 	    // Camera height blend
 	    float blendFactor = 0.7f;
 	    float cameraHeight = Mathf.Lerp(eyeLevel, tvHeight, blendFactor);
-	
+
 	    // Position camera
 	    Vector3 targetPosition = new Vector3(
 	        tvBase.X + (tvForward.X * zoomDistance),
 	        cameraHeight,
 	        tvBase.Z + (tvForward.Z * zoomDistance)
 	    );
-	
-	    // Look at point (with tilt)
+
+	    // Look at point with slight tilt
 	    Vector3 lookAtPoint = new Vector3(
 	        tvCenter.X,
-	        tvCenter.Y - 0.15f,
+	        tvCenter.Y - 0.1f,
 	        tvCenter.Z
 	    );
-	
-	    // CRITICAL FIX: Calculate direction and check if it's valid
+
+	    // Calculate direction
 	    Vector3 lookDirection = lookAtPoint - targetPosition;
-	
-	    GD.Print($"Look direction: {lookDirection}");
-	    GD.Print($"Direction length: {lookDirection.Length()}");
-	
-	    // SAFETY CHECK: If direction is too small, use a default direction
+
 	    if (lookDirection.Length() < 0.001f)
 	    {
-	        GD.PrintErr("WARNING: Look direction is zero! Using fallback direction.");
-	        lookDirection = -tvForward; // Look in the direction of the TV
+	        lookDirection = -tvForward;
 	    }
-	
-	    // Normalize the direction
+
 	    lookDirection = lookDirection.Normalized();
-	
-	    // Create transform that looks at the TV
+
+	    // Create transform
 	    targetTVTransform = new Transform3D(
 	        Basis.LookingAt(lookDirection, Vector3.Up),
 	        targetPosition
 	    );
-	
-	    // Additional safety: Check the basis determinant
-	    float det = targetTVTransform.Basis.Determinant();
-	    GD.Print($"Target transform determinant: {det}");
-	
-	    if (Mathf.Abs(det) < 0.001f)
-	    {
-	        GD.PrintErr("WARNING: Target transform has invalid basis! Using identity fallback.");
-	        targetTVTransform = new Transform3D(Basis.Identity, targetPosition);
-	    }
-	
-	    // Disable player input
+
 	    SetPlayerInputEnabled(false);
 	    isCameraMoving = true;
-	
+
 	    // Create tween
 	    currentTween = CreateTween();
 	    currentTween.SetParallel(true);
-	
+	    currentTween.SetLoops(1);
+
 	    currentTween.TweenProperty(MainCamera, "global_position", targetPosition, 0.8f)
 	         .SetEase(Tween.EaseType.Out)
 	         .SetTrans(Tween.TransitionType.Quad);
-	
+
 	    currentTween.TweenProperty(MainCamera, "global_transform:basis", targetTVTransform.Basis, 0.8f)
 	         .SetEase(Tween.EaseType.Out)
 	         .SetTrans(Tween.TransitionType.Quad);
-	
-	    // Set up completion callback
+
 	    currentTween.Finished += OnZoomToTVComplete;
 	}
-    
-    private void OnZoomToTVComplete()
-    {
-        MainCamera.GlobalPosition = targetTVTransform.Origin;
-    	MainCamera.GlobalTransform = targetTVTransform;
 	
-    	isCameraMoving = false;
+	private void OnZoomToTVComplete()
+	{
+	    // SAFETY CHECK
+	    if (targetTVTransform.Basis.Determinant() < 0.1f)
+	    {
+	        GD.PrintErr("Invalid transform in OnZoomToTVComplete, using position only");
+	        MainCamera.GlobalPosition = targetTVTransform.Origin;
+	    }
+	    else
+	    {
+	        MainCamera.GlobalPosition = targetTVTransform.Origin;
+	        MainCamera.GlobalTransform = targetTVTransform;
+	    }
 	
-    	// SHOW IMAGE ON TV WHEN ZOOM COMPLETES
-    	if (TV != null && TV is TV tvNode)
-    	{
-    	    tvNode.ShowImage(); // This shows your PNG
-    	    GD.Print("TV should now show image");
-    	}
+	    isCameraMoving = false;
 	
-    	GD.Print($"Camera reached TV - Position: {MainCamera.GlobalPosition}");
-    }
-    
-    internal void ReturnCamera()
-    {
-        if (!sitting) 
-        {
-            GD.Print("Cannot return camera - player not sitting");
-            return;
-        }
-
-        if (isCameraMoving) return;
-        
-        GD.Print("=== Return Camera ===");
-        
-        isCameraMoving = true;
-        
-        currentTween?.Kill();
-        
-        currentTween = CreateTween();
-        currentTween.SetParallel(true);
-        
-        // Return to the camera position that was stored BEFORE zooming
-        currentTween.TweenProperty(MainCamera, "global_position", originalCameraTransform.Origin, 0.8f)
-             .SetEase(Tween.EaseType.Out)
-             .SetTrans(Tween.TransitionType.Quad);
-        
-        currentTween.TweenProperty(MainCamera, "global_transform:basis", originalCameraTransform.Basis, 0.8f)
-             .SetEase(Tween.EaseType.Out)
-             .SetTrans(Tween.TransitionType.Quad);
-        
-        // Set up completion callback
-        currentTween.Finished += OnReturnCameraComplete;
-        
-    }
-    
-    private void OnReturnCameraComplete()
-    {
-        // Force exact original camera position
-        MainCamera.GlobalPosition = originalCameraTransform.Origin;
-        MainCamera.GlobalTransform = originalCameraTransform;
-        
-        isCameraMoving = false;
-        
-        GD.Print($"Camera returned - Position: {MainCamera.GlobalPosition}");
-		TV.HideImage();
-    }
+	    // SAFETY CHECK: Make sure TV is not null
+	    if (TV != null)
+	    {
+	        TV.ShowImage();
+	        GD.Print("TV showing image");
+	    }
+	
+	    GD.Print($"Camera reached TV");
+	}
+	
+	internal void ReturnCamera()
+	{
+	    if (!sitting) 
+	    {
+	        GD.Print("Cannot return camera - player not sitting");
+	        return;
+	    }
+	
+	    if (isCameraMoving) return;
+	
+	    GD.Print("=== Return Camera ===");
+	
+	    isCameraMoving = true;
+	
+	    currentTween?.Kill();
+	
+	    currentTween = CreateTween();
+	    currentTween.SetParallel(true);
+	
+	    currentTween.TweenProperty(MainCamera, "global_position", originalCameraTransform.Origin, 0.8f)
+	         .SetEase(Tween.EaseType.Out)
+	         .SetTrans(Tween.TransitionType.Quad);
+	
+	    currentTween.TweenProperty(MainCamera, "global_transform:basis", originalCameraTransform.Basis, 0.8f)
+	         .SetEase(Tween.EaseType.Out)
+	         .SetTrans(Tween.TransitionType.Quad);
+	
+	    currentTween.Finished += OnReturnCameraComplete;
+	}
+	
+	private void OnReturnCameraComplete()
+	{
+	    MainCamera.GlobalPosition = originalCameraTransform.Origin;
+	    MainCamera.GlobalTransform = originalCameraTransform;
+	
+	    isCameraMoving = false;
+	
+	    // SAFETY CHECK
+	    if (TV != null)
+	    {
+	        TV.HideImage();
+	    }
+	
+	    GD.Print($"Camera returned");
+	}
 
     private void SetPlayerInputEnabled(bool enabled)
     {

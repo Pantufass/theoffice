@@ -1,7 +1,7 @@
 using Godot;
 using System;
 
-public partial class Couch : Node3D, IInteractable
+public partial class Couch :Interactable
 {
     [Export] public Node3D SitPosition;
     [Export] public float SitDistance = 1.0f;
@@ -36,10 +36,12 @@ public partial class Couch : Node3D, IInteractable
         {
             TVTarget = GetNodeOrNull<Node3D>("../TV");
         }
+        base._Ready();
     }
 
-    public void Interact(PlayerCharacter player)
+    public override void Interact(PlayerCharacter player)
     {
+        
         if (!_isOccupied)
         {
             SitDown(player);
@@ -132,8 +134,9 @@ public partial class Couch : Node3D, IInteractable
         }
     }
 
-    public void OnFocus(PlayerCharacter player)
+    public override void OnFocus(PlayerCharacter player)
     {
+        base.OnFocus(player);
         if (!_isOccupied)
         {
             player.SetHint("Sit");
@@ -144,8 +147,9 @@ public partial class Couch : Node3D, IInteractable
         }
     }
 
-    public void OnUnfocus(PlayerCharacter player)
+    public override void OnUnfocus(PlayerCharacter player)
     {
+        base.OnUnfocus(player);
         player.SetHint("");
     }
 }

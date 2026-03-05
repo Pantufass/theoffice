@@ -30,6 +30,7 @@ public partial class KeyItem : Interactable
     }
     public override void OnFocus(PlayerCharacter player)
     {
+        base.OnFocus(player);
         if(Active)
         {
             player.SetHint("Interact to know more");

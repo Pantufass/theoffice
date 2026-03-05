@@ -1,7 +1,7 @@
 using Godot;
 using System;
 
-public partial class TV : Node3D, IInteractable
+public partial class TV : Interactable
 {
     [Export] public MeshInstance3D Screen;
     [Export] public SubViewport SubViewport;
@@ -20,6 +20,7 @@ public partial class TV : Node3D, IInteractable
 
     public override void _Ready()
     {
+        base._Ready();
         // Get references
         if(Screen == null) Screen = GetNode<MeshInstance3D>("Screen");
         if(SubViewport == null) SubViewport = GetNode<SubViewport>("SubViewport");
@@ -72,18 +73,22 @@ public partial class TV : Node3D, IInteractable
         _imageContainer = SubViewport.GetNodeOrNull<Control>("ImageContainer");
         if (_imageContainer == null)
         {
-            _imageContainer = new Control();
-            _imageContainer.Name = "ImageContainer";
+            _imageContainer = new Control
+            {
+                Name = "ImageContainer"
+            };
             _imageContainer.SetSize(new Vector2(SubViewport.Size.X, SubViewport.Size.Y));
             SubViewport.AddChild(_imageContainer);
 
             // Create image display
-            _tvImage = new TextureRect();
-            _tvImage.Name = "TVImage";
+            _tvImage = new TextureRect
+            {
+                Name = "TVImage",
+                StretchMode = TextureRect.StretchModeEnum.KeepAspectCentered,
+                ExpandMode = TextureRect.ExpandModeEnum.FitWidth,
+                Visible = false
+            };
             _tvImage.SetAnchorsPreset(Control.LayoutPreset.FullRect);
-            _tvImage.StretchMode = TextureRect.StretchModeEnum.KeepAspectCentered;
-            _tvImage.ExpandMode = TextureRect.ExpandModeEnum.FitWidth;
-            _tvImage.Visible = false;
             
             _imageContainer.AddChild(_tvImage);
             
@@ -95,7 +100,7 @@ public partial class TV : Node3D, IInteractable
         }
     }
 
-    public void Interact(PlayerCharacter player)
+    public override void Interact(PlayerCharacter player)
     {
         if(!tvOn)
         {
@@ -112,24 +117,6 @@ public partial class TV : Node3D, IInteractable
             ShowImage();
         }
     }
-
-    public void OnFocus(PlayerCharacter player)
-    {
-        if (_screenMaterial != null)
-        {
-            _screenMaterial.EmissionEnergyMultiplier = 1.5f;
-        }
-        
-    }
-
-    public void OnUnfocus(PlayerCharacter player)
-    {
-        if (_screenMaterial != null)
-        {
-            _screenMaterial.EmissionEnergyMultiplier = 1.0f;
-        }
-        
-    }
     
     internal void UpdateImage(int step)
     {
@@ -145,46 +132,40 @@ public partial class TV : Node3D, IInteractable
         GD.Print($"TV image updated for step {step}");
         HideImage();
     }
-    // Show the image (called from player when zoom completes)
     internal void ShowImage()
     {
-        ShowImage(current);
-    }
-    
-    internal void ShowImage(Texture2D image)
-    {
-        if (image == null)
+        if (current == null)
         {
             GD.PrintErr("No image to display!");
             return;
         }
-        
-        GD.Print($"Showing image on TV: {image.ResourcePath}");
-        
-        // Make sure UI exists
+
+        GD.Print("Showing image on TV");
+
         if (_tvImage == null)
         {
             SetupImageDisplay();
         }
-        
-        // Show image
-        _tvImage.Visible = true;
-        _tvImage.Texture = image;
-        
-        
-        // Force viewport to update
-        ForceViewportUpdate();
+
+        if (_tvImage != null)
+        {
+            _tvImage.Visible = true;
+            _tvImage.Texture = current;
+
+            ForceViewportUpdate();
+        }
     }
-    
+
     internal void HideImage()
     {
         GD.Print("Hiding TV image");
-        
+
         if (_tvImage != null)
         {
             _tvImage.Visible = false;
         }
-        
+
+        _imageTimer?.Stop();
         ForceViewportUpdate();
     }
     
@@ -220,4 +201,14 @@ public partial class TV : Node3D, IInteractable
     {
         tvOn = true;
     }
+
+    public override void OnFocus(PlayerCharacter player)
+    {
+        //base.OnFocus(player);
+    }
+    public override void OnUnfocus(PlayerCharacter player)
+    {
+        //base.OnUnfocus(player);
+    }
+
 }

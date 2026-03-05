@@ -1,7 +1,7 @@
 [gd_scene format=3 uid="uid://76rsq4vkfi8d"]
 
 [ext_resource type="Script" uid="uid://yxys1mxdejsu" path="res://Scenes/Couch.cs" id="1_nbwog"]
-[ext_resource type="PackedScene" path="res://sexist/Usable items/couchnice.tscn" id="2_a26vg"]
+[ext_resource type="PackedScene" uid="uid://bol7th75lau28" path="res://sexist/Usable items/couchnice.tscn" id="2_a26vg"]
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_lbuvq"]
 size = Vector3(0.83862305, 1, 1.1953125)
@@ -19,5 +19,5 @@ shape = SubResource("BoxShape3D_lbuvq")
 [node name="Node3D" type="Node3D" parent="." unique_id=74901658]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0.322937)
 
-[node name="MSH_Sofa_Soviet" parent="." unique_id=129053614 instance=ExtResource("2_a26vg")]
+[node name="Mesh" parent="." unique_id=129053614 instance=ExtResource("2_a26vg")]
 transform = Transform3D(-5.2453668e-08, 0, 1.2, 0, 1.2, 0, -1.2, 0, -5.2453668e-08, -0.03534484, -0.48004675, -0.04743719)
