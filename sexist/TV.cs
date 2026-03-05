@@ -5,10 +5,10 @@ public partial class TV : Interactable
 {
     [Export] public MeshInstance3D Screen;
     [Export] public SubViewport SubViewport;
-    
     [Export] public Texture2D BananaImage; 
     [Export] public Texture2D PaitingImage; 
     [Export] public Texture2D ShirtImage; 
+    [Export] public Texture2D ManImage; 
     private Texture2D current; 
     
     private StandardMaterial3D _screenMaterial;
@@ -21,14 +21,10 @@ public partial class TV : Interactable
     public override void _Ready()
     {
         base._Ready();
-        // Get references
         if(Screen == null) Screen = GetNode<MeshInstance3D>("Screen");
         if(SubViewport == null) SubViewport = GetNode<SubViewport>("SubViewport");
         
-        // Configure the viewport
         ConfigureViewport();
-
-        // Create and store the material
 
         _screenMaterial = new StandardMaterial3D
         {
@@ -123,6 +119,7 @@ public partial class TV : Interactable
         if (step == 1) current = PaitingImage;
         else if (step == 2) current = ShirtImage;
         else if (step == 3) current = BananaImage;
+        else if (step == 4) current = ManImage;
         else
         {
             GD.PrintErr($"Invalid step {step} for TV image update");
