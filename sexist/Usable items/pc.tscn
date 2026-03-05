@@ -15,10 +15,10 @@ albedo_texture = ExtResource("3_3d7xj")
 
 [node name="LaptopSET" unique_id=526198785 instance=ExtResource("1_de6uy")]
 
-[node name="Cube_000" parent="." index="0" unique_id=21629537]
+[node name="Cube_000" parent="." index="0" unique_id=1807959652]
 visible = false
 
-[node name="Cube_002" parent="." index="1" unique_id=307336573]
+[node name="Cube_002" parent="." index="1" unique_id=248770579]
 material_override = SubResource("StandardMaterial3D_gbtml")
 surface_material_override/0 = SubResource("StandardMaterial3D_hue7p")
 surface_material_override/1 = SubResource("StandardMaterial3D_oj12w")
