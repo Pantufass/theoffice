@@ -1,4 +1,4 @@
-[gd_scene format=3 uid="uid://ctaqvlikpkgbx"]
+[gd_scene format=3 uid="uid://diahj31pdqwga"]
 
 [ext_resource type="PackedScene" uid="uid://c56dlp33uear5" path="res://sexist/NewItems/car/MiniCooperForTexturing.fbx" id="1_352dc"]
 
@@ -7,7 +7,7 @@ size = Vector3(1.6479492, 1.2890625, 3.5014648)
 
 [node name="MiniCooperForTexturing" unique_id=1673405838 instance=ExtResource("1_352dc")]
 
-[node name="RigidBody3D" type="RigidBody3D" parent="." index="2" unique_id=1213497072]
+[node name="RigidBody3D" type="StaticBody3D" parent="." index="2" unique_id=721681776]
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="RigidBody3D" index="0" unique_id=478322147]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.052001953, 0.14453125, 0.30200195)
