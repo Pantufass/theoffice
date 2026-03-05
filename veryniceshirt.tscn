@@ -3,11 +3,10 @@
 [ext_resource type="PackedScene" uid="uid://x66dh86uq7u0" path="res://sexist/NewItems/shirt/folded_shirt_gftl.gltf" id="1_8ldr4"]
 [ext_resource type="Texture2D" uid="uid://06t6dpt7ecfr" path="res://sexist/shirtpattern/Hawaii.jpg" id="2_oyhjc"]
 [ext_resource type="Script" uid="uid://fbfjbs8uy66g" path="res://Scripts/KeyItem.cs" id="2_wmpq8"]
+[ext_resource type="ArrayMesh" uid="uid://c8n4eyt5lesug" path="res://sexist/special items/NEWSHIRT.obj" id="4_t0xem"]
+[ext_resource type="Material" uid="uid://ygwaxyuc3k74" path="res://sexist/shirtpattern/hawai.tres" id="5_i1734"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_wmpq8"]
-albedo_texture = ExtResource("2_oyhjc")
-
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_iwl3x"]
 albedo_texture = ExtResource("2_oyhjc")
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_t0xem"]
@@ -40,9 +39,10 @@ ItemType = 2
 FoundText = "This shirt looks so cool"
 InteractText = "My favourite shirt… I wore this shirt to Stephanie and I’s first date. Is it still gay to wear if I have a girlfriend??"
 
-[node name="Cloth" parent="folded_shirt_gftl_Scene_Node" parent_id_path=PackedInt32Array(847581614) index="0" unique_id=1485638895]
+[node name="Cloth" parent="folded_shirt_gftl_Scene_Node" parent_id_path=PackedInt32Array(1341027962) index="0" unique_id=1948176658]
 material_override = SubResource("StandardMaterial3D_wmpq8")
-surface_material_override/0 = SubResource("StandardMaterial3D_iwl3x")
+transparency = 1.0
+surface_material_override/0 = ExtResource("5_i1734")
 surface_material_override/1 = SubResource("StandardMaterial3D_t0xem")
 surface_material_override/2 = SubResource("StandardMaterial3D_i1734")
 surface_material_override/3 = SubResource("StandardMaterial3D_k5ldl")
@@ -66,11 +66,50 @@ surface_material_override/20 = SubResource("StandardMaterial3D_k5ldl")
 surface_material_override/21 = SubResource("StandardMaterial3D_k5ldl")
 surface_material_override/22 = SubResource("StandardMaterial3D_k5ldl")
 surface_material_override/23 = SubResource("StandardMaterial3D_k5ldl")
+surface_material_override/24 = ExtResource("5_i1734")
+surface_material_override/25 = ExtResource("5_i1734")
+surface_material_override/26 = ExtResource("5_i1734")
+surface_material_override/27 = ExtResource("5_i1734")
+surface_material_override/28 = ExtResource("5_i1734")
+surface_material_override/29 = ExtResource("5_i1734")
+surface_material_override/30 = ExtResource("5_i1734")
+surface_material_override/31 = ExtResource("5_i1734")
+surface_material_override/32 = ExtResource("5_i1734")
 surface_material_override/33 = SubResource("StandardMaterial3D_xawu6")
+surface_material_override/34 = ExtResource("5_i1734")
+surface_material_override/35 = ExtResource("5_i1734")
+surface_material_override/36 = ExtResource("5_i1734")
+surface_material_override/37 = ExtResource("5_i1734")
+surface_material_override/38 = ExtResource("5_i1734")
+surface_material_override/39 = ExtResource("5_i1734")
+surface_material_override/40 = ExtResource("5_i1734")
+surface_material_override/41 = ExtResource("5_i1734")
+surface_material_override/42 = ExtResource("5_i1734")
+surface_material_override/43 = ExtResource("5_i1734")
+surface_material_override/44 = ExtResource("5_i1734")
+surface_material_override/45 = ExtResource("5_i1734")
+surface_material_override/46 = ExtResource("5_i1734")
+surface_material_override/47 = ExtResource("5_i1734")
+surface_material_override/48 = ExtResource("5_i1734")
+surface_material_override/49 = ExtResource("5_i1734")
+surface_material_override/50 = ExtResource("5_i1734")
+surface_material_override/51 = ExtResource("5_i1734")
+surface_material_override/52 = ExtResource("5_i1734")
+surface_material_override/53 = ExtResource("5_i1734")
+surface_material_override/54 = ExtResource("5_i1734")
+surface_material_override/55 = ExtResource("5_i1734")
+surface_material_override/56 = ExtResource("5_i1734")
+surface_material_override/57 = ExtResource("5_i1734")
+surface_material_override/58 = ExtResource("5_i1734")
 surface_material_override/59 = SubResource("StandardMaterial3D_2iw1w")
 surface_material_override/60 = SubResource("StandardMaterial3D_35c4n")
 
-[node name="RigidBody3D" type="RigidBody3D" parent="." index="1" unique_id=876396553]
+[node name="Newshirt" type="MeshInstance3D" parent="." index="1" unique_id=804723357]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.00014731288, -0.008943349, -0.0066568404)
+mesh = ExtResource("4_t0xem")
+surface_material_override/0 = ExtResource("5_i1734")
+
+[node name="RigidBody3D" type="RigidBody3D" parent="." index="2" unique_id=876396553]
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="RigidBody3D" index="0" unique_id=412887803]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.0077819824, 0.059173584, 0.06982422)

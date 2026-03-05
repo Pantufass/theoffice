@@ -3,7 +3,7 @@ using System.Collections.Generic;
 
 public partial class Interactable : Node3D, IInteractable
 {
-    [Export] public bool DebugMode = false;
+	[Export] public bool DebugMode = false;
 	[Export] public string InteractText = "Interacted";
 	[Export] public Color GlowColor = new Color(1, 1, 0.7f, 0.03f);
 	[Export] public float GlowWidth = 0.002f;
@@ -96,13 +96,13 @@ public partial class Interactable : Node3D, IInteractable
 	public virtual void OnFocus(PlayerCharacter player)
 	{
 		ShowGlow(true);
-        player.SetHint("FOCUSED");
+		player.SetHint("FOCUSED");
 	}
 
 	public virtual void OnUnfocus(PlayerCharacter player)
 	{
 		ShowGlow(false);
-        player.SetHint("");
+		player.SetHint("");
 	}
 	
 	public virtual void Interact(PlayerCharacter player)
