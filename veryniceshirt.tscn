@@ -2,6 +2,7 @@
 
 [ext_resource type="PackedScene" uid="uid://x66dh86uq7u0" path="res://sexist/NewItems/shirt/folded_shirt_gftl.gltf" id="1_8ldr4"]
 [ext_resource type="Texture2D" uid="uid://06t6dpt7ecfr" path="res://sexist/shirtpattern/Hawaii.jpg" id="2_oyhjc"]
+[ext_resource type="Script" uid="uid://fbfjbs8uy66g" path="res://Scripts/KeyItem.cs" id="2_wmpq8"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_wmpq8"]
 albedo_texture = ExtResource("2_oyhjc")
@@ -34,8 +35,12 @@ albedo_texture = ExtResource("2_oyhjc")
 size = Vector3(0.22247314, 0.044006348, 0.27246094)
 
 [node name="folded_shirt_gftl" unique_id=609049664 instance=ExtResource("1_8ldr4")]
+script = ExtResource("2_wmpq8")
+ItemType = 2
+FoundText = "This shirt looks so cool"
+InteractText = "My favourite shirt… I wore this shirt to Stephanie and I’s first date. Is it still gay to wear if I have a girlfriend??"
 
-[node name="Cloth" parent="folded_shirt_gftl_Scene_Node" parent_id_path=PackedInt32Array(1108975493) index="0" unique_id=717425157]
+[node name="Cloth" parent="folded_shirt_gftl_Scene_Node" parent_id_path=PackedInt32Array(847581614) index="0" unique_id=1485638895]
 material_override = SubResource("StandardMaterial3D_wmpq8")
 surface_material_override/0 = SubResource("StandardMaterial3D_iwl3x")
 surface_material_override/1 = SubResource("StandardMaterial3D_t0xem")
