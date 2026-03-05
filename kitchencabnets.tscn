@@ -2,4 +2,13 @@
 
 [ext_resource type="PackedScene" uid="uid://co5t4ujmh20o3" path="res://sexist/kitchencabniet/kitchen small.fbx" id="1_lqbkb"]
 
+[sub_resource type="BoxShape3D" id="BoxShape3D_lqbkb"]
+size = Vector3(2.8652344, 2.6259766, 0.64733887)
+
 [node name="kitchen small" unique_id=1329355188 instance=ExtResource("1_lqbkb")]
+
+[node name="RigidBody3D" type="RigidBody3D" parent="." index="2" unique_id=1796187965]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.068847656, 0.8129883, -0.17633057)
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="RigidBody3D" index="0" unique_id=1146376392]
+shape = SubResource("BoxShape3D_lqbkb")

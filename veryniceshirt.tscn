@@ -2,4 +2,13 @@
 
 [ext_resource type="PackedScene" uid="uid://x66dh86uq7u0" path="res://sexist/NewItems/shirt/folded_shirt_gftl.gltf" id="1_8ldr4"]
 
+[sub_resource type="BoxShape3D" id="BoxShape3D_8ldr4"]
+size = Vector3(0.22247314, 0.044006348, 0.27246094)
+
 [node name="folded_shirt_gftl" unique_id=609049664 instance=ExtResource("1_8ldr4")]
+
+[node name="RigidBody3D" type="RigidBody3D" parent="." index="1" unique_id=876396553]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="RigidBody3D" index="0" unique_id=412887803]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.0077819824, 0.059173584, 0.06982422)
+shape = SubResource("BoxShape3D_8ldr4")
