@@ -1,0 +1,9 @@
+[gd_resource type="StandardMaterial3D" format=3 uid="uid://8o307s3mucy6"]
+
+[ext_resource type="Texture2D" uid="uid://0jrvdun6m8g6" path="res://3D Assets/Textures/CarpetNormalMap.png" id="1_8sbok"]
+
+[resource]
+albedo_color = Color(0.21568628, 0.21176471, 0.21176471, 1)
+normal_enabled = true
+normal_scale = 0.04
+normal_texture = ExtResource("1_8sbok")
