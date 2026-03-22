@@ -37,6 +37,7 @@ public partial class FinalScreen : Control
 		for (int i = 0; i < Math.Min(10, data.topTen.Count); i++)
 		{
 			SetLabelText(i,"Name",data.topTen[i].Name);
+			SetLabelText(i,"Priviledge",data.topTen[i].Priviledge ? "Priviledged" : "Not Priviledged");
 			SetLabelText(i,"Money",data.topTen[i].Score.ToString());
 			SetLabelText(i,"NWords",data.topTen[i].Words.ToString());
 			SetLabelText(i,"Accuracy",data.topTen[i].Accuracy.ToString());
@@ -199,7 +200,7 @@ public partial class FinalScreen : Control
 		SaveToFile(data);
 	}
 
-	public void Finish(string name, int score, float accuracy, int nWords, int fullPotential)
+	public void Finish(string name, bool priviledge, int score, float accuracy, int nWords, int fullPotential)
 	{
 		this.Visible = true;
 		ScoreData finalScore = null;
@@ -213,7 +214,7 @@ public partial class FinalScreen : Control
 							+"$ with an accuracy of "+accuracy*100
 							+"% and a total of "+nWords
 							+" words";
-			finalScore = new ScoreData(name, score, nWords, accuracy);
+			finalScore = new ScoreData(name, priviledge, score, nWords, accuracy);
 		}
 			
 		SaveScore(finalScore, fullPotential);

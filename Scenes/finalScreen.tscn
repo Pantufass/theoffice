@@ -1,9 +1,13 @@
 [gd_scene format=3 uid="uid://cv7y1e8vjfkel"]
 
 [ext_resource type="Script" uid="uid://cd6j2fk5s4jqw" path="res://Scripts/FinalScreen.cs" id="1_vewkw"]
+[ext_resource type="LabelSettings" uid="uid://b1vgsjvwbeqgc" path="res://racist/highscore.tres" id="2_lng5a"]
 
 [sub_resource type="LabelSettings" id="LabelSettings_85k7a"]
 font_size = 30
+
+[sub_resource type="LabelSettings" id="LabelSettings_58s36"]
+font_size = 32
 
 [node name="Final" type="Control" unique_id=441014253 node_paths=PackedStringArray("FinalScore", "TotalScore", "HighScoreCont", "HighScores")]
 layout_mode = 3
@@ -15,7 +19,7 @@ grow_vertical = 2
 script = ExtResource("1_vewkw")
 FinalScore = NodePath("FinalScore")
 TotalScore = NodePath("TotalScore")
-HighScoreCont = NodePath("HighScore")
+HighScoreCont = NodePath("HSplitContainer/HighScore")
 HighScores = []
 
 [node name="FinalScore" type="Label" parent="." unique_id=2025643976]
@@ -31,9 +35,10 @@ offset_right = 396.0
 offset_bottom = -328.0
 grow_horizontal = 2
 grow_vertical = 2
+scale = Vector2(1.6689811, 0.36640903)
 label_settings = SubResource("LabelSettings_85k7a")
 horizontal_alignment = 1
-autowrap_mode = 1
+autowrap_mode = 2
 
 [node name="Button" type="Button" parent="." unique_id=2111743319]
 layout_mode = 1
@@ -42,246 +47,365 @@ anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
-offset_left = -71.0
-offset_top = -26.5
-offset_right = 71.0
-offset_bottom = 26.5
+offset_left = 6.0
+offset_top = -26.0
+offset_right = 148.0
+offset_bottom = 27.0
 grow_horizontal = 2
 grow_vertical = 2
+scale = Vector2(1.2, 1.2)
 theme_override_font_sizes/font_size = 32
 text = "RESTART"
 
-[node name="HighScore" type="VSplitContainer" parent="." unique_id=1526406914]
+[node name="TotalScore" type="Label" parent="." unique_id=345136080]
 layout_mode = 0
-offset_right = 556.0
-offset_bottom = 1080.0
-split_offsets = PackedInt32Array(23, 58, 464, 499, 534, 569, 604, 639, 674, 0)
-collapsed = true
-split_offset = 23
-
-[node name="Label" type="Label" parent="HighScore" unique_id=1172733969]
-layout_mode = 2
-text = "Best employees"
+offset_left = 548.0
+offset_right = 1730.0
+offset_bottom = 255.0
+scale = Vector2(1.1643165, 1.0790428)
 horizontal_alignment = 1
 
-[node name="Number1" type="HSplitContainer" parent="HighScore" unique_id=1214737651]
+[node name="HSplitContainer" type="HSplitContainer" parent="." unique_id=432581493]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+split_offsets = PackedInt32Array(536, 1908)
+drag_area_highlight_in_editor = true
+split_offset = 536
+
+[node name="HighScore" type="VSplitContainer" parent="HSplitContainer" unique_id=1526406914]
 layout_mode = 2
-split_offsets = PackedInt32Array(200, 312, 424)
+split_offsets = PackedInt32Array(45, 93, 696, 744, 792, 840, 888, 936, 984, 1032)
+collapsed = true
+split_offset = 45
+
+[node name="Label" type="Label" parent="HSplitContainer/HighScore" unique_id=1172733969]
+layout_mode = 2
+text = "Best employees"
+label_settings = SubResource("LabelSettings_58s36")
+horizontal_alignment = 1
+
+[node name="Number1" type="HSplitContainer" parent="HSplitContainer/HighScore" unique_id=1214737651]
+layout_mode = 2
+split_offsets = PackedInt32Array(200, 213, 325, 437)
 split_offset = 200
 
-[node name="Name" type="Label" parent="HighScore/Number1" unique_id=1439602766]
+[node name="Name" type="Label" parent="HSplitContainer/HighScore/Number1" unique_id=1439602766]
 custom_minimum_size = Vector2(200, 0)
 layout_mode = 2
 text = "asda"
+label_settings = ExtResource("2_lng5a")
 
-[node name="Money" type="Label" parent="HighScore/Number1" unique_id=1028634776]
-custom_minimum_size = Vector2(100, 0)
-layout_mode = 2
-
-[node name="NWords" type="Label" parent="HighScore/Number1" unique_id=1069401811]
-custom_minimum_size = Vector2(100, 0)
-layout_mode = 2
-
-[node name="Accuracy" type="Label" parent="HighScore/Number1" unique_id=640813733]
-custom_minimum_size = Vector2(100, 0)
-layout_mode = 2
-
-[node name="Number2" type="HSplitContainer" parent="HighScore" unique_id=1630930685]
-layout_mode = 2
-split_offsets = PackedInt32Array(200, 312, 424)
-split_offset = 200
-
-[node name="Name" type="Label" parent="HighScore/Number2" unique_id=648095379]
+[node name="Priviledge" type="Label" parent="HSplitContainer/HighScore/Number1" unique_id=710402455]
 custom_minimum_size = Vector2(200, 0)
 layout_mode = 2
-text = "asde"
+text = "Not Priviledged"
+label_settings = ExtResource("2_lng5a")
 
-[node name="Money" type="Label" parent="HighScore/Number2" unique_id=30681445]
+[node name="Money" type="Label" parent="HSplitContainer/HighScore/Number1" unique_id=1028634776]
 custom_minimum_size = Vector2(100, 0)
 layout_mode = 2
+text = "1200"
+label_settings = ExtResource("2_lng5a")
 
-[node name="NWords" type="Label" parent="HighScore/Number2" unique_id=1398023734]
+[node name="NWords" type="Label" parent="HSplitContainer/HighScore/Number1" unique_id=1069401811]
 custom_minimum_size = Vector2(100, 0)
 layout_mode = 2
+text = "12"
+label_settings = ExtResource("2_lng5a")
 
-[node name="Accuracy" type="Label" parent="HighScore/Number2" unique_id=1784950024]
+[node name="Accuracy" type="Label" parent="HSplitContainer/HighScore/Number1" unique_id=640813733]
 custom_minimum_size = Vector2(100, 0)
 layout_mode = 2
+text = "90"
+label_settings = ExtResource("2_lng5a")
 
-[node name="Number3" type="HSplitContainer" parent="HighScore" unique_id=733978459]
+[node name="Number2" type="HSplitContainer" parent="HSplitContainer/HighScore" unique_id=183308824]
 layout_mode = 2
-split_offsets = PackedInt32Array(200, 312, 424)
+split_offsets = PackedInt32Array(200, 412, 524, 636)
 split_offset = 200
 
-[node name="Name" type="Label" parent="HighScore/Number3" unique_id=1443552113]
+[node name="Name" type="Label" parent="HSplitContainer/HighScore/Number2" unique_id=1279441976]
 custom_minimum_size = Vector2(200, 0)
 layout_mode = 2
-text = "aass"
+text = "asda"
+label_settings = ExtResource("2_lng5a")
 
-[node name="Money" type="Label" parent="HighScore/Number3" unique_id=859494171]
+[node name="Priviledge" type="Label" parent="HSplitContainer/HighScore/Number2" unique_id=1079487017]
+custom_minimum_size = Vector2(200, 0)
+layout_mode = 2
+label_settings = ExtResource("2_lng5a")
+
+[node name="Money" type="Label" parent="HSplitContainer/HighScore/Number2" unique_id=516696565]
 custom_minimum_size = Vector2(100, 0)
 layout_mode = 2
+label_settings = ExtResource("2_lng5a")
 
-[node name="NWords" type="Label" parent="HighScore/Number3" unique_id=872423475]
+[node name="NWords" type="Label" parent="HSplitContainer/HighScore/Number2" unique_id=1059363064]
 custom_minimum_size = Vector2(100, 0)
 layout_mode = 2
+label_settings = ExtResource("2_lng5a")
 
-[node name="Accuracy" type="Label" parent="HighScore/Number3" unique_id=1777468499]
+[node name="Accuracy" type="Label" parent="HSplitContainer/HighScore/Number2" unique_id=635257958]
 custom_minimum_size = Vector2(100, 0)
 layout_mode = 2
+label_settings = ExtResource("2_lng5a")
 
-[node name="Number4" type="HSplitContainer" parent="HighScore" unique_id=1385211564]
+[node name="Number3" type="HSplitContainer" parent="HSplitContainer/HighScore" unique_id=627448031]
 layout_mode = 2
-split_offsets = PackedInt32Array(200, 312, 424)
+split_offsets = PackedInt32Array(200, 412, 524, 636)
 split_offset = 200
 
-[node name="Name" type="Label" parent="HighScore/Number4" unique_id=889111049]
+[node name="Name" type="Label" parent="HSplitContainer/HighScore/Number3" unique_id=1293965569]
 custom_minimum_size = Vector2(200, 0)
 layout_mode = 2
-text = "uaua"
+text = "asda"
+label_settings = ExtResource("2_lng5a")
 
-[node name="Money" type="Label" parent="HighScore/Number4" unique_id=264679533]
+[node name="Priviledge" type="Label" parent="HSplitContainer/HighScore/Number3" unique_id=1327984925]
+custom_minimum_size = Vector2(200, 0)
+layout_mode = 2
+label_settings = ExtResource("2_lng5a")
+
+[node name="Money" type="Label" parent="HSplitContainer/HighScore/Number3" unique_id=643053139]
 custom_minimum_size = Vector2(100, 0)
 layout_mode = 2
+label_settings = ExtResource("2_lng5a")
 
-[node name="NWords" type="Label" parent="HighScore/Number4" unique_id=364913347]
+[node name="NWords" type="Label" parent="HSplitContainer/HighScore/Number3" unique_id=227834776]
 custom_minimum_size = Vector2(100, 0)
 layout_mode = 2
+label_settings = ExtResource("2_lng5a")
 
-[node name="Accuracy" type="Label" parent="HighScore/Number4" unique_id=1305434873]
+[node name="Accuracy" type="Label" parent="HSplitContainer/HighScore/Number3" unique_id=1257944913]
 custom_minimum_size = Vector2(100, 0)
 layout_mode = 2
+label_settings = ExtResource("2_lng5a")
 
-[node name="Number5" type="HSplitContainer" parent="HighScore" unique_id=1481272916]
+[node name="Number4" type="HSplitContainer" parent="HSplitContainer/HighScore" unique_id=2023352109]
 layout_mode = 2
-split_offsets = PackedInt32Array(200, 312, 424)
+split_offsets = PackedInt32Array(200, 412, 524, 636)
 split_offset = 200
 
-[node name="Name" type="Label" parent="HighScore/Number5" unique_id=1730297799]
+[node name="Name" type="Label" parent="HSplitContainer/HighScore/Number4" unique_id=706851987]
 custom_minimum_size = Vector2(200, 0)
 layout_mode = 2
+text = "asda"
+label_settings = ExtResource("2_lng5a")
 
-[node name="Money" type="Label" parent="HighScore/Number5" unique_id=1089933195]
+[node name="Priviledge" type="Label" parent="HSplitContainer/HighScore/Number4" unique_id=1703000803]
+custom_minimum_size = Vector2(200, 0)
+layout_mode = 2
+label_settings = ExtResource("2_lng5a")
+
+[node name="Money" type="Label" parent="HSplitContainer/HighScore/Number4" unique_id=830775587]
 custom_minimum_size = Vector2(100, 0)
 layout_mode = 2
+label_settings = ExtResource("2_lng5a")
 
-[node name="NWords" type="Label" parent="HighScore/Number5" unique_id=793700911]
+[node name="NWords" type="Label" parent="HSplitContainer/HighScore/Number4" unique_id=327391533]
 custom_minimum_size = Vector2(100, 0)
 layout_mode = 2
+label_settings = ExtResource("2_lng5a")
 
-[node name="Accuracy" type="Label" parent="HighScore/Number5" unique_id=1614951332]
+[node name="Accuracy" type="Label" parent="HSplitContainer/HighScore/Number4" unique_id=1601137802]
 custom_minimum_size = Vector2(100, 0)
 layout_mode = 2
+label_settings = ExtResource("2_lng5a")
 
-[node name="Number6" type="HSplitContainer" parent="HighScore" unique_id=1180611644]
+[node name="Number5" type="HSplitContainer" parent="HSplitContainer/HighScore" unique_id=746554848]
 layout_mode = 2
-split_offsets = PackedInt32Array(200, 312, 424)
+split_offsets = PackedInt32Array(200, 412, 524, 636)
 split_offset = 200
 
-[node name="Name" type="Label" parent="HighScore/Number6" unique_id=1989710944]
+[node name="Name" type="Label" parent="HSplitContainer/HighScore/Number5" unique_id=1358580372]
 custom_minimum_size = Vector2(200, 0)
 layout_mode = 2
+text = "asda"
+label_settings = ExtResource("2_lng5a")
 
-[node name="Money" type="Label" parent="HighScore/Number6" unique_id=324206707]
+[node name="Priviledge" type="Label" parent="HSplitContainer/HighScore/Number5" unique_id=103821863]
+custom_minimum_size = Vector2(200, 0)
+layout_mode = 2
+label_settings = ExtResource("2_lng5a")
+
+[node name="Money" type="Label" parent="HSplitContainer/HighScore/Number5" unique_id=386992115]
 custom_minimum_size = Vector2(100, 0)
 layout_mode = 2
+label_settings = ExtResource("2_lng5a")
 
-[node name="NWords" type="Label" parent="HighScore/Number6" unique_id=1718603126]
+[node name="NWords" type="Label" parent="HSplitContainer/HighScore/Number5" unique_id=237235560]
 custom_minimum_size = Vector2(100, 0)
 layout_mode = 2
+label_settings = ExtResource("2_lng5a")
 
-[node name="Accuracy" type="Label" parent="HighScore/Number6" unique_id=408260196]
+[node name="Accuracy" type="Label" parent="HSplitContainer/HighScore/Number5" unique_id=525011941]
 custom_minimum_size = Vector2(100, 0)
 layout_mode = 2
+label_settings = ExtResource("2_lng5a")
 
-[node name="Number7" type="HSplitContainer" parent="HighScore" unique_id=721650845]
+[node name="Number6" type="HSplitContainer" parent="HSplitContainer/HighScore" unique_id=1221533212]
 layout_mode = 2
-split_offsets = PackedInt32Array(200, 312, 424)
+split_offsets = PackedInt32Array(200, 412, 524, 636)
 split_offset = 200
 
-[node name="Name" type="Label" parent="HighScore/Number7" unique_id=1468978725]
+[node name="Name" type="Label" parent="HSplitContainer/HighScore/Number6" unique_id=1234746397]
 custom_minimum_size = Vector2(200, 0)
 layout_mode = 2
+text = "asda"
+label_settings = ExtResource("2_lng5a")
 
-[node name="Money" type="Label" parent="HighScore/Number7" unique_id=1165119298]
+[node name="Priviledge" type="Label" parent="HSplitContainer/HighScore/Number6" unique_id=100775689]
+custom_minimum_size = Vector2(200, 0)
+layout_mode = 2
+label_settings = ExtResource("2_lng5a")
+
+[node name="Money" type="Label" parent="HSplitContainer/HighScore/Number6" unique_id=1584274437]
 custom_minimum_size = Vector2(100, 0)
 layout_mode = 2
+label_settings = ExtResource("2_lng5a")
 
-[node name="NWords" type="Label" parent="HighScore/Number7" unique_id=1055854874]
+[node name="NWords" type="Label" parent="HSplitContainer/HighScore/Number6" unique_id=400242635]
 custom_minimum_size = Vector2(100, 0)
 layout_mode = 2
+label_settings = ExtResource("2_lng5a")
 
-[node name="Accuracy" type="Label" parent="HighScore/Number7" unique_id=1868791896]
+[node name="Accuracy" type="Label" parent="HSplitContainer/HighScore/Number6" unique_id=2130940143]
 custom_minimum_size = Vector2(100, 0)
 layout_mode = 2
+label_settings = ExtResource("2_lng5a")
 
-[node name="Number8" type="HSplitContainer" parent="HighScore" unique_id=272570636]
+[node name="Number7" type="HSplitContainer" parent="HSplitContainer/HighScore" unique_id=169932054]
 layout_mode = 2
-split_offsets = PackedInt32Array(200, 312, 424)
+split_offsets = PackedInt32Array(200, 412, 524, 636)
 split_offset = 200
 
-[node name="Name" type="Label" parent="HighScore/Number8" unique_id=1214163231]
+[node name="Name" type="Label" parent="HSplitContainer/HighScore/Number7" unique_id=1537011487]
 custom_minimum_size = Vector2(200, 0)
 layout_mode = 2
+text = "asda"
+label_settings = ExtResource("2_lng5a")
 
-[node name="Money" type="Label" parent="HighScore/Number8" unique_id=1392849092]
+[node name="Priviledge" type="Label" parent="HSplitContainer/HighScore/Number7" unique_id=1873560174]
+custom_minimum_size = Vector2(200, 0)
+layout_mode = 2
+label_settings = ExtResource("2_lng5a")
+
+[node name="Money" type="Label" parent="HSplitContainer/HighScore/Number7" unique_id=2027169445]
 custom_minimum_size = Vector2(100, 0)
 layout_mode = 2
+label_settings = ExtResource("2_lng5a")
 
-[node name="NWords" type="Label" parent="HighScore/Number8" unique_id=1909279823]
+[node name="NWords" type="Label" parent="HSplitContainer/HighScore/Number7" unique_id=1870597251]
 custom_minimum_size = Vector2(100, 0)
 layout_mode = 2
+label_settings = ExtResource("2_lng5a")
 
-[node name="Accuracy" type="Label" parent="HighScore/Number8" unique_id=1958322419]
+[node name="Accuracy" type="Label" parent="HSplitContainer/HighScore/Number7" unique_id=1523342074]
 custom_minimum_size = Vector2(100, 0)
 layout_mode = 2
+label_settings = ExtResource("2_lng5a")
 
-[node name="Number9" type="HSplitContainer" parent="HighScore" unique_id=320301027]
+[node name="Number8" type="HSplitContainer" parent="HSplitContainer/HighScore" unique_id=1963427237]
 layout_mode = 2
-split_offsets = PackedInt32Array(200, 312, 424)
+split_offsets = PackedInt32Array(200, 412, 524, 636)
 split_offset = 200
 
-[node name="Name" type="Label" parent="HighScore/Number9" unique_id=850587851]
+[node name="Name" type="Label" parent="HSplitContainer/HighScore/Number8" unique_id=1043261926]
 custom_minimum_size = Vector2(200, 0)
 layout_mode = 2
+text = "asda"
+label_settings = ExtResource("2_lng5a")
 
-[node name="Money" type="Label" parent="HighScore/Number9" unique_id=1184853665]
+[node name="Priviledge" type="Label" parent="HSplitContainer/HighScore/Number8" unique_id=684076358]
+custom_minimum_size = Vector2(200, 0)
+layout_mode = 2
+label_settings = ExtResource("2_lng5a")
+
+[node name="Money" type="Label" parent="HSplitContainer/HighScore/Number8" unique_id=307149250]
 custom_minimum_size = Vector2(100, 0)
 layout_mode = 2
+label_settings = ExtResource("2_lng5a")
 
-[node name="NWords" type="Label" parent="HighScore/Number9" unique_id=507705098]
+[node name="NWords" type="Label" parent="HSplitContainer/HighScore/Number8" unique_id=107736288]
 custom_minimum_size = Vector2(100, 0)
 layout_mode = 2
+label_settings = ExtResource("2_lng5a")
 
-[node name="Accuracy" type="Label" parent="HighScore/Number9" unique_id=421975720]
+[node name="Accuracy" type="Label" parent="HSplitContainer/HighScore/Number8" unique_id=1489825375]
 custom_minimum_size = Vector2(100, 0)
 layout_mode = 2
+label_settings = ExtResource("2_lng5a")
 
-[node name="Number10" type="HSplitContainer" parent="HighScore" unique_id=486086494]
+[node name="Number9" type="HSplitContainer" parent="HSplitContainer/HighScore" unique_id=1980420208]
 layout_mode = 2
-split_offsets = PackedInt32Array(200, 312, 424)
+split_offsets = PackedInt32Array(200, 412, 524, 636)
 split_offset = 200
 
-[node name="Name" type="Label" parent="HighScore/Number10" unique_id=1190013719]
+[node name="Name" type="Label" parent="HSplitContainer/HighScore/Number9" unique_id=603096864]
 custom_minimum_size = Vector2(200, 0)
 layout_mode = 2
+text = "asda"
+label_settings = ExtResource("2_lng5a")
 
-[node name="Money" type="Label" parent="HighScore/Number10" unique_id=1567805315]
+[node name="Priviledge" type="Label" parent="HSplitContainer/HighScore/Number9" unique_id=481243964]
+custom_minimum_size = Vector2(200, 0)
+layout_mode = 2
+label_settings = ExtResource("2_lng5a")
+
+[node name="Money" type="Label" parent="HSplitContainer/HighScore/Number9" unique_id=1500423741]
 custom_minimum_size = Vector2(100, 0)
 layout_mode = 2
+label_settings = ExtResource("2_lng5a")
 
-[node name="NWords" type="Label" parent="HighScore/Number10" unique_id=936496832]
+[node name="NWords" type="Label" parent="HSplitContainer/HighScore/Number9" unique_id=614953403]
 custom_minimum_size = Vector2(100, 0)
 layout_mode = 2
+label_settings = ExtResource("2_lng5a")
 
-[node name="Accuracy" type="Label" parent="HighScore/Number10" unique_id=1936815492]
+[node name="Accuracy" type="Label" parent="HSplitContainer/HighScore/Number9" unique_id=826851632]
 custom_minimum_size = Vector2(100, 0)
 layout_mode = 2
+label_settings = ExtResource("2_lng5a")
 
-[node name="TotalScore" type="Label" parent="." unique_id=345136080]
-layout_mode = 0
-offset_left = 738.0
-offset_right = 1920.0
-offset_bottom = 255.0
+[node name="Number10" type="HSplitContainer" parent="HSplitContainer/HighScore" unique_id=478193448]
+layout_mode = 2
+split_offsets = PackedInt32Array(200, 412, 524, 636)
+split_offset = 200
+
+[node name="Name" type="Label" parent="HSplitContainer/HighScore/Number10" unique_id=122115012]
+custom_minimum_size = Vector2(200, 0)
+layout_mode = 2
+text = "asda"
+label_settings = ExtResource("2_lng5a")
+
+[node name="Priviledge" type="Label" parent="HSplitContainer/HighScore/Number10" unique_id=1840768128]
+custom_minimum_size = Vector2(200, 0)
+layout_mode = 2
+label_settings = ExtResource("2_lng5a")
+
+[node name="Money" type="Label" parent="HSplitContainer/HighScore/Number10" unique_id=789848872]
+custom_minimum_size = Vector2(100, 0)
+layout_mode = 2
+label_settings = ExtResource("2_lng5a")
+
+[node name="NWords" type="Label" parent="HSplitContainer/HighScore/Number10" unique_id=1562612284]
+custom_minimum_size = Vector2(100, 0)
+layout_mode = 2
+label_settings = ExtResource("2_lng5a")
+
+[node name="Accuracy" type="Label" parent="HSplitContainer/HighScore/Number10" unique_id=62813052]
+custom_minimum_size = Vector2(100, 0)
+layout_mode = 2
+label_settings = ExtResource("2_lng5a")
+
+[node name="VSplitContainer2" type="VSplitContainer" parent="HSplitContainer" unique_id=136858321]
+layout_mode = 2
+
+[node name="VSplitContainer" type="VSplitContainer" parent="HSplitContainer" unique_id=1412713406]
+layout_mode = 2
 
 [connection signal="pressed" from="Button" to="." method="Restart"]

@@ -16,6 +16,7 @@ public partial class OnPc : CanvasLayer
 	[Export] public RichTextLabel Read;
 	[Export] public Label Money;
 	[Export] public FinalScreen FinalScreen;
+	[Export] public Label PriviledgeLabel;
 	private ModeEnum Mode { get; set; }
 
 	private Timer fullTimer;
@@ -30,6 +31,7 @@ public partial class OnPc : CanvasLayer
 	private int ScoreMult = 0;
 	private float PercentMult = 1.0f;
 	private string CitizenNum = "";
+	private bool Priviledge = false;
 	private int mult = 8;
 	private int minScore = 10;
 	private Tween moneyTween;
@@ -41,11 +43,12 @@ public partial class OnPc : CanvasLayer
 	{
 		if(Typing == null) Typing = GetNode<Control>("Typing");
 		if(CharSelect == null) CharSelect = GetNode<CharSelect>("CharSelect");
-		if(Read == null) Read = Typing.GetNode<RichTextLabel>("ReadLabel");
-		if(TimerLabel == null) TimerLabel = Typing.GetNode<Label>("TimerLabel");
+		if(Read == null) Read = Typing.GetNode<VSplitContainer>("Container").GetNode<RichTextLabel>("ReadLabel");
+		if(TimerLabel == null) TimerLabel = Typing.GetNode<VSplitContainer>("Container").GetNode<Label>("TimerLabel");
 		if(Money == null) Money = Typing.GetNode<Label>("Money");
 		if(fullTimer == null) fullTimer = GetNode<Timer>("FullTimer");
 		if(FinalScreen == null) FinalScreen = GetNode<FinalScreen>("FinalScreen");
+		if(PriviledgeLabel == null) PriviledgeLabel = Typing.GetNode<Label>("PriviledgeLabel");
 
 		Typing.Visible =false;
 
@@ -58,7 +61,15 @@ public partial class OnPc : CanvasLayer
 	{
 		ScoreMult = CharSelect.Score;
 		CitizenNum = CharSelect.CitizenNumber;
-		Mode = ScoreMult >= 13 ? ModeEnum.easy : ModeEnum.hard;
+		Priviledge = CharSelect.IsPriviledged();
+		if(Priviledge) {
+			PriviledgeLabel.Text = "Priviledged";
+			Mode = ModeEnum.easy;
+		}
+		else {
+			PriviledgeLabel.Text = "Not Priviledged";
+			Mode = ModeEnum.hard;
+		}
 		Typing.Visible = true;
 		PercentMult = (float)ScoreMult / CharSelect.MAX_SCORE;
 		fullTimer.Start();
@@ -182,7 +193,7 @@ public partial class OnPc : CanvasLayer
 	{
 		totalTyped++;
 		fullAccuracy = CalcAccuracy(currentWord, typed);
-		var diffMod = Mode == ModeEnum.easy ? 1.1 : 0.9;
+		var diffMod = Mode == ModeEnum.easy ? 0.75f : 1;
 		var greenChars = CorrectChars(currentWord,typed);
 		latest = minScore + (int)Mathf.Ceil(greenChars * PercentMult * CalcWordAccuracy(currentWord, typed) * mult * diffMod);
 		Score += latest;
@@ -236,7 +247,7 @@ public partial class OnPc : CanvasLayer
 	{
 		Typing.Visible = false;
 		fullTimer.Stop();
-		FinalScreen.Finish(CitizenNum, Score, fullAccuracy, totalTyped, PotentialScore);
+		FinalScreen.Finish(CitizenNum, Priviledge, Score, fullAccuracy, totalTyped, PotentialScore);
 		GD.Print($"{Score} / {PotentialScore}");
 	}
 

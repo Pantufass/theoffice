@@ -33,6 +33,7 @@ public partial class CharSelect : Control
 	[Export] public LineEdit citizenLine;
 
 	public static int MAX_SCORE = 20;
+	private const int privilegedScore = 12;
 
 	public bool started = false;
 
@@ -116,11 +117,12 @@ public partial class CharSelect : Control
 		{
 			citNum = citizenNumber;
 		}
-		return citNum % 2 == 0 ? CalcCitizen() : 0;
+		return citNum % 2 == 0 ? CalcCitizen()+1 : CalcCitizen();
 	}
 	private int CalcCitizen()
 	{
-		if(CitizenNumber.Length == 6 || CitizenNumber.Length == 9) return 3;
+		if(CitizenNumber.Length == 6 || CitizenNumber.Length == 9) return 2;
+		if(CitizenNumber.Length == 10) return 1;
 		//if(CitizenNumber.Length >= 9 && CitizenNumber.Length <= 10) return 3;
 		return 0;
 	}
@@ -155,6 +157,11 @@ public partial class CharSelect : Control
 		Score += CalcGender();
 		Score += CalcNative();
 		if(Score > MAX_SCORE) Score = MAX_SCORE;
+	}
+
+	public bool IsPriviledged()
+	{
+		return Score > privilegedScore;
 	}
 
 }
