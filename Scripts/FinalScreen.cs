@@ -87,6 +87,7 @@ public partial class FinalScreen : Control
 			fetch.topTen.Add(new ScoreData
 			{
 				Name = (string)d["name"],
+				Priviledge = (bool)d["priviledge"],
 				Score = (int)d["score"],
 				Words = (int)d["words"],
 				Accuracy = (float)d["accuracy"]
@@ -115,7 +116,8 @@ public partial class FinalScreen : Control
 			{
 				topArr.Add(new Godot.Collections.Dictionary
 				{
-					{ "name", s.Name ?? "" },
+					{ "name", s.Name ?? "nameless" },
+					{ "priviledge", s.Priviledge },
 					{ "score", s.Score },
 					{ "words", s.Words },
 					{ "accuracy", s.Accuracy }
@@ -182,6 +184,7 @@ public partial class FinalScreen : Control
 		data.topTen.Add(new ScoreData
 		{
 			Name = score.Name,
+			Priviledge = score.Priviledge,
 			Score = score.Score,
 			Words = score.Words,
 			Accuracy = score.Accuracy
@@ -216,7 +219,7 @@ public partial class FinalScreen : Control
 							+" words";
 			finalScore = new ScoreData(name, priviledge, score, nWords, accuracy);
 		}
-			
+		
 		SaveScore(finalScore, fullPotential);
 		ShowScores();
 	}
@@ -224,5 +227,6 @@ public partial class FinalScreen : Control
 	public void Restart()
 	{
 		GetTree().ReloadCurrentScene();
+		GD.Print("Game restarted");
 	}
 }

@@ -53,7 +53,10 @@ split_offset = 72
 
 [node name="Titlepart" type="VSplitContainer" parent="Control/VSplitContainer" unique_id=1526209612]
 layout_mode = 2
-split_offsets = PackedInt32Array(0, 0)
+split_offsets = PackedInt32Array(0, 0, 0, 0)
+
+[node name="MarginContainer2" type="MarginContainer" parent="Control/VSplitContainer/Titlepart" unique_id=1455307501]
+layout_mode = 2
 
 [node name="Title" type="Label" parent="Control/VSplitContainer/Titlepart" unique_id=1393125898]
 layout_mode = 2
@@ -75,6 +78,9 @@ custom_minimum_size = Vector2(400, 2)
 layout_mode = 2
 color = Color(0, 0, 0, 1)
 
+[node name="MarginContainer" type="MarginContainer" parent="Control/VSplitContainer/Titlepart" unique_id=2089977442]
+layout_mode = 2
+
 [node name="Citizen" type="VSplitContainer" parent="Control/VSplitContainer" unique_id=1046644634]
 layout_mode = 2
 split_offsets = PackedInt32Array(23, 66)
@@ -92,7 +98,7 @@ split_offsets = PackedInt32Array(120, 282)
 split_offset = 120
 
 [node name="Label2" type="Label" parent="Control/VSplitContainer/Citizen/HSplitContainer" unique_id=1702432266]
-custom_minimum_size = Vector2(150, 0)
+custom_minimum_size = Vector2(240, 0)
 layout_mode = 2
 
 [node name="ColorRect" type="ColorRect" parent="Control/VSplitContainer/Citizen/HSplitContainer" unique_id=1692682663]
@@ -112,7 +118,7 @@ grow_vertical = 2
 virtual_keyboard_enabled = false
 
 [node name="Label" type="Label" parent="Control/VSplitContainer/Citizen/HSplitContainer" unique_id=281548157]
-custom_minimum_size = Vector2(150, 0)
+custom_minimum_size = Vector2(240, 0)
 layout_mode = 2
 
 [node name="ColorRect" type="ColorRect" parent="Control/VSplitContainer/Citizen" unique_id=1777666008]
@@ -136,7 +142,7 @@ split_offsets = PackedInt32Array(120, 162, 174, 216)
 split_offset = 120
 
 [node name="Label2" type="Label" parent="Control/VSplitContainer/Race/HSplitContainer" unique_id=1886599449]
-custom_minimum_size = Vector2(120, 0)
+custom_minimum_size = Vector2(230, 0)
 layout_mode = 2
 
 [node name="<Button" type="Button" parent="Control/VSplitContainer/Race/HSplitContainer" unique_id=1016857166]
@@ -153,9 +159,12 @@ color = Color(0.82605994, 0.82606006, 0.8260599, 1)
 [node name="RaceValue" type="Label" parent="Control/VSplitContainer/Race/HSplitContainer/ColorRect" unique_id=191138853]
 unique_name_in_owner = true
 custom_minimum_size = Vector2(150, 0)
-layout_mode = 0
-offset_right = 150.0
-offset_bottom = 23.0
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
 label_settings = ExtResource("2_4q53g")
 horizontal_alignment = 1
 
@@ -165,7 +174,7 @@ layout_mode = 2
 text = ">"
 
 [node name="Label" type="Label" parent="Control/VSplitContainer/Race/HSplitContainer" unique_id=687512323]
-custom_minimum_size = Vector2(120, 0)
+custom_minimum_size = Vector2(230, 0)
 layout_mode = 2
 
 [node name="ColorRect" type="ColorRect" parent="Control/VSplitContainer/Race" unique_id=2010331272]
@@ -189,7 +198,7 @@ split_offsets = PackedInt32Array(120, 162, 174, 216)
 split_offset = 120
 
 [node name="Label2" type="Label" parent="Control/VSplitContainer/Gender/HSplitContainer" unique_id=1641357064]
-custom_minimum_size = Vector2(120, 0)
+custom_minimum_size = Vector2(230, 0)
 layout_mode = 2
 
 [node name="<Button" type="Button" parent="Control/VSplitContainer/Gender/HSplitContainer" unique_id=1964198601]
@@ -218,7 +227,7 @@ layout_mode = 2
 text = ">"
 
 [node name="Label" type="Label" parent="Control/VSplitContainer/Gender/HSplitContainer" unique_id=1937901288]
-custom_minimum_size = Vector2(120, 0)
+custom_minimum_size = Vector2(230, 0)
 layout_mode = 2
 
 [node name="ColorRect" type="ColorRect" parent="Control/VSplitContainer/Gender" unique_id=579679141]
@@ -242,7 +251,7 @@ split_offsets = PackedInt32Array(120, 162, 174, 216)
 split_offset = 120
 
 [node name="Label2" type="Label" parent="Control/VSplitContainer/Native/HSplitContainer" unique_id=1851773029]
-custom_minimum_size = Vector2(120, 0)
+custom_minimum_size = Vector2(230, 0)
 layout_mode = 2
 
 [node name="<Button" type="Button" parent="Control/VSplitContainer/Native/HSplitContainer" unique_id=140641156]
@@ -271,7 +280,7 @@ layout_mode = 2
 text = ">"
 
 [node name="Label" type="Label" parent="Control/VSplitContainer/Native/HSplitContainer" unique_id=1272261318]
-custom_minimum_size = Vector2(120, 0)
+custom_minimum_size = Vector2(230, 0)
 layout_mode = 2
 
 [node name="ColorRect" type="ColorRect" parent="Control/VSplitContainer/Native" unique_id=1498232840]

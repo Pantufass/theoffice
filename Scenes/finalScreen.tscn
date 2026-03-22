@@ -3,9 +3,6 @@
 [ext_resource type="Script" uid="uid://cd6j2fk5s4jqw" path="res://Scripts/FinalScreen.cs" id="1_vewkw"]
 [ext_resource type="LabelSettings" uid="uid://b1vgsjvwbeqgc" path="res://racist/highscore.tres" id="2_lng5a"]
 
-[sub_resource type="LabelSettings" id="LabelSettings_85k7a"]
-font_size = 30
-
 [sub_resource type="LabelSettings" id="LabelSettings_58s36"]
 font_size = 32
 
@@ -29,40 +26,22 @@ anchors_preset = 13
 anchor_left = 0.5
 anchor_right = 0.5
 anchor_bottom = 1.0
-offset_left = -404.0
-offset_top = 275.0
-offset_right = 396.0
-offset_bottom = -328.0
+offset_left = -168.0
+offset_top = 303.0
+offset_right = 889.0
+offset_bottom = -619.0
 grow_horizontal = 2
 grow_vertical = 2
-scale = Vector2(1.6689811, 0.36640903)
-label_settings = SubResource("LabelSettings_85k7a")
+label_settings = ExtResource("2_lng5a")
 horizontal_alignment = 1
 autowrap_mode = 2
 
-[node name="Button" type="Button" parent="." unique_id=2111743319]
-layout_mode = 1
-anchors_preset = 8
-anchor_left = 0.5
-anchor_top = 0.5
-anchor_right = 0.5
-anchor_bottom = 0.5
-offset_left = 6.0
-offset_top = -26.0
-offset_right = 148.0
-offset_bottom = 27.0
-grow_horizontal = 2
-grow_vertical = 2
-scale = Vector2(1.2, 1.2)
-theme_override_font_sizes/font_size = 32
-text = "RESTART"
-
 [node name="TotalScore" type="Label" parent="." unique_id=345136080]
 layout_mode = 0
-offset_left = 548.0
-offset_right = 1730.0
+offset_left = 792.0
+offset_right = 1849.0
 offset_bottom = 255.0
-scale = Vector2(1.1643165, 1.0790428)
+label_settings = ExtResource("2_lng5a")
 horizontal_alignment = 1
 
 [node name="HSplitContainer" type="HSplitContainer" parent="." unique_id=432581493]
@@ -72,13 +51,14 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
-split_offsets = PackedInt32Array(536, 1908)
+split_offsets = PackedInt32Array(748, 1896)
 drag_area_highlight_in_editor = true
-split_offset = 536
+split_offset = 748
 
 [node name="HighScore" type="VSplitContainer" parent="HSplitContainer" unique_id=1526406914]
 layout_mode = 2
-split_offsets = PackedInt32Array(45, 93, 696, 744, 792, 840, 888, 936, 984, 1032)
+theme_override_constants/separation = 25
+split_offsets = PackedInt32Array(45, 57, 105, 648, 696, 744, 792, 840, 888, 936, 984, 1032)
 collapsed = true
 split_offset = 45
 
@@ -87,6 +67,10 @@ layout_mode = 2
 text = "Best employees"
 label_settings = SubResource("LabelSettings_58s36")
 horizontal_alignment = 1
+
+[node name="MarginContainer2" type="MarginContainer" parent="HSplitContainer/HighScore" unique_id=219713044]
+custom_minimum_size = Vector2(0, 25)
+layout_mode = 2
 
 [node name="Number1" type="HSplitContainer" parent="HSplitContainer/HighScore" unique_id=1214737651]
 layout_mode = 2
@@ -402,10 +386,30 @@ custom_minimum_size = Vector2(100, 0)
 layout_mode = 2
 label_settings = ExtResource("2_lng5a")
 
+[node name="MarginContainer" type="MarginContainer" parent="HSplitContainer/HighScore" unique_id=323147263]
+layout_mode = 2
+
 [node name="VSplitContainer2" type="VSplitContainer" parent="HSplitContainer" unique_id=136858321]
 layout_mode = 2
 
 [node name="VSplitContainer" type="VSplitContainer" parent="HSplitContainer" unique_id=1412713406]
 layout_mode = 2
+
+[node name="Button" type="Button" parent="." unique_id=2111743319]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -16.0
+offset_top = 68.0
+offset_right = 126.0
+offset_bottom = 121.0
+grow_horizontal = 2
+grow_vertical = 2
+scale = Vector2(1.2, 1.2)
+theme_override_font_sizes/font_size = 32
+text = "RESTART"
 
 [connection signal="pressed" from="Button" to="." method="Restart"]

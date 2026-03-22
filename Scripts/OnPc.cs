@@ -63,11 +63,11 @@ public partial class OnPc : CanvasLayer
 		CitizenNum = CharSelect.CitizenNumber;
 		Priviledge = CharSelect.IsPriviledged();
 		if(Priviledge) {
-			PriviledgeLabel.Text = "Priviledged";
+			PriviledgeLabel.Visible = true;
 			Mode = ModeEnum.easy;
 		}
 		else {
-			PriviledgeLabel.Text = "Not Priviledged";
+			PriviledgeLabel.Visible = false;
 			Mode = ModeEnum.hard;
 		}
 		Typing.Visible = true;

@@ -83,7 +83,7 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 
-[node name="PrivLabel" type="Label" parent="." unique_id=50183198]
+[node name="PriviledgeLabel" type="Label" parent="." unique_id=50183198]
 layout_mode = 0
 offset_left = 38.0
 offset_top = 364.0
