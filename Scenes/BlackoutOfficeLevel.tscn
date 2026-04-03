@@ -1,6 +1,7 @@
 [gd_scene format=4 uid="uid://dmd6xekwcsjda"]
 
 [ext_resource type="PackedScene" uid="uid://bay7leqlone42" path="res://Objects/player.tscn" id="1_cmucv"]
+[ext_resource type="PackedScene" uid="uid://bv1gdr23wvd0f" path="res://Objects/Computer.tscn" id="2_5lges"]
 
 [sub_resource type="ArrayMesh" id="ArrayMesh_cmucv"]
 _surfaces = [{
@@ -30,6 +31,7 @@ sky = SubResource("Sky_cmucv")
 [node name="Node3D" type="Node3D" unique_id=649668159]
 
 [node name="ComputerRoom" type="CSGCombiner3D" parent="." unique_id=737245815]
+transform = Transform3D(5, 0, 0, 0, 5, 0, 0, 0, 5, 0, 0, 0)
 use_collision = true
 
 [node name="CSGBox3D" type="CSGBox3D" parent="ComputerRoom" unique_id=1903028319]
@@ -75,7 +77,7 @@ mesh = SubResource("ArrayMesh_cmucv")
 shape = SubResource("ConcavePolygonShape3D_5lges")
 
 [node name="PlayerCharacter" parent="." unique_id=1521709859 instance=ExtResource("1_cmucv")]
-transform = Transform3D(0.3, 0, 0, 0, 0.3, 0, 0, 0, 0.3, 0.1, 0, -0.1)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.1, 0, -0.1)
 SprintSpeed = 3.0
 WalkSpeed = 0.5
 JumpPeakTime = 0.5
@@ -88,3 +90,6 @@ MaxFallSpeed = 12.0
 [node name="WorldEnvironment" type="WorldEnvironment" parent="." unique_id=1011705015]
 environment = SubResource("Environment_cmucv")
 camera_attributes = SubResource("CameraAttributesPractical_5lges")
+
+[node name="Computer" parent="." unique_id=1430693161 instance=ExtResource("2_5lges")]
+transform = Transform3D(3.5, 0, 0, 0, 3.5, 0, 0, 0, 3.5, 0.2, 0.90000004, -4.4)
