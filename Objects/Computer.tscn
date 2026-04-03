@@ -1,6 +1,13 @@
-[gd_scene format=3 uid="uid://bv1gdr23wvd0f"]
+[gd_scene format=3 uid="uid://uk11vpsy02x7"]
 
-[node name="Computer" type="Node3D" unique_id=1430693161]
+[ext_resource type="Script" uid="uid://p68faeljfhv5" path="res://Scripts/Behaviour/Computer.cs" id="1_icap4"]
+
+[sub_resource type="PlaneMesh" id="PlaneMesh_lbi6m"]
+
+[node name="Computer" type="Node3D" unique_id=1430693161 node_paths=PackedStringArray("Screen", "SubViewport")]
+script = ExtResource("1_icap4")
+Screen = NodePath("Screen")
+SubViewport = NodePath("Screen/SubViewport")
 
 [node name="CSGCombiner3D" type="CSGCombiner3D" parent="." unique_id=1732950819]
 use_collision = true
@@ -15,3 +22,9 @@ size = Vector3(0.8, 0.2, 0.6)
 [node name="CSGBox3D2" type="CSGBox3D" parent="CSGCombiner3D" unique_id=157445595]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.15, 0.15, 0)
 size = Vector3(0.5, 0.6, 0.4)
+
+[node name="Screen" type="MeshInstance3D" parent="." unique_id=1151605257]
+transform = Transform3D(0.23343137, 0, 0, 0, -4.5089905e-08, -0.16941585, 0, 1.0315368, -7.405401e-09, -0.14014351, 0.26024723, 0.23736423)
+mesh = SubResource("PlaneMesh_lbi6m")
+
+[node name="SubViewport" type="SubViewport" parent="Screen" unique_id=67585135]
