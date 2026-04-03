@@ -1,0 +1,17 @@
+[gd_scene format=3 uid="uid://bv1gdr23wvd0f"]
+
+[node name="Computer" type="Node3D" unique_id=1430693161]
+
+[node name="CSGCombiner3D" type="CSGCombiner3D" parent="." unique_id=1732950819]
+use_collision = true
+
+[node name="CSGBox3D" type="CSGBox3D" parent="CSGCombiner3D" unique_id=668073219]
+size = Vector3(0.8, 0.3, 0.4)
+
+[node name="CSGBox3D3" type="CSGBox3D" parent="CSGCombiner3D" unique_id=989654311]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.050000004, 0.10000002)
+size = Vector3(0.8, 0.2, 0.6)
+
+[node name="CSGBox3D2" type="CSGBox3D" parent="CSGCombiner3D" unique_id=157445595]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.15, 0.15, 0)
+size = Vector3(0.5, 0.6, 0.4)
