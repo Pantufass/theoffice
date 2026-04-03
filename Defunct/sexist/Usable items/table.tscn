@@ -1,0 +1,12 @@
+[gd_scene format=3 uid="uid://b0fv8blxi1spc"]
+
+[ext_resource type="PackedScene" uid="uid://cmd5avcobegyh" path="res://Defunct/sexist/House Assets/Table.fbx" id="1_v5i0k"]
+[ext_resource type="Texture2D" uid="uid://cguo4hg23s2ix" path="res://Defunct/sexist/House textures/Table Clean.png" id="2_kl0hw"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_vjl2i"]
+albedo_texture = ExtResource("2_kl0hw")
+
+[node name="Table" unique_id=850882123 instance=ExtResource("1_v5i0k")]
+
+[node name="Cube" parent="." index="0" unique_id=2077723745]
+surface_material_override/0 = SubResource("StandardMaterial3D_vjl2i")

@@ -1,0 +1,5 @@
+[gd_scene format=3 uid="uid://c3cpdx7hk8enn"]
+
+[ext_resource type="PackedScene" uid="uid://pldg63lj5vvg" path="res://Defunct/sexist/NewItems/housing/tinylivingpack.glb" id="1_siyip"]
+
+[node name="Sketchfab_Scene" unique_id=14410763 instance=ExtResource("1_siyip")]

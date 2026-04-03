@@ -1,0 +1,28 @@
+[gd_scene format=3 uid="uid://t6p1tbnvemvf"]
+
+[ext_resource type="PackedScene" uid="uid://ddpjrkrm3si68" path="res://Defunct/sexist/House Assets/Shelf.fbx" id="1_aw007"]
+[ext_resource type="Texture2D" uid="uid://b2btvi5nvngbm" path="res://Defunct/sexist/House textures/Shelf.png" id="2_0iu12"]
+[ext_resource type="Texture2D" uid="uid://co5wcors8a36r" path="res://Defunct/sexist/dioporco/comedor_joka_Wood027_2K-JPG_Color.jpg" id="2_fxwhd"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_uu3sw"]
+albedo_texture = ExtResource("2_fxwhd")
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_7o7sa"]
+albedo_texture = ExtResource("2_0iu12")
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_xng2s"]
+albedo_texture = ExtResource("2_0iu12")
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_qp73u"]
+size = Vector3(0.30133057, 0.5782471, 1.7341309)
+
+[node name="Shelf" unique_id=1982737464 instance=ExtResource("1_aw007")]
+
+[node name="Shelf" parent="." index="0" unique_id=1241521952]
+material_override = SubResource("StandardMaterial3D_uu3sw")
+surface_material_override/0 = SubResource("StandardMaterial3D_7o7sa")
+surface_material_override/1 = SubResource("StandardMaterial3D_xng2s")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="." index="1" unique_id=804897115]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.0440979, -0.21087646, -0.04650879)
+shape = SubResource("BoxShape3D_qp73u")

@@ -1,0 +1,96 @@
+[gd_scene format=3 uid="uid://6ro81qds71v3"]
+
+[ext_resource type="LabelSettings" uid="uid://b1vgsjvwbeqgc" path="res://Defunct/racist/highscore.tres" id="1_oawdw"]
+
+[sub_resource type="LabelSettings" id="LabelSettings_uf01e"]
+font_size = 32
+
+[sub_resource type="LabelSettings" id="LabelSettings_ul674"]
+font_size = 32
+
+[sub_resource type="LabelSettings" id="LabelSettings_2gxi5"]
+font_size = 40
+
+[node name="Typing" type="Control" unique_id=1742347282]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Money" type="Label" parent="." unique_id=610044182]
+layout_mode = 0
+offset_left = 1317.0
+offset_top = 432.0
+offset_right = 1667.0
+offset_bottom = 477.0
+label_settings = SubResource("LabelSettings_uf01e")
+
+[node name="Container" type="VSplitContainer" parent="." unique_id=1909536699]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/separation = 70
+split_offsets = PackedInt32Array(40, 135, 187, 282, 332, 382, 432)
+dragging_enabled = false
+split_offset = 40
+
+[node name="MarginContainer" type="MarginContainer" parent="Container" unique_id=611981744]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="Container" unique_id=895140738]
+layout_mode = 2
+theme_override_constants/line_spacing = 3
+text = "Write as fast as possible. The company is counting on you."
+label_settings = SubResource("LabelSettings_ul674")
+horizontal_alignment = 1
+
+[node name="MarginContainer2" type="MarginContainer" parent="Container" unique_id=2143551545]
+layout_mode = 2
+
+[node name="TimerLabel" type="Label" parent="Container" unique_id=2128523152]
+layout_mode = 2
+text = "2"
+label_settings = SubResource("LabelSettings_2gxi5")
+horizontal_alignment = 1
+
+[node name="MarginContainer3" type="MarginContainer" parent="Container" unique_id=359433578]
+layout_mode = 2
+
+[node name="MarginContainer4" type="MarginContainer" parent="Container" unique_id=434594851]
+layout_mode = 2
+
+[node name="MarginContainer5" type="MarginContainer" parent="Container" unique_id=65688492]
+layout_mode = 2
+
+[node name="ReadLabel" type="RichTextLabel" parent="Container" unique_id=928035424]
+custom_minimum_size = Vector2(350, 0)
+layout_mode = 2
+theme_override_font_sizes/normal_font_size = 42
+bbcode_enabled = true
+text = "Things to copy"
+horizontal_alignment = 1
+
+[node name="CenterContainer" type="CenterContainer" parent="." unique_id=2100824126]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="PriviledgeLabel" type="Label" parent="." unique_id=50183198]
+layout_mode = 0
+offset_left = 38.0
+offset_top = 364.0
+offset_right = 568.0
+offset_bottom = 478.0
+text = "You are considered priviledged, 
+a 25% cut was executed 
+to promote equality."
+label_settings = ExtResource("1_oawdw")
+horizontal_alignment = 1

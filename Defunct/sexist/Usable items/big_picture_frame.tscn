@@ -1,0 +1,12 @@
+[gd_scene format=3 uid="uid://brrxf1ccw1w4n"]
+
+[ext_resource type="PackedScene" uid="uid://ctscu6pdk6ljp" path="res://Defunct/sexist/House Assets/BigPictureFrame.fbx" id="1_xahhb"]
+[ext_resource type="Texture2D" uid="uid://b08yahq2lj0j3" path="res://Defunct/sexist/House textures/BigPictureFrame.png" id="2_2vv4t"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_aoctt"]
+albedo_texture = ExtResource("2_2vv4t")
+
+[node name="BigPictureFrame" unique_id=1125263105 instance=ExtResource("1_xahhb")]
+
+[node name="Cube" parent="." index="0" unique_id=1815984544]
+surface_material_override/0 = SubResource("StandardMaterial3D_aoctt")

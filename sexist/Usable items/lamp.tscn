@@ -1,5 +1,0 @@
-[gd_scene format=3 uid="uid://dbm3mlfecq4mf"]
-
-[ext_resource type="PackedScene" uid="uid://c23qm07olxhlq" path="res://sexist/House Assets/Lamp.fbx" id="1_bekw5"]
-
-[node name="Lamp" unique_id=6008196 instance=ExtResource("1_bekw5")]

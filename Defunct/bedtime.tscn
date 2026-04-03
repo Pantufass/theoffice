@@ -1,0 +1,76 @@
+[gd_scene format=3 uid="uid://dwhrkw1okybwf"]
+
+[ext_resource type="PackedScene" uid="uid://xe65tgkbu3ic" path="res://Defunct/sexist/bedtime/uploads_files_4702907_Vilga.fbx" id="1_77ydv"]
+[ext_resource type="Texture2D" uid="uid://b54vgd1utf4o2" path="res://Defunct/sexist/bedtime/villawhite.jpg" id="2_hof6y"]
+[ext_resource type="Texture2D" uid="uid://cps46arpx7c7t" path="res://Defunct/sexist/bedtime/vilewwood.jpg" id="3_wy827"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_hyu34"]
+albedo_texture = ExtResource("2_hof6y")
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_nn5tr"]
+albedo_texture = ExtResource("2_hof6y")
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_o7o87"]
+albedo_texture = ExtResource("2_hof6y")
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_sfyuh"]
+albedo_texture = ExtResource("3_wy827")
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_40xia"]
+albedo_texture = ExtResource("2_hof6y")
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_4gq1d"]
+albedo_texture = ExtResource("2_hof6y")
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_g0l3v"]
+albedo_texture = ExtResource("2_hof6y")
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_wpthq"]
+albedo_texture = ExtResource("3_wy827")
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_ddmag"]
+albedo_texture = ExtResource("3_wy827")
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_5aypm"]
+albedo_texture = ExtResource("3_wy827")
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_77ydv"]
+size = Vector3(2.02771, 0.69311523, 2.1153564)
+
+[node name="uploads_files_4702907_Vilga" unique_id=101825358 instance=ExtResource("1_77ydv")]
+
+[node name="Matras" parent="Bed" parent_id_path=PackedInt32Array(1207053151) index="3" unique_id=1437163678]
+material_override = SubResource("StandardMaterial3D_hyu34")
+
+[node name="Odeyalo" parent="Bed" parent_id_path=PackedInt32Array(1207053151) index="4" unique_id=356025263]
+material_override = SubResource("StandardMaterial3D_nn5tr")
+
+[node name="Prostin" parent="Bed" parent_id_path=PackedInt32Array(1207053151) index="5" unique_id=1265903076]
+material_override = SubResource("StandardMaterial3D_o7o87")
+
+[node name="kr_004_005" parent="Bed/kronshtein001" parent_id_path=PackedInt32Array(2146866457) index="1" unique_id=6581228]
+material_override = SubResource("StandardMaterial3D_sfyuh")
+
+[node name="Pillow_3" parent="Bed" parent_id_path=PackedInt32Array(1207053151) index="13" unique_id=654631568]
+material_override = SubResource("StandardMaterial3D_40xia")
+
+[node name="Pillow" parent="Bed" parent_id_path=PackedInt32Array(1207053151) index="14" unique_id=657772657]
+material_override = SubResource("StandardMaterial3D_4gq1d")
+
+[node name="Pillow_2" parent="Bed" parent_id_path=PackedInt32Array(1207053151) index="15" unique_id=1301348954]
+material_override = SubResource("StandardMaterial3D_g0l3v")
+
+[node name="kr_004_01" parent="Bed/kronshtein" parent_id_path=PackedInt32Array(1739828855) index="1" unique_id=255515109]
+material_override = SubResource("StandardMaterial3D_wpthq")
+
+[node name="Line11" parent="Bed" parent_id_path=PackedInt32Array(1207053151) index="30" unique_id=143461479]
+material_override = SubResource("StandardMaterial3D_ddmag")
+
+[node name="Spinka2" parent="Bed" parent_id_path=PackedInt32Array(1207053151) index="32" unique_id=59341620]
+material_override = SubResource("StandardMaterial3D_5aypm")
+
+[node name="RigidBody3D" type="RigidBody3D" parent="." index="2" unique_id=2037813911]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="RigidBody3D" index="0" unique_id=2005431155]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.13372803, 0.15344238, 0.5576782)
+shape = SubResource("BoxShape3D_77ydv")

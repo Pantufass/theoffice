@@ -1,0 +1,67 @@
+[gd_scene format=3 uid="uid://5yke22kddbbe"]
+
+[ext_resource type="PackedScene" uid="uid://b6tyldk3yyeqn" path="res://Defunct/sexist/House Assets/couch.gltf" id="1_bmv7w"]
+[ext_resource type="Texture2D" uid="uid://cwdd4164d2oy6" path="res://Defunct/sexist/House textures/FabricPlain0149_2_350_baseColor.jpeg" id="2_djedm"]
+[ext_resource type="Texture2D" uid="uid://bdjjby6r0jhfp" path="res://Defunct/sexist/House textures/blanket_baseColor.jpeg" id="3_nxro2"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_u23o6"]
+albedo_texture = ExtResource("2_djedm")
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_8isll"]
+albedo_texture = ExtResource("3_nxro2")
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_q33bd"]
+albedo_texture = ExtResource("2_djedm")
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_3ffba"]
+albedo_texture = ExtResource("2_djedm")
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_n0agw"]
+albedo_texture = ExtResource("2_djedm")
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_u4s5x"]
+albedo_texture = ExtResource("2_djedm")
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_kgk0g"]
+albedo_texture = ExtResource("2_djedm")
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_hu1uw"]
+albedo_texture = ExtResource("2_djedm")
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_y0i7g"]
+albedo_texture = ExtResource("3_nxro2")
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_oqe8u"]
+albedo_texture = ExtResource("3_nxro2")
+
+[node name="Sketchfab_Scene" unique_id=1527288899 instance=ExtResource("1_bmv7w")]
+
+[node name="Material22" parent="Sketchfab_model/Collada visual scene group/SketchUp/group_0" parent_id_path=PackedInt32Array(655868499) index="1" unique_id=30014014]
+material_override = SubResource("StandardMaterial3D_u23o6")
+
+[node name="Material23" parent="Sketchfab_model/Collada visual scene group/SketchUp/group_0" parent_id_path=PackedInt32Array(655868499) index="2" unique_id=883979035]
+material_override = SubResource("StandardMaterial3D_8isll")
+
+[node name="Material24" parent="Sketchfab_model/Collada visual scene group/SketchUp/group_0" parent_id_path=PackedInt32Array(655868499) index="3" unique_id=1340665270]
+material_override = SubResource("StandardMaterial3D_q33bd")
+
+[node name="Material25" parent="Sketchfab_model/Collada visual scene group/SketchUp/group_0" parent_id_path=PackedInt32Array(655868499) index="4" unique_id=1821857458]
+material_override = SubResource("StandardMaterial3D_3ffba")
+
+[node name="Material26" parent="Sketchfab_model/Collada visual scene group/SketchUp/group_0" parent_id_path=PackedInt32Array(655868499) index="5" unique_id=1546088055]
+material_override = SubResource("StandardMaterial3D_n0agw")
+
+[node name="Material28" parent="Sketchfab_model/Collada visual scene group/SketchUp/group_0" parent_id_path=PackedInt32Array(655868499) index="7" unique_id=1549904236]
+material_override = SubResource("StandardMaterial3D_u4s5x")
+
+[node name="Material211" parent="Sketchfab_model/Collada visual scene group/SketchUp/group_0" parent_id_path=PackedInt32Array(655868499) index="10" unique_id=1626826509]
+material_override = SubResource("StandardMaterial3D_kgk0g")
+
+[node name="Material219" parent="Sketchfab_model/Collada visual scene group/SketchUp/group_0" parent_id_path=PackedInt32Array(655868499) index="23" unique_id=2029942876]
+material_override = SubResource("StandardMaterial3D_hu1uw")
+
+[node name="Material220" parent="Sketchfab_model/Collada visual scene group/SketchUp/group_1" parent_id_path=PackedInt32Array(100835316) index="0" unique_id=1488777155]
+material_override = SubResource("StandardMaterial3D_y0i7g")
+
+[node name="Material221" parent="Sketchfab_model/Collada visual scene group/SketchUp/group_2" parent_id_path=PackedInt32Array(2137926064) index="0" unique_id=854052087]
+material_override = SubResource("StandardMaterial3D_oqe8u")

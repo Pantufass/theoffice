@@ -1,0 +1,19 @@
+[gd_scene format=3 uid="uid://bsfel8tm0dajs"]
+
+[ext_resource type="PackedScene" uid="uid://dgg5hi27q3j7t" path="res://Defunct/sexist/special items/trendy Shirt from substance.fbx" id="1_q2eui"]
+[ext_resource type="Texture2D" uid="uid://d4esmrjm1r6jy" path="res://Defunct/sexist/special items/special af textures wtf/trendy Shirt_T_SHIRT3_lambert1_BaseColor.jpg" id="2_pfycn"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_q32ib"]
+albedo_texture = ExtResource("2_pfycn")
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_6ffo1"]
+albedo_texture = ExtResource("2_pfycn")
+
+[node name="trendy Shirt from substance" unique_id=1625029029 instance=ExtResource("1_q2eui")]
+transform = Transform3D(10, 0, 0, 0, 10, 0, 0, 0, 10, 0, -0.65192354, 0)
+
+[node name="T_SHIRT3_pasted__pasted__pasted__pasted__pasted__polySurface50" parent="group3/pasted__group4/pasted__pasted__group1/pasted__pasted__pasted__group/T_SHIRT3_group2/T_SHIRT3_pasted__group27/T_SHIRT3_pasted__pasted__group1/T_SHIRT3_pasted__pasted__pasted__group19/T_SHIRT3_pasted__pasted__pasted__pasted__group" parent_id_path=PackedInt32Array(1791012051) index="0" unique_id=260775721]
+surface_material_override/0 = SubResource("StandardMaterial3D_q32ib")
+
+[node name="pasted__pasted__pasted__Hoodie_Hood_lo" parent="group3/pasted__group4/pasted__pasted__group2" parent_id_path=PackedInt32Array(1744532588) index="0" unique_id=348707181]
+surface_material_override/0 = SubResource("StandardMaterial3D_6ffo1")

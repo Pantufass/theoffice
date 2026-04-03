@@ -1,0 +1,6 @@
+[gd_resource type="StandardMaterial3D" format=3 uid="uid://ygwaxyuc3k74"]
+
+[ext_resource type="Texture2D" uid="uid://06t6dpt7ecfr" path="res://Defunct/sexist/shirtpattern/Hawaii.jpg" id="1_ugwql"]
+
+[resource]
+albedo_texture = ExtResource("1_ugwql")

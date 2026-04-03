@@ -1,0 +1,14 @@
+[gd_scene format=3 uid="uid://buebjrjujuf2"]
+
+[ext_resource type="PackedScene" uid="uid://bqg8kxr57r61n" path="res://Defunct/sexist/NewItems/coffetable/antique_desk.glb" id="1_5rkvl"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_trdp3"]
+size = Vector3(1, 0.94348145, 1.9663086)
+
+[node name="Sketchfab_Scene" unique_id=187761789 instance=ExtResource("1_5rkvl")]
+
+[node name="RigidBody3D" type="RigidBody3D" parent="." index="1" unique_id=1916802443]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="RigidBody3D" index="0" unique_id=1216338749]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.028259277, -0.0017089844)
+shape = SubResource("BoxShape3D_trdp3")

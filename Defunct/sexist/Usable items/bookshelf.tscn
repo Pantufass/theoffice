@@ -1,0 +1,12 @@
+[gd_scene format=3 uid="uid://dxp4wi172u2y4"]
+
+[ext_resource type="PackedScene" uid="uid://dp3uth5ujawkq" path="res://Defunct/sexist/House Assets/Bookshelf.fbx" id="1_cyyaw"]
+[ext_resource type="Texture2D" uid="uid://j4g2vjj38fp4" path="res://Defunct/sexist/House textures/BookShelf.png" id="2_pweli"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_7ue8p"]
+albedo_texture = ExtResource("2_pweli")
+
+[node name="Bookshelf" unique_id=1336246402 instance=ExtResource("1_cyyaw")]
+
+[node name="Bookcase" parent="." index="0" unique_id=1139240530]
+surface_material_override/0 = SubResource("StandardMaterial3D_7ue8p")

@@ -1,0 +1,8 @@
+[gd_scene format=3 uid="uid://cntemlpapu03j"]
+
+[ext_resource type="PackedScene" uid="uid://4i5raehxjmnl" path="res://Defunct/sexist/dioporco/comedor_joka.glb" id="1_rnnjv"]
+
+[node name="comedor_joka" unique_id=1822568126 instance=ExtResource("1_rnnjv")]
+
+[node name="piso" parent="." index="0" unique_id=1670414859]
+visible = false
