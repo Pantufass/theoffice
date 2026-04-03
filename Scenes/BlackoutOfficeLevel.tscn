@@ -1,0 +1,69 @@
+[gd_scene format=3 uid="uid://dmd6xekwcsjda"]
+
+[ext_resource type="PackedScene" uid="uid://bay7leqlone42" path="res://Objects/player.tscn" id="1_cmucv"]
+
+[sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_cmucv"]
+
+[sub_resource type="Sky" id="Sky_cmucv"]
+sky_material = SubResource("ProceduralSkyMaterial_cmucv")
+
+[sub_resource type="Environment" id="Environment_cmucv"]
+background_mode = 2
+sky = SubResource("Sky_cmucv")
+
+[sub_resource type="CameraAttributesPractical" id="CameraAttributesPractical_5lges"]
+
+[node name="Node3D" type="Node3D" unique_id=649668159]
+
+[node name="ComputerRoom" type="CSGCombiner3D" parent="." unique_id=737245815]
+use_collision = true
+
+[node name="CSGBox3D" type="CSGBox3D" parent="ComputerRoom" unique_id=1903028319]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.00049999356, 0)
+size = Vector3(3, 0.001, 2)
+
+[node name="CSGBox3D2" type="CSGBox3D" parent="ComputerRoom" unique_id=1254363447]
+transform = Transform3D(1, 0, 0, 0, -4.371139e-08, -1, 0, 1, -4.371139e-08, 0, 0.49950004, 1)
+size = Vector3(3, 0.001, 1)
+
+[node name="CSGBox3D3" type="CSGBox3D" parent="ComputerRoom" unique_id=1540786005]
+transform = Transform3D(1, 0, 0, 0, -4.371139e-08, -1, 0, 1, -4.371139e-08, 0, 0.49950004, -1)
+size = Vector3(3, 0.001, 1)
+
+[node name="CSGBox3D4" type="CSGBox3D" parent="ComputerRoom" unique_id=535868658]
+transform = Transform3D(-4.371139e-08, -1, 4.371139e-08, 0, -4.371139e-08, -1, 1, -4.371139e-08, 1.9106855e-15, 1.5, 0.49950004, 0)
+size = Vector3(2, 0.001, 1)
+
+[node name="CSGBox3D5" type="CSGBox3D" parent="ComputerRoom" unique_id=1484794402]
+transform = Transform3D(-4.371139e-08, -1, 4.371139e-08, 0, -4.371139e-08, -1, 1, -4.371139e-08, 1.9106855e-15, -1.5, 0.49950004, 0)
+size = Vector3(2, 0.001, 1)
+
+[node name="CSGBox3D6" type="CSGBox3D" parent="ComputerRoom" unique_id=296246022]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.5, 0.100000024, 0)
+operation = 2
+size = Vector3(0.2, 1.2, 0.5)
+
+[node name="CSGBox3D7" type="CSGBox3D" parent="ComputerRoom" unique_id=1033649609]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.5, 0.100000024, 0)
+operation = 2
+size = Vector3(0.2, 1.2, 0.5)
+
+[node name="CSGBox3D8" type="CSGBox3D" parent="ComputerRoom" unique_id=1908436933]
+transform = Transform3D(-4.371139e-08, 0, -1, 0, 1, 0, 1, 0, -4.371139e-08, 0.29999995, 0.100000024, 1)
+operation = 2
+size = Vector3(0.2, 1.2, 0.5)
+
+[node name="PlayerCharacter" parent="." unique_id=1521709859 instance=ExtResource("1_cmucv")]
+transform = Transform3D(0.3, 0, 0, 0, 0.3, 0, 0, 0, 0.3, 0.1, 0, -0.1)
+SprintSpeed = 3.0
+WalkSpeed = 0.5
+JumpPeakTime = 0.5
+JumpFallTime = 0.5
+JumpHeight = 2.0
+JumpDistance = 4.0
+CoyoteTime = 0.1
+MaxFallSpeed = 12.0
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="." unique_id=1011705015]
+environment = SubResource("Environment_cmucv")
+camera_attributes = SubResource("CameraAttributesPractical_5lges")
