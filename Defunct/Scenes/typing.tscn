@@ -37,6 +37,9 @@ grow_vertical = 2
 theme_override_constants/separation = 70
 split_offsets = PackedInt32Array(40, 135, 187, 282, 332, 382, 432)
 dragging_enabled = false
+drag_area_margin_begin = 10
+drag_area_margin_end = 10
+drag_area_offset = 10
 split_offset = 40
 
 [node name="MarginContainer" type="MarginContainer" parent="Container" unique_id=611981744]
@@ -67,7 +70,8 @@ layout_mode = 2
 [node name="MarginContainer5" type="MarginContainer" parent="Container" unique_id=65688492]
 layout_mode = 2
 
-[node name="ReadLabel" type="RichTextLabel" parent="Container" unique_id=928035424]
+[node name="TypingLabel" type="RichTextLabel" parent="Container" unique_id=928035424]
+unique_name_in_owner = true
 custom_minimum_size = Vector2(350, 0)
 layout_mode = 2
 theme_override_font_sizes/normal_font_size = 42

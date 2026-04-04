@@ -1,15 +1,15 @@
 [gd_scene format=3 uid="uid://dkqgmryje87j8"]
 
-[ext_resource type="Script" uid="uid://cshg44jm410n3" path="res://Scripts/UI/OnPc.cs" id="1_t2wvu"]
+[ext_resource type="Script" uid="uid://byr118yirby2d" path="res://Scripts/UI/Typing.cs" id="1_e8c4i"]
 [ext_resource type="PackedScene" uid="uid://cv7y1e8vjfkel" path="res://Defunct/Scenes/finalScreen.tscn" id="2_2gxi5"]
 [ext_resource type="PackedScene" uid="uid://6ro81qds71v3" path="res://Defunct/Scenes/typing.tscn" id="2_85k7a"]
 [ext_resource type="PackedScene" uid="uid://dpi48qij7xmij" path="res://Defunct/Scenes/char_select.tscn" id="3_2gxi5"]
+[ext_resource type="LabelSettings" uid="uid://xa0n04llyoxl" path="res://UI/PressedKeySetting.tres" id="5_redui"]
 
-[node name="OnPC" type="CanvasLayer" unique_id=203585400 node_paths=PackedStringArray("Typing", "CharSelect", "FinalScreen")]
-script = ExtResource("1_t2wvu")
-Typing = NodePath("Typing")
-CharSelect = NodePath("CharSelect")
-FinalScreen = NodePath("FinalScreen")
+[node name="OnPC" type="CanvasLayer" unique_id=203585400 node_paths=PackedStringArray("fullTimer", "KeyLine")]
+script = ExtResource("1_e8c4i")
+fullTimer = NodePath("Timer")
+KeyLine = NodePath("Container/VSplitContainer/KeyLine")
 
 [node name="Background" type="ColorRect" parent="." unique_id=644131289]
 anchors_preset = 15
@@ -22,10 +22,172 @@ color = Color(0.11764706, 0.02745098, 0.3137255, 1)
 [node name="Typing" parent="." unique_id=1682653831 instance=ExtResource("2_85k7a")]
 
 [node name="FinalScreen" parent="." unique_id=441014253 instance=ExtResource("2_2gxi5")]
+visible = false
 
 [node name="CharSelect" parent="." unique_id=2031427807 instance=ExtResource("3_2gxi5")]
+visible = false
 
-[node name="FullTimer" type="Timer" parent="." unique_id=1921347659]
+[node name="Timer" type="Timer" parent="." unique_id=1921347659]
 wait_time = 30.0
 
-[connection signal="timeout" from="FullTimer" to="." method="Finish"]
+[node name="Container" type="Control" parent="." unique_id=1992306370]
+layout_mode = 3
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -16.0
+offset_top = -143.0
+offset_right = 24.0
+offset_bottom = -103.0
+grow_horizontal = 2
+grow_vertical = 0
+
+[node name="VSplitContainer" type="VSplitContainer" parent="Container" unique_id=2020611662]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+split_offsets = PackedInt32Array(45)
+split_offset = 45
+
+[node name="KeyLine" type="HSplitContainer" parent="Container/VSplitContainer" unique_id=1340727347]
+unique_name_in_owner = true
+layout_mode = 2
+split_offsets = PackedInt32Array(25, 67, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0)
+split_offset = 25
+
+[node name="Q" type="Label" parent="Container/VSplitContainer/KeyLine" unique_id=804417414]
+layout_mode = 2
+text = "Q"
+label_settings = ExtResource("5_redui")
+
+[node name="A" type="Label" parent="Container/VSplitContainer/KeyLine" unique_id=511238929]
+layout_mode = 2
+text = "A"
+label_settings = ExtResource("5_redui")
+
+[node name="Z" type="Label" parent="Container/VSplitContainer/KeyLine" unique_id=206344638]
+layout_mode = 2
+text = "Z"
+label_settings = ExtResource("5_redui")
+
+[node name="W" type="Label" parent="Container/VSplitContainer/KeyLine" unique_id=2126393096]
+layout_mode = 2
+text = "W"
+label_settings = ExtResource("5_redui")
+
+[node name="S" type="Label" parent="Container/VSplitContainer/KeyLine" unique_id=483242343]
+layout_mode = 2
+text = "S"
+label_settings = ExtResource("5_redui")
+
+[node name="X" type="Label" parent="Container/VSplitContainer/KeyLine" unique_id=1238443923]
+layout_mode = 2
+text = "X"
+label_settings = ExtResource("5_redui")
+
+[node name="E" type="Label" parent="Container/VSplitContainer/KeyLine" unique_id=1044083900]
+layout_mode = 2
+text = "E"
+label_settings = ExtResource("5_redui")
+
+[node name="D" type="Label" parent="Container/VSplitContainer/KeyLine" unique_id=1044740024]
+layout_mode = 2
+text = "D"
+label_settings = ExtResource("5_redui")
+
+[node name="C" type="Label" parent="Container/VSplitContainer/KeyLine" unique_id=1841971783]
+layout_mode = 2
+text = "C"
+label_settings = ExtResource("5_redui")
+
+[node name="R" type="Label" parent="Container/VSplitContainer/KeyLine" unique_id=2129182087]
+layout_mode = 2
+text = "R"
+label_settings = ExtResource("5_redui")
+
+[node name="F" type="Label" parent="Container/VSplitContainer/KeyLine" unique_id=251109337]
+layout_mode = 2
+text = "F"
+label_settings = ExtResource("5_redui")
+
+[node name="V" type="Label" parent="Container/VSplitContainer/KeyLine" unique_id=230115297]
+layout_mode = 2
+text = "V"
+label_settings = ExtResource("5_redui")
+
+[node name="T" type="Label" parent="Container/VSplitContainer/KeyLine" unique_id=1774866803]
+layout_mode = 2
+text = "T"
+label_settings = ExtResource("5_redui")
+
+[node name="G" type="Label" parent="Container/VSplitContainer/KeyLine" unique_id=1461762119]
+layout_mode = 2
+text = "G"
+label_settings = ExtResource("5_redui")
+
+[node name="B" type="Label" parent="Container/VSplitContainer/KeyLine" unique_id=1128088137]
+layout_mode = 2
+text = "B"
+label_settings = ExtResource("5_redui")
+
+[node name="Y" type="Label" parent="Container/VSplitContainer/KeyLine" unique_id=1917282007]
+layout_mode = 2
+text = "Y"
+label_settings = ExtResource("5_redui")
+
+[node name="H" type="Label" parent="Container/VSplitContainer/KeyLine" unique_id=146955750]
+layout_mode = 2
+text = "H"
+label_settings = ExtResource("5_redui")
+
+[node name="N" type="Label" parent="Container/VSplitContainer/KeyLine" unique_id=346549563]
+layout_mode = 2
+text = "N"
+label_settings = ExtResource("5_redui")
+
+[node name="U" type="Label" parent="Container/VSplitContainer/KeyLine" unique_id=1583852602]
+layout_mode = 2
+text = "U"
+label_settings = ExtResource("5_redui")
+
+[node name="J" type="Label" parent="Container/VSplitContainer/KeyLine" unique_id=515087994]
+layout_mode = 2
+text = "J"
+label_settings = ExtResource("5_redui")
+
+[node name="M" type="Label" parent="Container/VSplitContainer/KeyLine" unique_id=912152670]
+layout_mode = 2
+text = "M"
+label_settings = ExtResource("5_redui")
+
+[node name="I" type="Label" parent="Container/VSplitContainer/KeyLine" unique_id=2081266486]
+layout_mode = 2
+text = "I"
+label_settings = ExtResource("5_redui")
+
+[node name="K" type="Label" parent="Container/VSplitContainer/KeyLine" unique_id=2033603833]
+layout_mode = 2
+text = "K"
+label_settings = ExtResource("5_redui")
+
+[node name="O" type="Label" parent="Container/VSplitContainer/KeyLine" unique_id=1214849209]
+layout_mode = 2
+text = "O"
+label_settings = ExtResource("5_redui")
+
+[node name="L" type="Label" parent="Container/VSplitContainer/KeyLine" unique_id=896128233]
+layout_mode = 2
+text = "L"
+label_settings = ExtResource("5_redui")
+
+[node name="P" type="Label" parent="Container/VSplitContainer/KeyLine" unique_id=1286544691]
+layout_mode = 2
+text = "P"
+label_settings = ExtResource("5_redui")
+
+[connection signal="timeout" from="Timer" to="." method="Finish"]
