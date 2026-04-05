@@ -4,6 +4,7 @@ using System;
 
 public partial class PlayerCharacter : CharacterBody3D
 {
+	public bool Enabled { get;  set; } = true;
 	// ────────── Nodes ──────────
 	private Godot.Range sprintBar;
 	[Export] public Node3D Hand;
@@ -219,6 +220,13 @@ public partial class PlayerCharacter : CharacterBody3D
 	// ────────── Input ──────────
 	public override void _Input(InputEvent input)
 	{
+		if(!Enabled) return;
+
+		if (Typing.isActive && (input.IsActionPressed("ui_cancel") || Input.IsActionJustPressed("Interact")))
+    	{
+    	    return;
+    	}
+
 		if(Input.IsActionJustPressed("Interact") && CurrentInteractable != null)
 		{
 			CurrentInteractable.Interact(this);
@@ -424,7 +432,7 @@ public partial class PlayerCharacter : CharacterBody3D
 
 	public override void _Process(double delta)
 	{
-        if(sitting) return;
+        if(sitting || !Enabled) return;
 		CheckInteractable(delta);
 		if(SubviewportCamera != null && MainCamera != null)
 		{
@@ -436,6 +444,7 @@ public partial class PlayerCharacter : CharacterBody3D
 	// ────────── Physics ──────────
 	public override void _PhysicsProcess(double delta)
 	{
+		if(!Enabled) return;
 		float d = (float)delta;
 
 		SprintReplenish(d);

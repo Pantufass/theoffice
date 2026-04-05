@@ -16,7 +16,14 @@ public partial class Typing : CanvasLayer
     [Export] public HSplitContainer KeyLine;
     private Dictionary<char, Tween> releaseTweens = new Dictionary<char, Tween>();
     private Dictionary<char, Label> keyMap = new Dictionary<char, Label>();
-  
+    public static bool isActive = false;
+
+    [Signal]
+    public delegate void TypingCompletedEventHandler(float accuracy);
+
+    [Signal] 
+    public delegate void TypingCancelledEventHandler();
+    
 	public override void _Ready()
 	{
 		if(TypingLabel == null) TypingLabel = GetNode<RichTextLabel>("Typing/Container/TypingLabel");
@@ -43,23 +50,60 @@ public partial class Typing : CanvasLayer
 	{
 		TimerLabel.Text = Mathf.Ceil(fullTimer.TimeLeft).ToString();
 	}
+    public void EnableTyping(bool active)
+    {
+        isActive = active;
+        Visible = active;
+
+        if (active)
+        {
+            // Reset typing
+            typed = "";
+            wrongChars = 0;
+            TypingLabel.Text = words;
+            fullTimer.Start();
+            
+            // Grab focus on a Control inside this scene
+            TypingLabel.GrabFocus();
+            
+            // Release mouse for keyboard input
+            Input.MouseMode = Input.MouseModeEnum.Visible;
+            SetProcessInput(true);
+        }
+        else
+        {
+            SetProcessInput(false);
+            Input.MouseMode = Input.MouseModeEnum.Captured;
+        }
+    }
 
 	public override void _Input(InputEvent e)
 	{
-		if (e is InputEventKey keyEvent)
+        GD.Print("Input received in Typing: " + e);
+        if (!isActive) return;
+
+        if (e is InputEventKey keyEvent)
         {
+            if(keyEvent.Pressed && keyEvent.Keycode == Key.Escape)
+            {
+                Finished();
+                return;
+            }
+
             if (keyEvent.Pressed && keyEvent.Unicode != 0)
             {
                 char c = (char)keyEvent.Unicode;
                 UpdateColorSentence(c);
                 AnimateKey(c);
             }
+
             if (keyEvent.IsReleased())
             {
                 char c = (char)keyEvent.Keycode;
                 DisanimateKey(c);
             }
         }
+
 	}
 
     private void AnimateKey(char c)
@@ -137,9 +181,21 @@ public partial class Typing : CanvasLayer
 
     public void Finished()
     {
-        fullTimer.Stop();
         fullAccuracy = CalcAccuracy();
         GD.Print("Finished! Accuracy: " + (fullAccuracy * 100).ToString("F2") + "%");
+        
+        CancelTyping();
+    }
+
+    private void CancelTyping()
+    {
+        fullTimer.Stop();
+        EnableTyping(false);
+        var player = GetTree().GetFirstNodeInGroup("PlayerCharacter") as PlayerCharacter;
+        if (player != null)
+        {
+            player.Enabled = true;
+        }        
     }
 
 	private float CalcAccuracy()
@@ -147,4 +203,11 @@ public partial class Typing : CanvasLayer
 		return words.Length > 0 ? (words.Length - wrongChars) / (float)words.Length : 0;
 	}
 	
+    public void GrabFocus()
+    {
+        // Make sure this CanvasLayer captures input
+        SetProcessInput(true);
+        // Optional: Release mouse capture so keyboard works
+        Input.MouseMode = Input.MouseModeEnum.Captured;
+    } 
 }

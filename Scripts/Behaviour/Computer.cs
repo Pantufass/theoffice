@@ -6,6 +6,7 @@ public partial class Computer : Interactable
 	[Export] public MeshInstance3D Screen;
 	[Export] public SubViewport SubViewport;
 	[Export] public Texture2D BackgroundImage; 
+	[Export] public Typing TypingUI; 
 	private Texture2D current; 
 	
 	private StandardMaterial3D _screenMaterial;
@@ -13,13 +14,17 @@ public partial class Computer : Interactable
 	private TextureRect _tvImage;
 	private Timer _imageTimer;
     private Label _textDisplay;
+	
+    private PlayerCharacter currentPlayer;
+	
 
 	public override void _Ready()
 	{
 		base._Ready();
 		if(Screen == null) Screen = GetNode<MeshInstance3D>("Screen");
 		if(SubViewport == null) SubViewport = Screen.GetNode<SubViewport>("SubViewport");
-		
+		if(TypingUI == null) TypingUI = GetNode<Typing>("Screen/SubViewport/OnPC"); 
+
 		ConfigureViewport();
 
 		_screenMaterial = new StandardMaterial3D
@@ -130,10 +135,27 @@ public partial class Computer : Interactable
 	public override void Interact(PlayerCharacter player)
 	{
 		base.Interact(player);
-        //TODO 
+        
+    	if (TypingUI != null)
+    	{
+			GD.Print("Enabling typing UI");
+		    TypingUI.EnableTyping(true);
 
+        	player.Enabled = false; 
+    	}
 
 	}
+	public override void _Input(InputEvent @event)
+    {
+        if (TypingUI != null && TypingUI.Visible && Typing.isActive)
+    	{
+    	    // Mark input as handled so it doesn't go elsewhere
+    	    GetViewport().SetInputAsHandled();
+	
+    	    // Forward to SubViewport
+    	    SubViewport.PushInput(@event);
+    	}
+    }
 
 	internal void ShowImage()
 	{

@@ -4,9 +4,11 @@ using System.Collections.Generic;
 public partial class Interactable : Node3D, IInteractable
 {
 	[Export] public bool DebugMode = false;
+	[Export] public bool GlowOn = true;
 	[Export] public string InteractText = "Interacted";
 	[Export] public Color GlowColor = new Color(1, 1, 0.7f, 0.03f);
 	[Export] public float GlowWidth = 0.002f;
+	private string shaderPath = "res://UI/Shaders/edge_glow.gdshader";
 	
 	private List<MeshInstance3D> _originalMeshes = new List<MeshInstance3D>();
 	private List<MeshInstance3D> _glowMeshes = new List<MeshInstance3D>();
@@ -18,7 +20,7 @@ public partial class Interactable : Node3D, IInteractable
 		
 		// Create glow material
 		_glowMaterial = new ShaderMaterial();
-		_glowMaterial.Shader = GD.Load<Shader>("res://edge_glow.gdshader");
+		_glowMaterial.Shader = GD.Load<Shader>(shaderPath);
 		_glowMaterial.SetShaderParameter("glow_color", GlowColor);
 		_glowMaterial.SetShaderParameter("glow_width", GlowWidth);
 		
@@ -30,9 +32,11 @@ public partial class Interactable : Node3D, IInteractable
 		{
 			CreateGlowMesh(mesh);
 		}
-		
+		var tempGlow = GlowOn;
+		GlowOn = true;
 		// Start hidden
 		ShowGlow(false);
+		GlowOn = tempGlow;
 	}
 	
 	private void FindAllMeshes(Node node)
@@ -71,6 +75,7 @@ public partial class Interactable : Node3D, IInteractable
 	
 	private void ShowGlow(bool show)
 	{
+		if(!GlowOn) return;
 		foreach (var glow in _glowMeshes)
 		{
 			if (glow != null)
@@ -96,13 +101,15 @@ public partial class Interactable : Node3D, IInteractable
 	public virtual void OnFocus(PlayerCharacter player)
 	{
 		ShowGlow(true);
-		player.SetHint("FOCUSED");
+		if(DebugMode)
+			player.SetHint("FOCUSED");
 	}
 
 	public virtual void OnUnfocus(PlayerCharacter player)
 	{
 		ShowGlow(false);
-		player.SetHint("");
+		if(DebugMode)
+			player.SetHint("");
 	}
 	
 	public virtual void Interact(PlayerCharacter player)

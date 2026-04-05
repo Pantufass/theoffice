@@ -4,7 +4,7 @@
 [ext_resource type="PackedScene" uid="uid://cv7y1e8vjfkel" path="res://Defunct/Scenes/finalScreen.tscn" id="2_2gxi5"]
 [ext_resource type="PackedScene" uid="uid://6ro81qds71v3" path="res://Defunct/Scenes/typing.tscn" id="2_85k7a"]
 [ext_resource type="PackedScene" uid="uid://dpi48qij7xmij" path="res://Defunct/Scenes/char_select.tscn" id="3_2gxi5"]
-[ext_resource type="LabelSettings" uid="uid://xa0n04llyoxl" path="res://UI/PressedKeySetting.tres" id="5_redui"]
+[ext_resource type="LabelSettings" uid="uid://xa0n04llyoxl" path="res://UI/FontSettings/PressedKeySetting.tres" id="5_redui"]
 
 [node name="OnPC" type="CanvasLayer" unique_id=203585400 node_paths=PackedStringArray("fullTimer", "KeyLine")]
 script = ExtResource("1_e8c4i")
