@@ -140,14 +140,16 @@ public partial class Computer : Interactable
     	{
 			GD.Print("Enabling typing UI");
 		    TypingUI.EnableTyping(true);
-
-        	player.Enabled = false; 
     	}
 
 	}
 	public override void _Input(InputEvent @event)
     {
-        if (TypingUI != null && TypingUI.Visible && Typing.isActive)
+		if (@event is InputEventKey keyEvent && keyEvent.Keycode == Key.Escape)
+    	{
+    	    return; // Let Typing UI handle Escape
+    	}
+        if (TypingUI != null && Typing.isActive)
     	{
     	    // Mark input as handled so it doesn't go elsewhere
     	    GetViewport().SetInputAsHandled();

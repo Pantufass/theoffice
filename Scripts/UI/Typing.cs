@@ -53,7 +53,6 @@ public partial class Typing : CanvasLayer
     public void EnableTyping(bool active)
     {
         isActive = active;
-        Visible = active;
 
         if (active)
         {
@@ -66,26 +65,27 @@ public partial class Typing : CanvasLayer
             // Grab focus on a Control inside this scene
             TypingLabel.GrabFocus();
             
-            // Release mouse for keyboard input
-            Input.MouseMode = Input.MouseModeEnum.Visible;
+            PlayerInstance.SetTypingMode(true);
             SetProcessInput(true);
         }
         else
         {
             SetProcessInput(false);
-            Input.MouseMode = Input.MouseModeEnum.Captured;
+            PlayerInstance.SetTypingMode(false);
+
         }
     }
 
 	public override void _Input(InputEvent e)
 	{
-        GD.Print("Input received in Typing: " + e);
         if (!isActive) return;
 
         if (e is InputEventKey keyEvent)
         {
-            if(keyEvent.Pressed && keyEvent.Keycode == Key.Escape)
+            if(keyEvent.Pressed && keyEvent.Keycode == Key.Backspace)
             {
+                GD.Print("Typing cancelled by user");
+                GetViewport().SetInputAsHandled();
                 Finished();
                 return;
             }
@@ -191,11 +191,7 @@ public partial class Typing : CanvasLayer
     {
         fullTimer.Stop();
         EnableTyping(false);
-        var player = GetTree().GetFirstNodeInGroup("PlayerCharacter") as PlayerCharacter;
-        if (player != null)
-        {
-            player.Enabled = true;
-        }        
+        PlayerInstance.SetTypingMode(false);   
     }
 
 	private float CalcAccuracy()
@@ -203,11 +199,4 @@ public partial class Typing : CanvasLayer
 		return words.Length > 0 ? (words.Length - wrongChars) / (float)words.Length : 0;
 	}
 	
-    public void GrabFocus()
-    {
-        // Make sure this CanvasLayer captures input
-        SetProcessInput(true);
-        // Optional: Release mouse capture so keyboard works
-        Input.MouseMode = Input.MouseModeEnum.Captured;
-    } 
 }
