@@ -13,6 +13,7 @@
 | Cancel Typing | ESC |
 
 ## Project Structure
+```
 root/
 ├── Assets/ # 3D assets and models
 │ └── ObjectFolder/ # Individual model folders
@@ -30,7 +31,7 @@ root/
 │ ├── FontSettings/ # Godot font settings
 │ └── Shaders/ # Shader files
 └── project.godot # Godot project file (v4.6.2)
-
+```
 
 ## Naming Convention
 
