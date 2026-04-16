@@ -1,0 +1,164 @@
+[gd_scene format=3 uid="uid://cec8ykqksjtkx"]
+
+[ext_resource type="PackedScene" uid="uid://bay7leqlone42" path="res://Objects/player.tscn" id="1_r05fc"]
+
+[sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_t6kmc"]
+
+[sub_resource type="Sky" id="Sky_cmucv"]
+sky_material = SubResource("ProceduralSkyMaterial_t6kmc")
+
+[sub_resource type="Environment" id="Environment_worix"]
+background_mode = 2
+sky = SubResource("Sky_cmucv")
+
+[sub_resource type="CameraAttributesPractical" id="CameraAttributesPractical_sewj0"]
+
+[node name="HallwayCorner" type="Node3D" unique_id=343592504]
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="." unique_id=639429901]
+environment = SubResource("Environment_worix")
+camera_attributes = SubResource("CameraAttributesPractical_sewj0")
+
+[node name="PlayerCharacter" parent="." unique_id=1521709859 instance=ExtResource("1_r05fc")]
+
+[node name="HallwayShort" type="CSGCombiner3D" parent="." unique_id=1847416873]
+transform = Transform3D(5, 0, 0, 0, 5, 0, 0, 0, 5, 0, 0, 0)
+use_collision = true
+
+[node name="BuildingExterior" type="CSGCombiner3D" parent="HallwayShort" unique_id=892276611]
+
+[node name="Floor" type="CSGBox3D" parent="HallwayShort/BuildingExterior" unique_id=370768518]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.14999996, -0.00049999356, 0)
+size = Vector3(3.3, 0.001, 1.1)
+
+[node name="Floor2" type="CSGBox3D" parent="HallwayShort/BuildingExterior" unique_id=1672124501]
+transform = Transform3D(-4.3711392e-08, 0, -1, 0, 1, 0, 1, 0, -4.3711392e-08, 1.2500001, -0.00049999356, 2.1000001)
+size = Vector3(3.1000001, 0.001, 1.1)
+
+[node name="Ceiling" type="CSGBox3D" parent="HallwayShort/BuildingExterior" unique_id=22081493]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.4, 0.9995, 0)
+visible = false
+size = Vector3(2.2, 0.001, 1.1)
+
+[node name="EastWall" type="CSGBox3D" parent="HallwayShort/BuildingExterior" unique_id=669903531]
+transform = Transform3D(1, 0, 0, 0, -4.3711392e-08, -1, 0, 1, -4.3711392e-08, -0.39999995, 0.49950004, 0.53999996)
+size = Vector3(2.2, 0.001, 1)
+
+[node name="EastWall2" type="CSGBox3D" parent="HallwayShort/BuildingExterior" unique_id=24106447]
+transform = Transform3D(-4.3711392e-08, -1, 4.3711392e-08, 0, -4.3711392e-08, -1, 1, -4.3711392e-08, 1.9106859e-15, 0.70000005, 0.49950004, 2.09)
+size = Vector3(3.1000001, 0.001, 1)
+
+[node name="EastWall3" type="CSGBox3D" parent="HallwayShort/BuildingExterior" unique_id=1451019878]
+transform = Transform3D(-4.3711392e-08, -1, 4.3711392e-08, 0, -4.3711392e-08, -1, 1, -4.3711392e-08, 1.9106859e-15, 1.8000001, 0.49950004, 1.54)
+size = Vector3(4.2000003, 0.001, 1)
+
+[node name="WestWall" type="CSGBox3D" parent="HallwayShort/BuildingExterior" unique_id=1611255184]
+transform = Transform3D(1, 0, 0, 0, -4.3711392e-08, -1, 0, 1, -4.3711392e-08, 0.1499999, 0.49950004, -0.53999996)
+size = Vector3(3.3, 0.001, 1)
+
+[node name="NorthWall" type="CSGBox3D" parent="HallwayShort/BuildingExterior" unique_id=1967586012]
+transform = Transform3D(-1, 8.7422784e-08, -3.8213718e-15, 0, -4.3711392e-08, -1, -8.7422784e-08, -1, 4.3711392e-08, 1.2500002, 0.49950004, 3.6347349)
+size = Vector3(1.1, 0.001, 1)
+
+[node name="NorthDoor" type="CSGBox3D" parent="HallwayShort/BuildingExterior" unique_id=259080130]
+transform = Transform3D(-4.3711392e-08, 0, -1, 0, 1, 0, 1, 0, -4.3711392e-08, 1.2500002, 0.100000024, 3.7099998)
+operation = 2
+size = Vector3(0.2, 1.2, 0.5)
+
+[node name="SouthWall" type="CSGBox3D" parent="HallwayShort/BuildingExterior" unique_id=1826367129]
+transform = Transform3D(-4.3711392e-08, -1, 4.3711392e-08, 0, -4.3711392e-08, -1, 1, -4.3711392e-08, 1.9106855e-15, -1.5, 0.49950004, 0)
+size = Vector3(1.1, 0.001, 1)
+
+[node name="SouthDoor" type="CSGBox3D" parent="HallwayShort/BuildingExterior" unique_id=282708258]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.5, 0.100000024, 0)
+operation = 2
+size = Vector3(0.2, 1.2, 0.5)
+
+[node name="Desk2" type="CSGCombiner3D" parent="HallwayShort" unique_id=286388812]
+transform = Transform3D(-1, 8.7422784e-08, -3.8213718e-15, 8.7422784e-08, 1, -2.842171e-15, 3.8213718e-15, -2.842171e-15, -1, 0.8500002, -0.02049998, 3.0747347)
+
+[node name="CSGBox3D4" type="CSGBox3D" parent="HallwayShort/Desk2" unique_id=563354327]
+transform = Transform3D(-4.3711392e-08, 0, 1, 0, 1, 0, -1, 0, -4.3711392e-08, -0.64000005, 0.11000001, 0.49)
+size = Vector3(0.1, 0.2, 0.2)
+
+[node name="CSGBox3D2" type="CSGBox3D" parent="HallwayShort/Desk2" unique_id=1309799684]
+transform = Transform3D(-4.3711392e-08, 0, 1, 0, 1, 0, -1, 0, -4.3711392e-08, -0.84, 0.11000001, 0.33999997)
+size = Vector3(0.4, 0.2, 0.2)
+
+[node name="WaterCooler" type="CSGCombiner3D" parent="HallwayShort" unique_id=614928666]
+transform = Transform3D(-1, 8.7422784e-08, 0, 8.7422784e-08, 1, 5.684342e-15, 0, 5.684342e-15, -1, 1.8700001, -0.020499969, 0.81473505)
+
+[node name="CSGBox3D5" type="CSGBox3D" parent="HallwayShort/WaterCooler" unique_id=54458413]
+transform = Transform3D(-4.7683717e-08, 0, 1, 0, 1, 0, -1, 0, -4.7683717e-08, 0.22000006, 0.11000001, -0.4)
+size = Vector3(0.2, 0.2, 0.2)
+
+[node name="CSGBox3D6" type="CSGCylinder3D" parent="HallwayShort/WaterCooler" unique_id=180799578]
+transform = Transform3D(-4.7683717e-08, 0, 1, 0, 1, 0, -1, 0, -4.7683717e-08, 0.22000006, 0.34500012, -0.4)
+radius = 0.11
+height = 0.25
+
+[node name="Desk3" type="CSGCombiner3D" parent="HallwayShort" unique_id=761318015]
+transform = Transform3D(-1, 8.7422784e-08, -3.8213718e-15, 8.7422784e-08, 1, -2.842171e-15, 3.8213718e-15, -2.842171e-15, -1, 0.8500002, -0.02049998, 2.6747348)
+
+[node name="CSGBox3D4" type="CSGBox3D" parent="HallwayShort/Desk3" unique_id=386112289]
+transform = Transform3D(-4.3711392e-08, 7.1054274e-15, 1, 2.1175824e-22, 1, -7.1054274e-15, -1, -2.1175824e-22, -4.3711392e-08, -0.64000005, 0.11, 0.18999982)
+size = Vector3(0.1, 0.2, 0.2)
+
+[node name="CSGBox3D2" type="CSGBox3D" parent="HallwayShort/Desk3" unique_id=56137633]
+transform = Transform3D(-4.3711392e-08, 0, 1, 0, 1, 0, -1, 0, -4.3711392e-08, -0.84, 0.11000001, 0.33999997)
+size = Vector3(0.4, 0.2, 0.2)
+
+[node name="Desk4" type="CSGCombiner3D" parent="HallwayShort" unique_id=1867041523]
+transform = Transform3D(1, -8.7422784e-08, 8.7422784e-08, 8.7422784e-08, 1, -2.842171e-15, -8.7422784e-08, 1.0484914e-14, 1, 1.6500002, -0.02049998, 0.63473505)
+
+[node name="CSGBox3D4" type="CSGBox3D" parent="HallwayShort/Desk4" unique_id=859224306]
+transform = Transform3D(-4.3711392e-08, 0, 1, 0, 1, 0, -1, 0, -4.3711392e-08, -0.64000005, 0.11000001, 0.49)
+size = Vector3(0.1, 0.2, 0.2)
+
+[node name="CSGBox3D2" type="CSGBox3D" parent="HallwayShort/Desk4" unique_id=1247971836]
+transform = Transform3D(-4.3711392e-08, 0, 1, 0, 1, 0, -1, 0, -4.3711392e-08, -0.84, 0.11000001, 0.33999997)
+size = Vector3(0.4, 0.2, 0.2)
+
+[node name="Desk5" type="CSGCombiner3D" parent="HallwayShort" unique_id=352998623]
+transform = Transform3D(1, -8.7422784e-08, 8.7422784e-08, 8.7422784e-08, 1, -2.842171e-15, -8.7422784e-08, 1.0484914e-14, 1, 1.6500002, -0.02049998, 1.0347348)
+
+[node name="CSGBox3D4" type="CSGBox3D" parent="HallwayShort/Desk5" unique_id=1445668429]
+transform = Transform3D(-4.3711392e-08, 7.1054274e-15, 1, 2.1175824e-22, 1, -7.1054274e-15, -1, -2.1175824e-22, -4.3711392e-08, -0.64000005, 0.11, 0.18999982)
+size = Vector3(0.1, 0.2, 0.2)
+
+[node name="CSGBox3D2" type="CSGBox3D" parent="HallwayShort/Desk5" unique_id=806428006]
+transform = Transform3D(-4.3711392e-08, 0, 1, 0, 1, 0, -1, 0, -4.3711392e-08, -0.84, 0.11000001, 0.33999997)
+size = Vector3(0.4, 0.2, 0.2)
+
+[node name="Desk6" type="CSGCombiner3D" parent="HallwayShort" unique_id=546334496]
+transform = Transform3D(4.3711395e-08, -6.6635434e-15, -1, 8.7422784e-08, 1, -2.8421716e-15, 1, -8.7422784e-08, 4.3711395e-08, 1.8700001, -0.02049998, 0.39473486)
+
+[node name="CSGBox3D4" type="CSGBox3D" parent="HallwayShort/Desk6" unique_id=2004277357]
+transform = Transform3D(-4.3711392e-08, 0, 1, 0, 1, 0, -1, 0, -4.3711392e-08, -0.64000005, 0.11000001, 0.49)
+size = Vector3(0.1, 0.2, 0.2)
+
+[node name="CSGBox3D2" type="CSGBox3D" parent="HallwayShort/Desk6" unique_id=546005761]
+transform = Transform3D(-4.3711392e-08, 0, 1, 0, 1, 0, -1, 0, -4.3711392e-08, -0.84, 0.11000001, 0.33999997)
+size = Vector3(0.4, 0.2, 0.2)
+
+[node name="Desk8" type="CSGCombiner3D" parent="HallwayShort/Desk6/CSGBox3D2" unique_id=296568837]
+transform = Transform3D(-1, 8.7422784e-08, 8.742279e-08, 8.742279e-08, 1, 8.742279e-08, -8.7422784e-08, 8.74228e-08, -1, -0.7000001, -0.11000003, 1.18)
+
+[node name="CSGBox3D4" type="CSGBox3D" parent="HallwayShort/Desk6/CSGBox3D2/Desk8" unique_id=343806141]
+transform = Transform3D(-4.3711392e-08, 7.1054274e-15, 1, -2.1175824e-22, 1, -7.1054274e-15, -1, -2.1175824e-22, -4.3711392e-08, -0.6400001, 0.11, 0.19000001)
+size = Vector3(0.1, 0.2, 0.2)
+
+[node name="CSGBox3D2" type="CSGBox3D" parent="HallwayShort/Desk6/CSGBox3D2/Desk8" unique_id=591122014]
+transform = Transform3D(-4.3711392e-08, 0, 1, 0, 1, 0, -1, 0, -4.3711392e-08, -0.84, 0.11000001, 0.33999997)
+size = Vector3(0.4, 0.2, 0.2)
+
+[node name="Desk7" type="CSGCombiner3D" parent="HallwayShort" unique_id=1179835835]
+transform = Transform3D(4.3711395e-08, -6.6635434e-15, -1, 8.7422784e-08, 1, -2.8421716e-15, 1, -8.7422784e-08, 4.3711395e-08, 1.4700005, -0.02049998, 0.39473486)
+
+[node name="CSGBox3D4" type="CSGBox3D" parent="HallwayShort/Desk7" unique_id=118729439]
+transform = Transform3D(-4.3711392e-08, 7.1054274e-15, 1, 2.1175824e-22, 1, -7.1054274e-15, -1, -2.1175824e-22, -4.3711392e-08, -0.64000005, 0.11, 0.18999982)
+size = Vector3(0.1, 0.2, 0.2)
+
+[node name="CSGBox3D2" type="CSGBox3D" parent="HallwayShort/Desk7" unique_id=2060951537]
+transform = Transform3D(-4.3711392e-08, 0, 1, 0, 1, 0, -1, 0, -4.3711392e-08, -0.84, 0.11000001, 0.33999997)
+size = Vector3(0.4, 0.2, 0.2)

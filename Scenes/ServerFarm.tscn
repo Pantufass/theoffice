@@ -1,0 +1,125 @@
+[gd_scene format=3 uid="uid://cjgk3yavyjj54"]
+
+[ext_resource type="PackedScene" uid="uid://bay7leqlone42" path="res://Objects/player.tscn" id="1_mxllt"]
+
+[sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_mxllt"]
+
+[sub_resource type="Sky" id="Sky_mxllt"]
+sky_material = SubResource("ProceduralSkyMaterial_mxllt")
+
+[sub_resource type="Environment" id="Environment_rh704"]
+background_mode = 2
+sky = SubResource("Sky_mxllt")
+
+[sub_resource type="CameraAttributesPractical" id="CameraAttributesPractical_ni0jx"]
+
+[node name="ServerFarm" type="Node3D" unique_id=2002356571]
+
+[node name="PlayerCharacter" parent="." unique_id=1521709859 instance=ExtResource("1_mxllt")]
+
+[node name="ServerFarm" type="CSGCombiner3D" parent="." unique_id=255994256]
+transform = Transform3D(5, 0, 0, 0, 5, 0, 0, 0, 5, 0, 0, 0)
+use_collision = true
+
+[node name="BuildingExterior" type="CSGCombiner3D" parent="ServerFarm" unique_id=890327883]
+
+[node name="Floor" type="CSGBox3D" parent="ServerFarm/BuildingExterior" unique_id=262991609]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.75, -0.00049999356, 0)
+size = Vector3(4.5, 0.001, 3.2)
+
+[node name="Ceiling" type="CSGBox3D" parent="ServerFarm/BuildingExterior" unique_id=1222275402]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.75, 0.9995, 0)
+size = Vector3(4.5, 0.001, 3.2)
+
+[node name="EastWall" type="CSGBox3D" parent="ServerFarm/BuildingExterior" unique_id=1575688463]
+transform = Transform3D(1, 0, 0, 0, -4.3711392e-08, -1, 0, 1, -4.3711392e-08, 0.75, 0.49950004, 1.6)
+size = Vector3(4.5, 0.001, 1)
+
+[node name="EastDoor" type="CSGBox3D" parent="ServerFarm/BuildingExterior" unique_id=1904540233]
+transform = Transform3D(-4.3711392e-08, 0, -1, 0, 1, 0, 1, 0, -4.3711392e-08, 0.29999995, 0.100000024, 1.6)
+operation = 2
+size = Vector3(0.2, 1.2, 0.5)
+
+[node name="WestWall" type="CSGBox3D" parent="ServerFarm/BuildingExterior" unique_id=1587643497]
+transform = Transform3D(1, 0, 0, 0, -4.3711392e-08, -1, 0, 1, -4.3711392e-08, 0.75, 0.49950004, -1.6)
+size = Vector3(4.5, 0.001, 1)
+
+[node name="NorthWall" type="CSGBox3D" parent="ServerFarm/BuildingExterior" unique_id=861773043]
+transform = Transform3D(-4.3711392e-08, -1, 4.3711392e-08, 0, -4.3711392e-08, -1, 1, -4.3711392e-08, 1.9106855e-15, 3.0000002, 0.49950004, 0)
+size = Vector3(3.2, 0.001, 1)
+
+[node name="NorthDoor" type="CSGBox3D" parent="ServerFarm/BuildingExterior" unique_id=807208540]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3.0600002, 0.100000024, 0)
+operation = 2
+size = Vector3(0.2, 1.2, 0.5)
+
+[node name="SouthWall" type="CSGBox3D" parent="ServerFarm/BuildingExterior" unique_id=1946497067]
+transform = Transform3D(-4.3711392e-08, -1, 4.3711392e-08, 0, -4.3711392e-08, -1, 1, -4.3711392e-08, 1.9106855e-15, -1.5, 0.49950004, 0)
+size = Vector3(3.2, 0.001, 1)
+
+[node name="SouthDoor" type="CSGBox3D" parent="ServerFarm/BuildingExterior" unique_id=1012117017]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.5, 0.100000024, 0)
+operation = 2
+size = Vector3(0.2, 1.2, 0.5)
+
+[node name="ServerRacks" type="CSGCombiner3D" parent="ServerFarm" unique_id=431513984]
+
+[node name="CSGBox3D" type="CSGBox3D" parent="ServerFarm/ServerRacks" unique_id=1030333661]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.68, 0.26000005, -1.1800001)
+size = Vector3(0.90000004, 0.5, 0.4)
+
+[node name="CSGBox3D2" type="CSGBox3D" parent="ServerFarm/ServerRacks" unique_id=1144501999]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.68, 0.26000005, -0.49999997)
+size = Vector3(0.90000004, 0.5, 0.4)
+
+[node name="CSGBox3D3" type="CSGBox3D" parent="ServerFarm/ServerRacks" unique_id=476426889]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.68, 0.26000005, 0.49800006)
+size = Vector3(0.90000004, 0.5, 0.4)
+
+[node name="CSGBox3D4" type="CSGBox3D" parent="ServerFarm/ServerRacks" unique_id=1376106006]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.68, 0.26000005, 1.1780001)
+size = Vector3(0.90000004, 0.5, 0.4)
+
+[node name="CSGBox3D5" type="CSGBox3D" parent="ServerFarm/ServerRacks" unique_id=1547642083]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.3, 0.26000005, -1.1800002)
+size = Vector3(0.90000004, 0.5, 0.4)
+
+[node name="CSGBox3D6" type="CSGBox3D" parent="ServerFarm/ServerRacks" unique_id=1785000605]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.3, 0.26000005, -0.49999997)
+size = Vector3(0.90000004, 0.5, 0.4)
+
+[node name="CSGBox3D7" type="CSGBox3D" parent="ServerFarm/ServerRacks" unique_id=810804011]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.3, 0.26000005, 0.49800006)
+size = Vector3(0.90000004, 0.5, 0.4)
+
+[node name="CSGBox3D8" type="CSGBox3D" parent="ServerFarm/ServerRacks" unique_id=1371139755]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.3, 0.26000005, 1.1780001)
+size = Vector3(0.90000004, 0.5, 0.4)
+
+[node name="CSGBox3D9" type="CSGBox3D" parent="ServerFarm/ServerRacks" unique_id=1473088999]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.45999995, 0.26000005, -1.1600002)
+size = Vector3(0.90000004, 0.5, 0.4)
+
+[node name="CSGBox3D13" type="CSGBox3D" parent="ServerFarm/ServerRacks" unique_id=2045168329]
+transform = Transform3D(-4.3711392e-08, 0, -1, 0, 1, 0, 1, 0, -4.3711392e-08, 1.38, 0.26000005, -0.28000024)
+size = Vector3(0.90000004, 0.5, 0.4)
+
+[node name="CSGBox3D14" type="CSGBox3D" parent="ServerFarm/ServerRacks" unique_id=1575089072]
+transform = Transform3D(-4.3711392e-08, 0, -1, 0, 1, 0, 1, 0, -4.3711392e-08, 1.38, 0.26000005, 0.8799998)
+size = Vector3(0.90000004, 0.5, 0.4)
+
+[node name="CSGBox3D10" type="CSGBox3D" parent="ServerFarm/ServerRacks" unique_id=1203562193]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.45999995, 0.26000005, -0.48)
+size = Vector3(0.90000004, 0.5, 0.4)
+
+[node name="CSGBox3D11" type="CSGBox3D" parent="ServerFarm/ServerRacks" unique_id=1241442039]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.46000004, 0.26000005, 0.19800007)
+size = Vector3(0.90000004, 0.5, 0.4)
+
+[node name="CSGBox3D12" type="CSGBox3D" parent="ServerFarm/ServerRacks" unique_id=893340589]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.46000004, 0.26000005, 0.8780001)
+size = Vector3(0.90000004, 0.5, 0.4)
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="." unique_id=1054606052]
+environment = SubResource("Environment_rh704")
+camera_attributes = SubResource("CameraAttributesPractical_ni0jx")

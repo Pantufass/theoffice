@@ -1,0 +1,132 @@
+[gd_scene format=3 uid="uid://dmrsmo4c0j3tk"]
+
+[ext_resource type="PackedScene" uid="uid://bay7leqlone42" path="res://Objects/player.tscn" id="1_gshlu"]
+
+[sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_nlq1c"]
+
+[sub_resource type="Sky" id="Sky_lwtdp"]
+sky_material = SubResource("ProceduralSkyMaterial_nlq1c")
+
+[sub_resource type="Environment" id="Environment_egq6e"]
+background_mode = 2
+sky = SubResource("Sky_lwtdp")
+
+[sub_resource type="CameraAttributesPractical" id="CameraAttributesPractical_ebchq"]
+
+[node name="PlatformRoom" type="Node3D" unique_id=1278621798]
+
+[node name="HallwayShort" type="CSGCombiner3D" parent="." unique_id=15795359]
+transform = Transform3D(5, 0, 0, 0, 5, 0, 0, 0, 5, 0, 0, 0)
+use_collision = true
+
+[node name="BuildingExterior" type="CSGCombiner3D" parent="HallwayShort" unique_id=1775468609]
+
+[node name="Floor" type="CSGBox3D" parent="HallwayShort/BuildingExterior" unique_id=610312161]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.95, -0.00049999356, 0)
+size = Vector3(1.1, 0.001, 1.9)
+
+[node name="Floor2" type="CSGBox3D" parent="HallwayShort/BuildingExterior" unique_id=1187165379]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.11, -0.00049999356, 0)
+size = Vector3(1.1, 0.001, 1.9)
+
+[node name="Floor3" type="CSGBox3D" parent="HallwayShort/BuildingExterior" unique_id=1264217766]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.059999943, -1.4205, 0)
+size = Vector3(3.2, 0.001, 1.9)
+
+[node name="Ceiling" type="CSGBox3D" parent="HallwayShort/BuildingExterior" unique_id=782207868]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.4, 0.9995, 0)
+visible = false
+size = Vector3(2.2, 0.001, 1.1)
+
+[node name="EastWall" type="CSGBox3D" parent="HallwayShort/BuildingExterior" unique_id=580192075]
+transform = Transform3D(1, 0, 0, 0, -4.3711392e-08, -1, 0, 1, -4.3711392e-08, 0.10000004, 0.49950004, 0.94)
+size = Vector3(3.2, 0.001, 1)
+
+[node name="WestWall" type="CSGBox3D" parent="HallwayShort/BuildingExterior" unique_id=1684518876]
+transform = Transform3D(1, 0, 0, 0, -4.3711392e-08, -1, 0, 1, -4.3711392e-08, 0.09999996, 0.49950004, -0.94)
+size = Vector3(3.2, 0.001, 1)
+
+[node name="NorthWall" type="CSGBox3D" parent="HallwayShort/BuildingExterior" unique_id=1517043828]
+transform = Transform3D(-4.3711392e-08, -1, 4.3711392e-08, 0, -4.3711392e-08, -1, 1, -4.3711392e-08, 1.9106855e-15, 1.6600001, 0.49950004, 0)
+size = Vector3(1.9, 0.001, 1)
+
+[node name="NorthDoor" type="CSGBox3D" parent="HallwayShort/BuildingExterior" unique_id=1296586642]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.7200003, 0.100000024, 0)
+operation = 2
+size = Vector3(0.2, 1.2, 0.5)
+
+[node name="SouthWall" type="CSGBox3D" parent="HallwayShort/BuildingExterior" unique_id=1703687625]
+transform = Transform3D(-4.3711392e-08, -1, 4.3711392e-08, 0, -4.3711392e-08, -1, 1, -4.3711392e-08, 1.9106855e-15, -1.5, 0.49950004, 0)
+size = Vector3(1.9, 0.001, 1)
+
+[node name="SouthDoor" type="CSGBox3D" parent="HallwayShort/BuildingExterior" unique_id=1376181882]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.5, 0.100000024, 0)
+operation = 2
+size = Vector3(0.2, 1.2, 0.5)
+
+[node name="Desk1" type="CSGCombiner3D" parent="HallwayShort" unique_id=709929433]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.36, 0, -0.28)
+
+[node name="CSGBox3D" type="CSGBox3D" parent="HallwayShort/Desk1" unique_id=1768348332]
+transform = Transform3D(-4.3711392e-08, 0, 1, 0, 1, 0, -1, 0, -4.3711392e-08, -0.5, 0.11000001, -0.32000002)
+size = Vector3(0.4, 0.2, 0.2)
+
+[node name="CSGBox3D3" type="CSGBox3D" parent="HallwayShort/Desk1" unique_id=786849523]
+transform = Transform3D(-4.3711392e-08, 0, 1, 0, 1, 0, -1, 0, -4.3711392e-08, -0.7, 0.11000001, -0.47000003)
+size = Vector3(0.1, 0.2, 0.2)
+
+[node name="Desk2" type="CSGCombiner3D" parent="HallwayShort" unique_id=1850685224]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.36, 0, 0.26000002)
+
+[node name="CSGBox3D4" type="CSGBox3D" parent="HallwayShort/Desk2" unique_id=1871927637]
+transform = Transform3D(-4.3711392e-08, 0, 1, 0, 1, 0, -1, 0, -4.3711392e-08, -0.64000005, 0.11000001, 0.49)
+size = Vector3(0.1, 0.2, 0.2)
+
+[node name="CSGBox3D2" type="CSGBox3D" parent="HallwayShort/Desk2" unique_id=1623042916]
+transform = Transform3D(-4.3711392e-08, 0, 1, 0, 1, 0, -1, 0, -4.3711392e-08, -0.84, 0.11000001, 0.33999997)
+size = Vector3(0.4, 0.2, 0.2)
+
+[node name="Desk3" type="CSGCombiner3D" parent="HallwayShort" unique_id=1350309819]
+transform = Transform3D(1.3113417e-07, 0, 1, 0, 1, 0, -1, 0, 1.3113417e-07, 0.98, 0, -0.14000003)
+
+[node name="CSGBox3D4" type="CSGBox3D" parent="HallwayShort/Desk3" unique_id=1148834163]
+transform = Transform3D(-4.3711392e-08, 0, 1, 0, 1, 0, -1, 0, -4.3711392e-08, -0.64000005, 0.11000001, 0.49)
+size = Vector3(0.1, 0.2, 0.2)
+
+[node name="CSGBox3D2" type="CSGBox3D" parent="HallwayShort/Desk3" unique_id=1038686001]
+transform = Transform3D(-4.3711392e-08, 0, 1, 0, 1, 0, -1, 0, -4.3711392e-08, -0.84, 0.11000001, 0.33999997)
+size = Vector3(0.4, 0.2, 0.2)
+
+[node name="WaterCooler" type="CSGCombiner3D" parent="HallwayShort" unique_id=1121622918]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.96000004, 0, -0.3)
+
+[node name="CSGBox3D5" type="CSGBox3D" parent="HallwayShort/WaterCooler" unique_id=1297400338]
+transform = Transform3D(-4.7683717e-08, 0, 1, 0, 1, 0, -1, 0, -4.7683717e-08, 0.22000006, 0.11000001, -0.4)
+size = Vector3(0.2, 0.2, 0.2)
+
+[node name="CSGBox3D6" type="CSGCylinder3D" parent="HallwayShort/WaterCooler" unique_id=1655123454]
+transform = Transform3D(-4.7683717e-08, 0, 1, 0, 1, 0, -1, 0, -4.7683717e-08, 0.22000006, 0.34500012, -0.4)
+radius = 0.11
+height = 0.25
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="." unique_id=2105012622]
+environment = SubResource("Environment_egq6e")
+camera_attributes = SubResource("CameraAttributesPractical_ebchq")
+
+[node name="Platform1" type="CSGBox3D" parent="." unique_id=1940343111]
+transform = Transform3D(5, 0, 0, 0, 5, 0, 0, 0, 5, 0.3, 0.14999995, -3.1000004)
+size = Vector3(0.3, 0.1, 0.3)
+
+[node name="Platform2" type="CSGBox3D" parent="." unique_id=1231028023]
+transform = Transform3D(5, 0, 0, 0, 5, 0, 0, 0, 5, 0.3, 0.14999995, 0)
+size = Vector3(0.3, 0.1, 0.3)
+
+[node name="Platform3" type="CSGBox3D" parent="." unique_id=14426421]
+transform = Transform3D(5, 0, 0, 0, 5, 0, 0, 0, 5, 0.3, 0.14999995, 3)
+use_collision = true
+size = Vector3(0.3, 0.1, 0.3)
+
+[node name="PlayerCharacter" parent="." unique_id=1521709859 instance=ExtResource("1_gshlu")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -5.5, 0, 0)
+
+[node name="CSGCombiner3D" type="CSGCombiner3D" parent="." unique_id=56914883]

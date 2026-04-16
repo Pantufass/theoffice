@@ -1,0 +1,93 @@
+[gd_scene format=3 uid="uid://cq2jiq7ccud88"]
+
+[ext_resource type="PackedScene" uid="uid://bay7leqlone42" path="res://Objects/player.tscn" id="1_lwtdp"]
+
+[sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_im4ra"]
+
+[sub_resource type="Sky" id="Sky_lwtdp"]
+sky_material = SubResource("ProceduralSkyMaterial_im4ra")
+
+[sub_resource type="Environment" id="Environment_cj8oj"]
+background_mode = 2
+sky = SubResource("Sky_lwtdp")
+
+[sub_resource type="CameraAttributesPractical" id="CameraAttributesPractical_5rysx"]
+
+[node name="HallwayShort" type="Node3D" unique_id=1405864564]
+
+[node name="HallwayShort" type="CSGCombiner3D" parent="." unique_id=428953282]
+transform = Transform3D(5, 0, 0, 0, 5, 0, 0, 0, 5, 0, 0, 0)
+use_collision = true
+
+[node name="BuildingExterior" type="CSGCombiner3D" parent="HallwayShort" unique_id=1301796551]
+
+[node name="Floor" type="CSGBox3D" parent="HallwayShort/BuildingExterior" unique_id=1308193024]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.39999995, -0.00049999356, 0)
+size = Vector3(2.2, 0.001, 1.1)
+
+[node name="Ceiling" type="CSGBox3D" parent="HallwayShort/BuildingExterior" unique_id=1967012241]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.4, 0.9995, 0)
+size = Vector3(2.2, 0.001, 1.1)
+
+[node name="EastWall" type="CSGBox3D" parent="HallwayShort/BuildingExterior" unique_id=1886476260]
+transform = Transform3D(1, 0, 0, 0, -4.3711392e-08, -1, 0, 1, -4.3711392e-08, -0.39999995, 0.49950004, 0.53999996)
+size = Vector3(2.2, 0.001, 1)
+
+[node name="WestWall" type="CSGBox3D" parent="HallwayShort/BuildingExterior" unique_id=461109160]
+transform = Transform3D(1, 0, 0, 0, -4.3711392e-08, -1, 0, 1, -4.3711392e-08, -0.4, 0.49950004, -0.53999996)
+size = Vector3(2.2, 0.001, 1)
+
+[node name="NorthWall" type="CSGBox3D" parent="HallwayShort/BuildingExterior" unique_id=96868255]
+transform = Transform3D(-4.3711392e-08, -1, 4.3711392e-08, 0, -4.3711392e-08, -1, 1, -4.3711392e-08, 1.9106855e-15, 0.70000005, 0.49950004, 0)
+size = Vector3(1.1, 0.001, 1)
+
+[node name="NorthDoor" type="CSGBox3D" parent="HallwayShort/BuildingExterior" unique_id=654855129]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.76000017, 0.100000024, 0)
+operation = 2
+size = Vector3(0.2, 1.2, 0.5)
+
+[node name="SouthWall" type="CSGBox3D" parent="HallwayShort/BuildingExterior" unique_id=1762441081]
+transform = Transform3D(-4.3711392e-08, -1, 4.3711392e-08, 0, -4.3711392e-08, -1, 1, -4.3711392e-08, 1.9106855e-15, -1.5, 0.49950004, 0)
+size = Vector3(1.1, 0.001, 1)
+
+[node name="SouthDoor" type="CSGBox3D" parent="HallwayShort/BuildingExterior" unique_id=1617055102]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.5, 0.100000024, 0)
+operation = 2
+size = Vector3(0.2, 1.2, 0.5)
+
+[node name="Desk1" type="CSGCombiner3D" parent="HallwayShort" unique_id=1885425451]
+
+[node name="CSGBox3D" type="CSGBox3D" parent="HallwayShort/Desk1" unique_id=1347963783]
+transform = Transform3D(-4.3711392e-08, 0, 1, 0, 1, 0, -1, 0, -4.3711392e-08, -0.5, 0.11000001, -0.32000002)
+size = Vector3(0.4, 0.2, 0.2)
+
+[node name="CSGBox3D3" type="CSGBox3D" parent="HallwayShort/Desk1" unique_id=383494578]
+transform = Transform3D(-4.3711392e-08, 0, 1, 0, 1, 0, -1, 0, -4.3711392e-08, -0.7, 0.11000001, -0.47000003)
+size = Vector3(0.1, 0.2, 0.2)
+
+[node name="Desk2" type="CSGCombiner3D" parent="HallwayShort" unique_id=1747280936]
+
+[node name="CSGBox3D4" type="CSGBox3D" parent="HallwayShort/Desk2" unique_id=1054083188]
+transform = Transform3D(-4.3711392e-08, 0, 1, 0, 1, 0, -1, 0, -4.3711392e-08, -0.64000005, 0.11000001, 0.49)
+size = Vector3(0.1, 0.2, 0.2)
+
+[node name="CSGBox3D2" type="CSGBox3D" parent="HallwayShort/Desk2" unique_id=1401151313]
+transform = Transform3D(-4.3711392e-08, 0, 1, 0, 1, 0, -1, 0, -4.3711392e-08, -0.84, 0.11000001, 0.33999997)
+size = Vector3(0.4, 0.2, 0.2)
+
+[node name="WaterCooler" type="CSGCombiner3D" parent="HallwayShort" unique_id=1144854015]
+
+[node name="CSGBox3D5" type="CSGBox3D" parent="HallwayShort/WaterCooler" unique_id=242902882]
+transform = Transform3D(-4.7683717e-08, 0, 1, 0, 1, 0, -1, 0, -4.7683717e-08, 0.22000006, 0.11000001, -0.4)
+size = Vector3(0.2, 0.2, 0.2)
+
+[node name="CSGBox3D6" type="CSGCylinder3D" parent="HallwayShort/WaterCooler" unique_id=2043291730]
+transform = Transform3D(-4.7683717e-08, 0, 1, 0, 1, 0, -1, 0, -4.7683717e-08, 0.22000006, 0.34500012, -0.4)
+radius = 0.11
+height = 0.25
+
+[node name="PlayerCharacter" parent="." unique_id=1521709859 instance=ExtResource("1_lwtdp")]
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="." unique_id=605320972]
+environment = SubResource("Environment_cj8oj")
+camera_attributes = SubResource("CameraAttributesPractical_5rysx")
