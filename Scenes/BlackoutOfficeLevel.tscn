@@ -1,7 +1,7 @@
 [gd_scene format=4 uid="uid://dmd6xekwcsjda"]
 
 [ext_resource type="PackedScene" uid="uid://bay7leqlone42" path="res://Objects/player.tscn" id="1_cmucv"]
-[ext_resource type="PackedScene" uid="uid://bv1gdr23wvd0f" path="res://Objects/Computer.tscn" id="2_5lges"]
+[ext_resource type="PackedScene" uid="uid://uk11vpsy02x7" path="res://Objects/Computer.tscn" id="2_5lges"]
 
 [sub_resource type="ArrayMesh" id="ArrayMesh_cmucv"]
 _surfaces = [{
