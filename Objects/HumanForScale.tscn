@@ -1,0 +1,9 @@
+[gd_scene format=3 uid="uid://cvc62edgp5qob"]
+
+[ext_resource type="ArrayMesh" uid="uid://jvmqa1t02qmx" path="res://Assets/HumanForScale/HumanForScale.obj" id="1_xn8mq"]
+
+[node name="HumanForScale" type="Node3D" unique_id=708814893]
+
+[node name="HumanForScale" type="MeshInstance3D" parent="." unique_id=1090996036]
+transform = Transform3D(0.097, 0, 0, 0, 0.097, 0, 0, 0, 0.097, 0, 0, 0)
+mesh = ExtResource("1_xn8mq")

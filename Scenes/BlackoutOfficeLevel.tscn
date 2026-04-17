@@ -2,6 +2,7 @@
 
 [ext_resource type="PackedScene" uid="uid://bay7leqlone42" path="res://Objects/player.tscn" id="1_cmucv"]
 [ext_resource type="PackedScene" uid="uid://uk11vpsy02x7" path="res://Objects/Computer.tscn" id="2_5lges"]
+[ext_resource type="PackedScene" uid="uid://cvc62edgp5qob" path="res://Objects/HumanForScale.tscn" id="3_gi84j"]
 
 [sub_resource type="ArrayMesh" id="ArrayMesh_cmucv"]
 _surfaces = [{
@@ -31,7 +32,7 @@ sky = SubResource("Sky_cmucv")
 [node name="Node3D" type="Node3D" unique_id=649668159]
 
 [node name="ComputerRoom" type="CSGCombiner3D" parent="." unique_id=737245815]
-transform = Transform3D(5, 0, 0, 0, 5, 0, 0, 0, 5, 0, 0, 0)
+transform = Transform3D(3.5, 0, 0, 0, 3.5, 0, 0, 0, 3.5, 0, 0, -2.4)
 use_collision = true
 
 [node name="CSGBox3D" type="CSGBox3D" parent="ComputerRoom" unique_id=1903028319]
@@ -92,4 +93,7 @@ environment = SubResource("Environment_cmucv")
 camera_attributes = SubResource("CameraAttributesPractical_5lges")
 
 [node name="Computer" parent="." unique_id=1430693161 instance=ExtResource("2_5lges")]
-transform = Transform3D(3.5, 0, 0, 0, 3.5, 0, 0, 0, 3.5, 0.2, 0.90000004, -4.4)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.2, 0.90000004, -4.4)
+
+[node name="HumanForScale" parent="." unique_id=708814893 instance=ExtResource("3_gi84j")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3.6000001, 0, -3.5)

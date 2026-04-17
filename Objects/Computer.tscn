@@ -2,7 +2,6 @@
 
 [ext_resource type="Script" uid="uid://p68faeljfhv5" path="res://Scripts/Behaviour/Computer.cs" id="1_icap4"]
 [ext_resource type="PackedScene" uid="uid://dkqgmryje87j8" path="res://Defunct/Scenes/OnPc.tscn" id="2_osssl"]
-[ext_resource type="ArrayMesh" uid="uid://b8e0rupjvj3oa" path="res://Assets/Computer/Computer.obj" id="3_l1p3a"]
 
 [sub_resource type="PlaneMesh" id="PlaneMesh_lbi6m"]
 
@@ -15,29 +14,26 @@ GlowOn = false
 InteractText = "Computer Screen"
 
 [node name="CSGCombiner3D" type="CSGCombiner3D" parent="." unique_id=1732950819]
-visible = false
+transform = Transform3D(2, 0, 0, 0, 2, 0, 0, 0, 2, 0, 0, 0)
 use_collision = true
 
 [node name="CSGBox3D" type="CSGBox3D" parent="CSGCombiner3D" unique_id=668073219]
-size = Vector3(0.8, 0.3, 0.4)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.07084961, 0)
+size = Vector3(0.8, 0.15830079, 0.4)
 
 [node name="CSGBox3D3" type="CSGBox3D" parent="CSGCombiner3D" unique_id=989654311]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.050000004, 0.10000002)
-size = Vector3(0.8, 0.2, 0.6)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.024841301, 0.10000002)
+size = Vector3(0.8, 0.050317384, 0.6)
 
 [node name="CSGBox3D2" type="CSGBox3D" parent="CSGCombiner3D" unique_id=157445595]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.15, 0.15, 0)
-size = Vector3(0.5, 0.6, 0.4)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.15, 0.26313478, 0)
+size = Vector3(0.5, 0.37373048, 0.4)
 
 [node name="Screen" type="MeshInstance3D" parent="." unique_id=1151605257]
-transform = Transform3D(0.23343137, 0, 0, 0, -4.5089905e-08, -0.16941585, 0, 1.0315368, -7.405401e-09, -0.14014351, 0.26024723, 0.23736423)
+transform = Transform3D(0.44, 0, 0, 0, -8.51935e-08, -0.319, 0, 1.949, -1.3943933e-08, -0.29423863, 0.527224, 0.40839458)
 mesh = SubResource("PlaneMesh_lbi6m")
 
 [node name="SubViewport" type="SubViewport" parent="Screen" unique_id=67585135]
 size = Vector2i(1920, 1080)
 
 [node name="OnPC" parent="Screen/SubViewport" unique_id=203585400 instance=ExtResource("2_osssl")]
-
-[node name="Computer" type="MeshInstance3D" parent="." unique_id=1869548840]
-transform = Transform3D(0.3, 0, 0, 0, 0.3, 0, 0, 0, 0.3, 0.22866978, 0.11255941, -0.031686224)
-mesh = ExtResource("3_l1p3a")
